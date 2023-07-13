@@ -12,10 +12,13 @@ class CategoriaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return 'texte';
+        $categorias = Categoria::all();
+        return view('pages.categoria.index', ['categorias' => $categorias, 'request' => $request->all() ]);
+
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +33,25 @@ class CategoriaController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-        //
+        // $regras = [
+        //     'nome' => 'required|min:3|max:40'
+        // ];
+
+        // $feedback = [
+        //     'required' => 'O campo :attribute deve ser preenchido',
+        //     'nome.min' => 'O campo nome de ter no mínimo 3 caracteres',
+        //     'nome.max' => 'O campo nome de ter no máximo 40 caracteres',
+        // ];
+
+        // $request->validate($regras, $feedback);
+
+        // $categoria = new Categoria();
+        // $categoria->nome = $request->get('nome');
+        // $categoria->save();
+
+        Categoria::create($request->all());
+
+        return redirect()->route('pages.categoria.index');
     }
 
     /**

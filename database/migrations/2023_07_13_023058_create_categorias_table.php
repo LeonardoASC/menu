@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('Categorias', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->string('tipo');
             $table->timestamps();
         });
     }
