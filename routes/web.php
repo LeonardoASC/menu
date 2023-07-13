@@ -22,3 +22,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('produto', 'App\Http\Controllers\ProdutoController');
+
+Route::resource('categoria', 'App\Http\Controllers\CategoriaController');
+
+Route::fallback(function() {
+    echo 'A rota acessada não existe. <a href="'.route('home').'">clique aqui</a> para ir para página inicial';
+});

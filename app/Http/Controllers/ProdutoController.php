@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\produto;
+use App\Models\Produto;
 use App\Http\Requests\StoreprodutoRequest;
 use App\Http\Requests\UpdateprodutoRequest;
 use Illuminate\Http\Request;
@@ -20,9 +20,8 @@ class ProdutoController extends Controller
 
     public function index(Request $request)
     {
-        $produtos = produto::all();
-        // dd($produtos);
-        return view('pages.produto', ['produtos' => $produtos, 'request' => $request->all() ]);
+        $produtos = Produto::all();
+        return view('pages.produto.produto', ['produtos' => $produtos, 'request' => $request->all() ]);
     }
 
     /**
