@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Cardapio;
+use App\Http\Requests\StoreCardapioRequest;
+use App\Http\Requests\UpdateCardapioRequest;
+use Illuminate\Http\Request;
+
+class CardapioController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $cardapios = Cardapio::all();
+        return view('pages.cardapio.index', ['cardapios' => $cardapios, 'request' => $request->all() ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreCardapioRequest $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Cardapio $cardapio)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Cardapio $cardapio)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateCardapioRequest $request, Cardapio $cardapio)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Cardapio $cardapio)
+    {
+        //
+    }
+}

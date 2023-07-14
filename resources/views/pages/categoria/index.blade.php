@@ -14,9 +14,10 @@
 </head>
 
 <body>
-    <div class="flex flex-col justify-center items-center h-[100vh]">
+    <x-caminho/>
+    <div class="flex flex-col justify-center items-center">
         <div
-            class="!z-5 relative flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
+            class="!z-5 relative items-center flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
 
             <div class="relative flex flex-row justify-between">
                 <div class="flex items-center">
@@ -30,20 +31,20 @@
                 </div>
             </div>
 
-            
 
-            @if (isset($categorias))
+
+            {{-- @if (isset($categorias))
             <div>sim</div>
         @else
             <div>nao</div>
-        @endif
+        @endif --}}
 
 
 
             @foreach ($categorias as $categoria)
-                <div class="h-full w-full">
-                    <div class="mt-5 flex items-center justify-between p-2">
-                        <div class="flex items-center justify-center gap-2">
+                <div class="h-full w-full flex justify-end">
+                    <div class="mt-5 flex items-center justify-between p-2 ">
+                        <div class="flex items-center justify-center gap-2 ">
                             <p class="text-base font-bold text-navy-700 dark:text-white">
                                 {{ $categoria->nome }}
                             </p>

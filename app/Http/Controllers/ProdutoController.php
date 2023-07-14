@@ -21,7 +21,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         $produtos = Produto::all();
-        return view('pages.produto.produto', ['produtos' => $produtos, 'request' => $request->all() ]);
+        return view('pages.produto.index', ['produtos' => $produtos, 'request' => $request->all() ]);
     }
 
     /**
@@ -29,15 +29,41 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.produto.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreprodutoRequest $request)
+    public function store(Request $request)
     {
-        //
+        $regras = [
+            'titulo' => 'required|min:3|max:40',
+            'descricao' => 'max:255',
+            'preco' => 'numeric|min:0',
+            'imagem' => 'nullable|image|max:2048'
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'titulo.min' => 'O campo título deve ter no mínimo 3 caracteres',
+            'titulo.max' => 'O campo título deve ter no máximo 40 caracteres',
+            'descricao.max' => 'O campo descrição deve ter no máximo 255 caracteres',
+            'preco.numeric' => 'O campo preço deve ser um valor numérico',
+            'preco.min' => 'O campo preço não pode ser um valor negativo',
+            'imagem.image' => 'O arquivo enviado para o campo imagem deve ser uma imagem válida',
+            'imagem.max' => 'O tamanho do arquivo enviado para o campo imagem não pode exceder 2MB',
+        ];
+
+        $request->validate($regras, $feedback);
+
+        // $categoria = new Categoria();
+        // $categoria->nome = $request->get('nome');
+        // $categoria->save();
+
+        Produto::create($request->all());
+
+        return redirect()->route('produto.index');
     }
 
     /**

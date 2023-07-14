@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <x-caminho />
     <div class="bg-white p-8 rounded-md w-full">
         <div class=" flex items-center justify-between pb-6">
             <div>
@@ -60,8 +61,12 @@
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    <a href="{{ route('produto.create') }}">
+                                    <button
+                                        class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold cursor-pointer">Cadastrar produto</button>
+                                        </a>
+                                    </th>
 
-                                </th>
                             </tr>
                         </thead>
 
@@ -76,11 +81,8 @@
                                         </div>
                                         @foreach ($produtos as $produto)
                                             <div class="ml-3">
-
                                                 <p class="text-gray-900 whitespace-no-wrap">
-
                                                     {{ $produto->titulo }}
-
                                                 </p>
                                             </div>
                                         @endforeach
@@ -97,8 +99,8 @@
                                     </p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <button
-                                        class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Pedir</button>
+                                    <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Editar</button>
+                                    <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Excluir</button>
                                 </td>
 
                             </tr>
