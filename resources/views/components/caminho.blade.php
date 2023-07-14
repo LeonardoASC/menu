@@ -4,7 +4,7 @@
             class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
             Home
         </button>
-        <a href="{{ route('produto.index') }}">
+        <a href="{{ route('login') }}">
             <button type="button"
                 class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
                 Login
@@ -29,19 +29,21 @@
             </button>
         </a>
 
-
+        <a href="{{ route('pedido.index') }}">
         <button type="button"
             class="border border-teal-500 bg-teal-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-teal-600 focus:outline-none focus:shadow-outline">
-            View Categoria edit
+            Pedidos
         </button>
+        </a>
 
-        <button type="button"
+        {{-- <button type="button"
             class="border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline">
             Dark
-        </button>
-        <button type="button"
+        </button> --}}
+
+        {{-- <button type="button"
             class="border border-gray-200 bg-gray-200 text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
             Light
-        </button>
+        </button> --}}
     </div>
 </div>

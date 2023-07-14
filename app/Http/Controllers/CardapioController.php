@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cardapio;
+use App\Models\Produto;
 use App\Http\Requests\StoreCardapioRequest;
 use App\Http\Requests\UpdateCardapioRequest;
 use Illuminate\Http\Request;
@@ -14,8 +15,8 @@ class CardapioController extends Controller
      */
     public function index(Request $request)
     {
-        $cardapios = Cardapio::all();
-        return view('pages.cardapio.index', ['cardapios' => $cardapios, 'request' => $request->all() ]);
+        $produtos = Produto::all();
+        return view('pages.cardapio.index', ['produtos' => $produtos, 'request' => $request->all() ]);
     }
 
     /**
@@ -65,4 +66,11 @@ class CardapioController extends Controller
     {
         //
     }
+    public function realizarTarefa(Request $request)
+    {
+        // Lógica para realizar a tarefa
+        return view('pages.cardapio.confirmar');
+        // Redirecionar ou retornar uma resposta em JSON, conforme necessário
+    }
+
 }

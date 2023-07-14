@@ -22,9 +22,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('produto', 'App\Http\Controllers\ProdutoController');
 
+Route::resource('produto', 'App\Http\Controllers\ProdutoController');
 Route::resource('cardapio', 'App\Http\Controllers\CardapioController');
+Route::resource('pedido', 'App\Http\Controllers\PedidoController');
+
 
 Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.index');
 Route::get('/categoria/create', [App\Http\Controllers\CategoriaController::class, 'create'])->name('categoria.create');
@@ -36,6 +38,8 @@ Route::delete('/categoria/{categoria}', [App\Http\Controllers\CategoriaControlle
 
 
 
+
+Route::post('/realizar-tarefa', [App\Http\Controllers\CardapioController::class, 'realizarTarefa'])->name('realizar-tarefa');
 
 
 
