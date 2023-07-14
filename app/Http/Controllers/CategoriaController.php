@@ -31,19 +31,19 @@ class CategoriaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoriaRequest $request)
+    public function store(Request $request)
     {
-        // $regras = [
-        //     'nome' => 'required|min:3|max:40'
-        // ];
+        $regras = [
+            'nome' => 'required|min:3|max:40'
+        ];
 
-        // $feedback = [
-        //     'required' => 'O campo :attribute deve ser preenchido',
-        //     'nome.min' => 'O campo nome de ter no mínimo 3 caracteres',
-        //     'nome.max' => 'O campo nome de ter no máximo 40 caracteres',
-        // ];
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'O campo nome de ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo nome de ter no máximo 40 caracteres',
+        ];
 
-        // $request->validate($regras, $feedback);
+        $request->validate($regras, $feedback);
 
         // $categoria = new Categoria();
         // $categoria->nome = $request->get('nome');
@@ -51,7 +51,7 @@ class CategoriaController extends Controller
 
         Categoria::create($request->all());
 
-        return redirect()->route('pages.categoria.index');
+        return redirect()->route('categoria.index');
     }
 
     /**
@@ -65,24 +65,28 @@ class CategoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categoria $Categoria)
+    public function edit(Categoria $categoria)
     {
-        //
+
+        return view('pages.categoria.edit', ['categoria' => $categoria]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoriaRequest $request, Categoria $Categoria)
+    public function update(Request $request, Categoria $categoria)
     {
-        //
-    }
+            $categoria->update($request->all());
+            return redirect()->route('categoria.index', ['categoria' => $categoria->id]);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Categoria $Categoria)
-    {
-        //
+        /**
+         * Remove the specified resource from storage.
+         */
+        public function destroy(Categoria $categoria)
+        {
+            $categoria->delete();
+            return redirect()->route('categoria.index');
+
     }
 }

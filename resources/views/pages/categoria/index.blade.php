@@ -30,33 +30,48 @@
                 </div>
             </div>
 
+            
+
+            @if (isset($categorias))
+            <div>sim</div>
+        @else
+            <div>nao</div>
+        @endif
+
+
+
             @foreach ($categorias as $categoria)
                 <div class="h-full w-full">
                     <div class="mt-5 flex items-center justify-between p-2">
                         <div class="flex items-center justify-center gap-2">
                             <p class="text-base font-bold text-navy-700 dark:text-white">
-                                {{ $categoria->tipo }}
+                                {{ $categoria->nome }}
                             </p>
                         </div>
-                        <a href="">
-                            <button type="button" class="border border-indigo-500 bg-yellow-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                        <a href="{{ route('categoria.edit', ['categoria' => $categoria->id]) }}">
+                            <button type="button"
+                                class="border border-indigo-500 bg-yellow-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
                                 Editar
                             </button>
                         </a>
-                        <a href="">
-                            <button type="button" class="border border-indigo-500 bg-red-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
-                                Excluir
-                            </button>
-                        </a>
+                        <form method="POST" action="{{ route('categoria.destroy', ['categoria' => $categoria->id])}}">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit"
+                            class="border border-indigo-500 bg-red-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                            Excluir
+                        </button>
+                    </form>
+
                     </div>
                 </div>
             @endforeach
             <a href="{{ route('categoria.create') }}">
                 <button type="button"
-                class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
-                Adicionar categoria
-            </button>
-        </a>
+                    class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                    Adicionar categoria
+                </button>
+            </a>
         </div>
 </body>
 

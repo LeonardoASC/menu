@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +24,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('produto', 'App\Http\Controllers\ProdutoController');
 
-Route::resource('categoria', 'App\Http\Controllers\CategoriaController');
+Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.index');
+Route::get('/categoria/create', [App\Http\Controllers\CategoriaController::class, 'create'])->name('categoria.create');
+Route::post('/categoria', [App\Http\Controllers\CategoriaController::class, 'store'])->name('categoria.store');
+Route::get('/categoria/{categoria}', [App\Http\Controllers\CategoriaController::class, 'show'])->name('categoria.show');
+Route::get('/categoria/{categoria}/edit', [App\Http\Controllers\CategoriaController::class, 'edit'])->name('categoria.edit');
+Route::put('/categoria/{categoria}', [App\Http\Controllers\CategoriaController::class, 'update'])->name('categoria.update');
+Route::delete('/categoria/{categoria}', [App\Http\Controllers\CategoriaController::class, 'destroy'])->name('categoria.destroy');
+
+
+
+
+
 
 Route::fallback(function() {
     echo 'A rota acessada não existe. <a href="'.route('home').'">clique aqui</a> para ir para página inicial';
