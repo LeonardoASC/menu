@@ -82,7 +82,7 @@
                                         @foreach ($produtos as $produto)
                                             <div class="ml-3">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    {{ $produto->titulo }}
+                                                    {{ $produto->nome }}
                                                 </p>
                                             </div>
                                         @endforeach

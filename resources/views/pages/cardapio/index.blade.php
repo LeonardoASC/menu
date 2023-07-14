@@ -80,7 +80,7 @@
 
                                                 <p class="text-gray-900 whitespace-no-wrap">
 
-                                                    {{ $cardapio->titulo }}
+                                                    {{ $cardapio->nome }}
 
                                                 </p>
                                             </div>

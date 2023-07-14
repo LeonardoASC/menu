@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use App\Models\Categoria;
 use App\Http\Requests\StoreprodutoRequest;
 use App\Http\Requests\UpdateprodutoRequest;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         $produtos = Produto::all();
+        
         return view('pages.produto.index', ['produtos' => $produtos, 'request' => $request->all() ]);
     }
 
@@ -29,7 +31,9 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        return view('pages.produto.create');
+        $categorias = Categoria::all();
+
+        return view('pages.produto.create', ['categorias' => $categorias]);
     }
 
     /**
@@ -38,7 +42,7 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $regras = [
-            'titulo' => 'required|min:3|max:40',
+            'nome' => 'required|min:3|max:40',
             'descricao' => 'max:255',
             'preco' => 'numeric|min:0',
             'imagem' => 'nullable|image|max:2048'
@@ -46,8 +50,8 @@ class ProdutoController extends Controller
 
         $feedback = [
             'required' => 'O campo :attribute deve ser preenchido',
-            'titulo.min' => 'O campo título deve ter no mínimo 3 caracteres',
-            'titulo.max' => 'O campo título deve ter no máximo 40 caracteres',
+            'nome.min' => 'O campo título deve ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo título deve ter no máximo 40 caracteres',
             'descricao.max' => 'O campo descrição deve ter no máximo 255 caracteres',
             'preco.numeric' => 'O campo preço deve ser um valor numérico',
             'preco.min' => 'O campo preço não pode ser um valor negativo',

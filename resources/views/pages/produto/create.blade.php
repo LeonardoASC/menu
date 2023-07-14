@@ -33,9 +33,9 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nome do produto</label>
                 <input
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                    type="text" id="name" name="titulo" placeholder="Cerveja"
-                    value="{{ $produto->titulo ?? old('titulo') }}">
-                {{ $errors->has('titulo') ? $errors->first('titulo') : '' }}
+                    type="text" id="name" name="nome" placeholder="Cerveja"
+                    value="{{ $produto->nome ?? old('nome') }}">
+                {{ $errors->has('nome') ? $errors->first('nome') : '' }}
             </div>
 
             <div class="mb-4">
@@ -45,6 +45,19 @@
                     type="text" id="name" name="descricao" placeholder="Cerveja"
                     value="{{ $produto->descricao ?? old('descricao') }}">
                 {{ $errors->has('descricao') ? $errors->first('descricao') : '' }}
+            </div>
+
+          
+
+            <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Categoria do produto</label>
+            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" name="categoria_id">
+                <option class="text-zinc-400" placeholder="categoria">-- Selecione --</option>
+                @foreach($categorias as $categoria)
+                    <option value="{{ $categoria->id }}" {{ ($produto->categoria_id ?? old('categoria_id')) == $categoria->id ? 'selected' : '' }} >{{ $categoria->nome }}</option>
+                @endforeach
+            </select>
+
             </div>
 
             <div class="mb-4">
