@@ -108,6 +108,7 @@
                                         <button type="submit" class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Pedir</button>
                                         <input type="hidden" name="produto_nome" value="{{ $produto->nome }}">
                                         <input type="hidden" name="produto_quantidade" value="1">
+                                        <input type="hidden" name="produto_status" value="Solicitado">
                                         <input type="hidden" name="produto_preco" value="{{ $produto->preco }}">
                                         <input type="hidden" name="produto_descricao" value="{{ $produto->descricao }}">
                                     </td>

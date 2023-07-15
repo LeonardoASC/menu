@@ -19,15 +19,13 @@
                     <h1 class="mb-2 text-2xl">Atualizar</h1>
                 </div>
 
-                <form action="{{route('categoria.update', ['categoria' => $categoria->id])}}" method="post">
+                <form action="{{ route('categoria.update', ['categoria' => $categoria->id]) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="mb-4 text-lg">
                         <input type="text" name="nome" value="{{ $categoria->nome ?? old('nome') }}"
-
                             class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                              placeholder="nova categoria"
-                              />
+                            placeholder="nova categoria" />
                     </div>
                     <div class="mt-8 flex justify-center text-lg text-black">
                         <button type="submit"

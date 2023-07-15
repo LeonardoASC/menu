@@ -81,6 +81,7 @@ class CategoriaController extends Controller
     {
             $categoria->update($request->all());
             return redirect()->route('categoria.index', ['categoria' => $categoria->id]);
+            
         }
 
         /**

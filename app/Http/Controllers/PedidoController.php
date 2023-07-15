@@ -15,7 +15,6 @@ class PedidoController extends Controller
     public function index(Request $request)
     {
         $pedidos = Pedido::all();
-
         return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all() ]);
     }
 
@@ -34,6 +33,7 @@ class PedidoController extends Controller
     {
         $produtoNome = $request->input('produto_nome');
         $produtoQuantidade = $request->input('produto_quantidade');
+        $produtoStatus = $request->input('produto_status');
         $produtoPreco = $request->input('produto_preco');
         $produtoDescricao = $request->input('produto_descricao');
 
@@ -41,6 +41,7 @@ class PedidoController extends Controller
         $pedido = new Pedido();
         $pedido->nome = $produtoNome;
         $pedido->quantidade = $produtoQuantidade;
+        $pedido->status = $produtoStatus;
         $pedido->preco = $produtoPreco;
         $pedido->observacao = $produtoDescricao;
         $pedido->save();
@@ -67,9 +68,14 @@ class PedidoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePedidoRequest $request, Pedido $pedido)
+    public function update(Request $request, Pedido $pedido)
     {
-        //
+        // $pedido->update($request->all());
+        // dd($request->all());
+        // $pedido->status = 'Entregue';
+        // $pedido->save();
+        $pedido->update(['status' => $request->input('pedido_status')]);
+        return redirect()->route('pedido.index', ['pedido' => $pedido->id]);
     }
 
     /**

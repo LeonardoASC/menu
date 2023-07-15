@@ -53,6 +53,10 @@
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Status de entrega
                                 </th>
+                                <th
+                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+
+                                </th>
                             </tr>
                         </thead>
 
@@ -70,19 +74,32 @@
                                     {{ $pedido->observacao }}
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                    {{$pedido->status}}
                                     <div class="flex items-center">
                                         <span class="mr-2">60%</span>
                                         <div class="relative w-full">
                                             <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
                                                 <div style="width: 60%"
-                                                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
+
+
+                                <form action="{{ route('pedido.update', ['pedido' => $pedido]) }}" method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <button type="submit" class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Entregar pedido</button>
+                                    <input type="hidden" name="pedido_status" value="Entregue">
+
+                                </td>
+
+                            </form>
                             </tr>
-                            @endforeach
+                             @endforeach
                         </tbody>
 
 
