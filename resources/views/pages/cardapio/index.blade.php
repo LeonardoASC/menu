@@ -29,16 +29,17 @@
                         placeholder="search...">
                 </div>
                 <div class="lg:ml-40 ml-10 space-x-8">
-                    <a href="{{ route('produto.create') }}">
+                    {{-- <a href="{{ route('pedido.index') }}">
                         <button
-                            class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold cursor-pointer">Cadastrar
+                            class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold cursor-pointer">Cadastrar s
                             produto</button>
-                    </a>
-
+                    </a> --}}
+                    <a href="{{ route('pedido.index') }}">
                     <button
                         class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                         Carrinho
                     </button>
+                </a>
                     <button
                         class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                         Comanda

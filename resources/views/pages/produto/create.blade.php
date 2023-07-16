@@ -25,6 +25,7 @@
                 Consultar
             </button>
         </a>
+
         <form action="{{ route('produto.store') }}" method="post"
             class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
             @csrf
@@ -47,7 +48,7 @@
                 {{ $errors->has('descricao') ? $errors->first('descricao') : '' }}
             </div>
 
-          
+
 
             <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Categoria do produto</label>
@@ -85,6 +86,8 @@
                 type="submit">Registrar
             </button>
         </form>
+
+        
     </div>
 </body>
 

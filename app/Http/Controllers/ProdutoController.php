@@ -24,9 +24,19 @@ class ProdutoController extends Controller
 
     public function index(Request $request)
     {
-        $produtos = Produto::all();
+        // funcionando
+        // $produtos = Produto::all();
 
-        return view('pages.produto.index', ['produtos' => $produtos, 'request' => $request->all() ]);
+        $termo = $request->input('termo');
+        $produtos = Produto::query();
+
+        if ($termo) {
+            $produtos->where('nome', 'LIKE', '%' . $termo . '%');
+        }
+
+        $produtos = $produtos->get();
+
+        return view('pages.produto.index', ['produtos' => $produtos,'termo' => $termo ,'request' => $request->all() ]);
     }
 
     /**
@@ -103,5 +113,12 @@ class ProdutoController extends Controller
     public function destroy(produto $produto)
     {
         //
+    }
+
+    public function buscar(Request $request)
+    {
+        $termo = $request->input('termo');
+        $produtos = Produto::where('nome', 'LIKE', '%' . $termo . '%')->get();
+        return view('produtos.busca', compact('produtos', 'termo'));
     }
 }

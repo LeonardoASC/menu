@@ -16,6 +16,7 @@ class CardapioController extends Controller
     public function index(Request $request)
     {
         $produtos = Produto::all();
+
         return view('pages.cardapio.index', ['produtos' => $produtos, 'request' => $request->all() ]);
     }
 
@@ -66,11 +67,11 @@ class CardapioController extends Controller
     {
         //
     }
+
     public function realizarTarefa(Request $request)
     {
-        // Lógica para realizar a tarefa
         return view('pages.cardapio.confirmar');
-        // Redirecionar ou retornar uma resposta em JSON, conforme necessário
+
     }
 
 }

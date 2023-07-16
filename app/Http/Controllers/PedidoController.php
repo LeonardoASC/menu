@@ -46,7 +46,7 @@ class PedidoController extends Controller
         $pedido->observacao = $produtoDescricao;
         $pedido->save();
 
-        return redirect()->route('pedido.index');
+        return redirect()->route('cardapio.index');
     }
 
     /**

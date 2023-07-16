@@ -12,6 +12,7 @@
 <body>
     <x-caminho />
     <div class="bg-white p-8 rounded-md w-full">
+
         <div class=" flex items-center justify-between pb-6">
             <div>
                 <h2 class="text-gray-600 font-semibold">produto</h2>
@@ -19,15 +20,29 @@
             </div>
             <div class="flex items-center justify-between">
                 <div class="flex bg-gray-50 items-center p-2 rounded-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-                        fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <input class="bg-gray-50 outline-none ml-1 block " type="text" name="" id=""
-                        placeholder="search...">
+                    <form action="{{ route('produto.index') }}" method="GET" class="flex items-center">
+                        <div class="mr-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+                        </div>
+                        <input class="bg-gray-50 outline-none ml-1 block" type="text" name="termo"
+                            placeholder="Pesquisar..." value="{{ $termo }}">
+                        <button type="button" id="limpar">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M14.348 14.849l-1.5 1.5L10 11.5l-2.849 2.849-1.5-1.5L8.5 10 5.651 7.151l1.5-1.5L10 8.5l2.849-2.849 1.5 1.5L11.5 10l2.849 2.849z" />
+                            </svg>
+
+                        </button>
+                    </form>
                 </div>
+
                 <div class="lg:ml-40 ml-10 space-x-8">
                     <a href="{{ route('produto.create') }}">
                         <button
@@ -104,17 +119,34 @@
                                         <button
                                             class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Excluir</button>
                                     </td>
+                                </tr>
+                            </tbody>
+                        @endforeach
+                    </table>
                 </div>
-                </tr>
-                </tbody>
-                @endforeach
-                </table>
-
             </div>
         </div>
-    </div>
 
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var input = document.querySelector("input[name='termo']");
+            var button = document.getElementById("limpar");
+
+            input.addEventListener("keydown", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    input.form.submit();
+                }
+            });
+
+            button.addEventListener("click", function(event) {
+                input.value = "";
+                input.form.submit();
+            });
+        });
+    </script>
+
 </body>
 
 </html>
