@@ -15,9 +15,18 @@ class CardapioController extends Controller
      */
     public function index(Request $request)
     {
-        $produtos = Produto::all();
+        // $produtos = Produto::all();
 
-        return view('pages.cardapio.index', ['produtos' => $produtos, 'request' => $request->all() ]);
+        $termo = $request->input('termo');
+        $produtos = Produto::query();
+
+        if ($termo) {
+            $produtos->where('nome', 'LIKE', '%' . $termo . '%');
+        }
+
+        $produtos = $produtos->get();
+
+        return view('pages.cardapio.index', ['produtos' => $produtos,'termo' => $termo, 'request' => $request->all() ]);
     }
 
     /**
