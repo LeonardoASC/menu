@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cardapio;
 use App\Models\Produto;
+use App\Models\Categoria;
 use App\Http\Requests\StoreCardapioRequest;
 use App\Http\Requests\UpdateCardapioRequest;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class CardapioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, $categoriaId = NULL)
     {
         // $produtos = Produto::all();
 
@@ -24,9 +25,23 @@ class CardapioController extends Controller
             $produtos->where('nome', 'LIKE', '%' . $termo . '%');
         }
 
-        $produtos = $produtos->get();
 
-        return view('pages.cardapio.index', ['produtos' => $produtos,'termo' => $termo, 'request' => $request->all() ]);
+        if ($categoriaId) {
+            $produtos->whereHas('categoria', function ($query) use ($categoriaId) {
+                $query->where('id', $categoriaId);
+            });
+        }
+
+        $produtos = $produtos->get();
+        $categorias = Categoria::all();
+
+        return view('pages.cardapio.index', [
+            'produtos' => $produtos,
+            'termo' => $termo,
+            'categoriaId'=> $categoriaId,
+            'categorias' => $categorias,
+            'request' => $request->all()
+        ]);
     }
 
     /**
@@ -76,11 +91,22 @@ class CardapioController extends Controller
     {
         //
     }
-
     public function realizarTarefa(Request $request)
     {
+        //ainda nao implementado, possivel modal para confirmar o pedido
         return view('pages.cardapio.confirmar');
 
+    }
+
+    public function filtrar(Request $request)
+    {
+        $filtro = $request->input('filtro'); // Receba o valor do filtro do formulário
+
+        $produtos = Produto::where('nome', 'like', "%$filtro%") // Filtro por nome
+            ->orWhere('preco', '>=', $filtro) // Filtro por preço mínimo
+            ->get();
+
+        return view('produtos.index', compact('produtos'));
     }
 
 }

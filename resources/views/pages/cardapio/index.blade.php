@@ -41,6 +41,20 @@
                 </div>
 
 
+                <form action="{{ route('cardapio.index') }}" method="GET">
+                    <select name="categoriaId">
+                        <option value="">Todas as categorias</option>
+                        @foreach ($categorias as $categoria)
+                            <option value="{{ $categoria->id }}" {{ $categoriaId == $categoria->id ? 'selected' : '' }}>
+                                {{ $categoria->nome }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <button type="submit">Buscar</button>
+                </form>
+                {{-- @dd($categoriaId) --}}
+
+
 
                 <div class="lg:ml-40 ml-10 space-x-8">
                     <a href="{{ route('pedido.index') }}">
