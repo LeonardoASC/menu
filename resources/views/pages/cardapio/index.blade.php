@@ -16,6 +16,10 @@
             <div>
                 <h1 class="text-gray-600 font-bold">Produto</h1>
             </div>
+            <div id="cliente-info">
+                Bem vindo, {{ session('nome') }}
+                cpf: {{ session('cpf') }}
+            </div>
             <div class="flex items-center justify-between">
 
                 <div class="flex bg-gray-50 items-center p-2 rounded-md">
@@ -63,11 +67,12 @@
                             Carrinho
                         </button>
                     </a>
+                    <a href="{{ route('comanda.index') }}">
                     <button
                         class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                         Comanda
                     </button>
-
+                    </a>
                 </div>
             </div>
         </div>

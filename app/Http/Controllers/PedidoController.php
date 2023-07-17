@@ -6,6 +6,8 @@ use App\Models\Pedido;
 use App\Http\Requests\StorePedidoRequest;
 use App\Http\Requests\UpdatePedidoRequest;
 use Illuminate\Http\Request;
+use App\Models\Cliente;
+use Illuminate\Support\Facades\Session;
 
 class PedidoController extends Controller
 {
@@ -14,8 +16,26 @@ class PedidoController extends Controller
      */
     public function index(Request $request)
     {
-        $pedidos = Pedido::all();
+        // $cpfSessao = session('cpf');
+        // $pedidos = Pedido::whereHas('clientes', function ($query) use ($cpfSessao) {
+        //     $query->where('cpf', $cpfSessao);
+        // })->get();
+
+
+        $pedidos = Pedido::where('status', 'Solicitado')->get();
         return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all() ]);
+
+        // $cpf = Session::get('cpf'); // Obtém o CPF armazenado na sessão
+
+        // $cliente = Cliente::where('cpf', $cpf)->first();
+
+        // if ($cliente) {
+        //     $pedidos = $cliente->pedidos;
+
+        //     return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all()]);
+        // } else {
+        //     return redirect()->back()->with('error', 'Cliente não encontrado.');
+        // }
     }
 
     /**
@@ -44,6 +64,7 @@ class PedidoController extends Controller
         $pedido->status = $produtoStatus;
         $pedido->preco = $produtoPreco;
         $pedido->observacao = $produtoDescricao;
+        // $pedido->cliente_id = session('cpf');
         $pedido->save();
 
         return redirect()->route('cardapio.index');

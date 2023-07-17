@@ -23,13 +23,18 @@
                             </h3>
                         </div>
                         <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                            <a href="{{ route('cardapio.index') }}">
-                            <button
-                                class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button">
-                                Voltar ao cardapio
-                            </button>
-                            </a>
+                            <div class="flex justify-end">
+                                <a href="{{ route('comanda.index') }}">
+                                    <button class="mr-2 bg-green-400 px-2 py-1 rounded-md text-white font-semibold cursor-pointer">
+                                        Comanda
+                                    </button>
+                                </a>
+                                <a href="{{ route('cardapio.index') }}">
+                                    <button class="bg-green-400 px-2 py-1 rounded-md text-white font-semibold cursor-pointer">
+                                        Cardapio
+                                    </button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,7 +99,7 @@
                                     @csrf
                                     @method('PATCH')
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <button type="submit" class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Entregar pedido</button>
+                                    <button type="submit" class="bg-green-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Entregar pedido</button>
                                     <input type="hidden" name="pedido_status" value="Entregue">
 
                                 </td>

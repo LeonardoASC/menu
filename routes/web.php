@@ -24,7 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('produto', 'App\Http\Controllers\ProdutoController');
-
 Route::resource('cliente', 'App\Http\Controllers\ClienteController');
 
 
@@ -32,6 +31,7 @@ Route::group(['middleware' => 'verificar.credenciais'], function () {
     Route::resource('pedido', 'App\Http\Controllers\PedidoController');
     Route::resource('cardapio', 'App\Http\Controllers\CardapioController');
 });
+Route::resource('comanda', 'App\Http\Controllers\ComandaController');
 
 
 Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.index');
