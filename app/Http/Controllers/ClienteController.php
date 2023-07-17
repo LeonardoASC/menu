@@ -29,7 +29,38 @@ class ClienteController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   //funcionando
+        // $regras = [
+        //     'nome' => 'required|min:3|max:40',
+        //     'cpf' => 'required|digits:11'
+        // ];
+
+        // $feedback = [
+        //     'required' => 'O campo :attribute deve ser preenchido.',
+        //     'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres.',
+        //     'nome.max' => 'O campo nome deve ter no máximo 40 caracteres.',
+        //     'cpf.required' => 'O campo CPF deve ser preenchido.',
+        //     'cpf.digits' => 'O campo CPF deve ter exatamente 11 dígitos.',
+
+        // ];
+
+        // $request->validate($regras, $feedback);
+
+        //     // Obter os valores do formulário
+        //     $nome = $request->input('nome');
+        //     $cpf = $request->input('cpf');
+
+        //     // Armazenar na sessão
+        //     session(['nome' => $nome, 'cpf' => $cpf]);
+
+        //     //Usar esse para finalizar a sessao
+        //     // $request->session()->flush();
+
+
+        // Cliente::create($request->all());
+
+        // return redirect()->route('cardapio.index');
+
         $regras = [
             'nome' => 'required|min:3|max:40',
             'cpf' => 'required|digits:11'
@@ -45,18 +76,28 @@ class ClienteController extends Controller
 
         $request->validate($regras, $feedback);
 
-            // Obter os valores do formulário
-            $nome = $request->input('nome');
-            $cpf = $request->input('cpf');
+        $cpf = $request->input('cpf');
 
-            // Armazenar na sessão
-            session(['nome' => $nome, 'cpf' => $cpf]);
+        // Verificar se o CPF já existe no banco de dados
+        $clienteExistente = Cliente::where('cpf', $cpf)->first();
 
-            //Usar esse para finalizar a sessao
-            // $request->session()->flush();
+        if ($clienteExistente) {
+            // CPF já existe, usar o cliente existente
+            $cliente = $clienteExistente;
+        } else {
+            // CPF não existe, criar um novo cliente
+            $cliente = new Cliente();
+            $cliente->cpf = $cpf;
+        }
 
+        // Definir os outros atributos do cliente
+        $cliente->nome = $request->input('nome');
 
-        Cliente::create($request->all());
+        // Salvar o cliente no banco de dados
+        $cliente->save();
+
+        // Armazenar na sessão
+        session(['nome' => $cliente->nome, 'cpf' => $cliente->cpf]);
 
         return redirect()->route('cardapio.index');
     }

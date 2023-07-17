@@ -16,26 +16,22 @@ class PedidoController extends Controller
      */
     public function index(Request $request)
     {
-        // $cpfSessao = session('cpf');
-        // $pedidos = Pedido::whereHas('clientes', function ($query) use ($cpfSessao) {
-        //     $query->where('cpf', $cpfSessao);
-        // })->get();
 
+        // $pedidos = Pedido::where('status', 'Solicitado')
+        //             // ->where('cliente_id', $user->id)
+        //             ->get();
 
-        $pedidos = Pedido::where('status', 'Solicitado')->get();
+    // $cpf = $request->session()->get('cpf'); // Obtém o CPF do cliente da sessão
+    // $pedidos = Pedido::where('status', 'Solicitado')
+    //             ->where('cpf', $cpf)
+    //             ->get();
+
+    $cpf = $request->session()->get('cpf'); // Obtém o CPF do cliente da sessão
+    $pedidos = Pedido::join('clientes', 'pedidos.cliente_id', '=', 'clientes.id')
+                ->where('pedidos.status', 'Solicitado')
+                ->where('clientes.cpf', $cpf)
+                ->get(['pedidos.*']);
         return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all() ]);
-
-        // $cpf = Session::get('cpf'); // Obtém o CPF armazenado na sessão
-
-        // $cliente = Cliente::where('cpf', $cpf)->first();
-
-        // if ($cliente) {
-        //     $pedidos = $cliente->pedidos;
-
-        //     return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all()]);
-        // } else {
-        //     return redirect()->back()->with('error', 'Cliente não encontrado.');
-        // }
     }
 
     /**
@@ -51,11 +47,13 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+
         $produtoNome = $request->input('produto_nome');
         $produtoQuantidade = $request->input('produto_quantidade');
         $produtoStatus = $request->input('produto_status');
         $produtoPreco = $request->input('produto_preco');
         $produtoDescricao = $request->input('produto_descricao');
+        $sessionCliente = Cliente::where('cpf', '=',session('cpf'))->get()->first();
 
         // Salve os valores na tabela de pedidos
         $pedido = new Pedido();
@@ -64,6 +62,7 @@ class PedidoController extends Controller
         $pedido->status = $produtoStatus;
         $pedido->preco = $produtoPreco;
         $pedido->observacao = $produtoDescricao;
+        $pedido->cliente_id = $sessionCliente->id;
         // $pedido->cliente_id = session('cpf');
         $pedido->save();
 
