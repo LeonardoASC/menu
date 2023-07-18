@@ -64,13 +64,13 @@
                 <div class="lg:ml-40 ml-10 space-x-8">
                     <a href="{{ route('pedido.index') }}">
                         <button
-                            class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                            class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                             Carrinho
                         </button>
                     </a>
                     <a href="{{ route('comanda.index') }}">
                         <button
-                            class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                            class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                             Comanda
                         </button>
                     </a>
@@ -140,7 +140,7 @@
                                             @csrf
                                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                 <button
-                                                    class="toggleModalButton bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+                                                    class="toggleModalButton bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
                                                     data-produto-id="{{ $produto->id }}">Pedir</button>
                                                 {{-- <button type="submit" class="toggleModalButton bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Pedir</button> --}}
                                                 <input type="hidden" name="produto_nome" value="{{ $produto->nome }}">
