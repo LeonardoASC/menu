@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,10 +14,11 @@
     <div class="bg-white p-8 rounded-md w-full">
         <div class=" flex items-center justify-between pb-6">
             <div>
-                <h1 class="text-gray-600 font-bold">Produto</h1>
+                <h1 class="text-gray-600 font-bold">Produtos</h1>
             </div>
             <div id="cliente-info">
                 Bem vindo, {{ session('nome') }}
+                <br>
                 cpf: {{ session('cpf') }}
             </div>
             <div class="flex items-center justify-between">
@@ -135,16 +135,21 @@
                                             </p>
                                         </td>
 
-                                        <form id="pedidoForm" action="{{ route('pedido.store') }}" method="POST">
+                                        <form id="pedidoForm-{{ $produto->id }}" action="{{ route('pedido.store') }}"
+                                            method="POST">
                                             @csrf
                                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                <button type="submit"
-                                                    class="toggleModalButton bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Pedir</button>
+                                                <button
+                                                    class="toggleModalButton bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+                                                    data-produto-id="{{ $produto->id }}">Pedir</button>
+                                                {{-- <button type="submit" class="toggleModalButton bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Pedir</button> --}}
                                                 <input type="hidden" name="produto_nome" value="{{ $produto->nome }}">
                                                 <input type="hidden" name="produto_quantidade" value="1">
                                                 <input type="hidden" name="produto_status" value="Solicitado">
-                                                <input type="hidden" name="produto_preco" value="{{ $produto->preco }}">
-                                                <input type="hidden" name="produto_descricao" value="{{ $produto->descricao }}">
+                                                <input type="hidden" name="produto_preco"
+                                                    value="{{ $produto->preco }}">
+                                                <input type="hidden" name="produto_descricao"
+                                                    value="{{ $produto->descricao }}">
                                             </td>
 
                                         </form>
@@ -157,99 +162,117 @@
             </div>
 
         </div>
-        <div id="modal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
-            <div class="bg-white p-6 rounded-lg">
-                <h2 class="text-lg font-bold mb-4">Confirmação do Pedido</h2>
-                <p>Deseja confirmar o pedido?</p>
-                <div class="flex justify-end mt-4">
-                    <button id="cancelButton" class="bg-gray-300 px-4 py-2 rounded-lg mr-2">Cancelar</button>
-                    <button id="confirmButton" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Confirmar</button>
-                </div>
-            </div>
-        </div>
 
-        {{-- <div id="myModal" class="modalMacro" style="display: none">
+        {{-- //modal\\ --}}
+        <div id="modal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
             <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
                 <div class="fixed inset-0 z-10 overflow-y-auto">
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <div
                             class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                            <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                            <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 ">
                                 <div class="sm:flex sm:items-start">
                                     <div
                                         class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                        <svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="2" stroke="currentColor" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                                d="M5 13l4 4L19 7" />
                                         </svg>
                                     </div>
                                     <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                         <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
-                                            Voce realmente deseja realizar este pedido ?</h3>
+                                            Deseja realmente fazer este pedido?</h3>
                                         <div class="mt-2">
-                                            <p class="text-sm text-gray-500">Detalhes do pedido {
-                                                }.</p>
+                                            <p class="text-sm text-gray-500">
+                                                Detalhes do pedido:
+                                                <br>
+                                                Nome do pedido: <span id="nomePedido"></span>
+                                                <br>
+                                                Descrição: <span id="descricaoPedido"></span>
+                                                <br>
+                                                Preço: <span id="precoPedido"></span>
+                                            </p>
+
                                         </div>
+
                                     </div>
+
+                                </div>
+                                {{-- selecionar quantidade --}}
+                                <div class="flex items-center justify-end">
+                                    <button
+                                        class="bg-green-200 text-green-900 hover:bg-green-300 rounded-l-md px-2 py-1">
+                                        -
+                                    </button>
+                                    <input class="w-12 text-center" type="text" value="1">
+                                    <button
+                                        class="bg-green-200 text-green-900 hover:bg-green-300 rounded-r-md px-2 py-1">
+                                        +
+                                    </button>
                                 </div>
                             </div>
+
                             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                <button type="button"
-                                    class="toggleModalButton inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">Pedir</button>
-                                <button type="button"
-                                    class="toggleModalButton mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancelar</button>
+                                <button type="button" id="confirmButton"
+                                    class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Pedir</button>
+                                <button type="button" id="cancelButton"
+                                    class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancelar</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
-    <script>
-        //apagar o registro da pesquisa
-        document.addEventListener("DOMContentLoaded", function() {
-            var input = document.querySelector("input[name='termo']");
-            var button = document.getElementById("limpar");
 
-            input.addEventListener("keydown", function(event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault();
+
+        <script>
+            //apagar o registro da pesquisa
+            document.addEventListener("DOMContentLoaded", function() {
+                var input = document.querySelector("input[name='termo']");
+                var button = document.getElementById("limpar");
+
+                input.addEventListener("keydown", function(event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        input.form.submit();
+                    }
+                });
+
+                button.addEventListener("click", function(event) {
+                    input.value = "";
                     input.form.submit();
+                });
+            });
+
+            modal
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggleModalButtons = document.getElementsByClassName('toggleModalButton');
+                const modal = document.getElementById('modal');
+                const cancelButton = document.getElementById('cancelButton');
+                const confirmButton = document.getElementById('confirmButton');
+
+                for (let i = 0; i < toggleModalButtons.length; i++) {
+                    toggleModalButtons[i].addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const produtoId = this.getAttribute('data-produto-id');
+                        const pedidoForm = document.getElementById('pedidoForm-' + produtoId);
+                        modal.classList.remove('hidden');
+
+                        confirmButton.addEventListener('click', function() {
+                            pedidoForm.submit();
+                            modal.classList.add('hidden');
+                        });
+                    });
                 }
+
+                cancelButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
             });
-
-            button.addEventListener("click", function(event) {
-                input.value = "";
-                input.form.submit();
-            });
-        });
-//modal
-
-document.addEventListener('DOMContentLoaded', function() {
-        const toggleModalButton = document.getElementsByClassName('toggleModalButton');
-        const modal = document.getElementById('modal');
-        const cancelButton = document.getElementById('cancelButton');
-        const confirmButton = document.getElementById('confirmButton');
-
-        for (let i = 0; i < toggleModalButton.length; i++) {
-            toggleModalButton[i].addEventListener('click', function(event) {
-                event.preventDefault();
-                modal.classList.remove('hidden');
-            });
-        }
-
-        cancelButton.addEventListener('click', function() {
-            modal.classList.add('hidden');
-        });
-
-        confirmButton.addEventListener('click', function() {
-            document.getElementById('pedidoForm').submit();
-        });
-    });
-
-    </script>
+        </script>
 </body>
 
 </html>
