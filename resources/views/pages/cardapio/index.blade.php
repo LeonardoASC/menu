@@ -82,7 +82,6 @@
             <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                 <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                     <table class="min-w-full leading-normal">
-
                         @if ($produtos->isEmpty())
                             <p>Nenhum produto encontrado.</p>
                         @else
@@ -144,10 +143,8 @@
                                                 <input type="hidden" name="produto_nome" value="{{ $produto->nome }}">
                                                 <input type="hidden" name="produto_quantidade" value="1">
                                                 <input type="hidden" name="produto_status" value="Solicitado">
-                                                <input type="hidden" name="produto_preco"
-                                                    value="{{ $produto->preco }}">
-                                                <input type="hidden" name="produto_descricao"
-                                                    value="{{ $produto->descricao }}">
+                                                <input type="hidden" name="produto_preco" value="{{ $produto->preco }}">
+                                                <input type="hidden" name="produto_descricao" value="{{ $produto->descricao }}">
                                             </td>
 
                                         </form>
@@ -159,6 +156,16 @@
                 </div>
             </div>
 
+        </div>
+        <div id="modal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+            <div class="bg-white p-6 rounded-lg">
+                <h2 class="text-lg font-bold mb-4">Confirmação do Pedido</h2>
+                <p>Deseja confirmar o pedido?</p>
+                <div class="flex justify-end mt-4">
+                    <button id="cancelButton" class="bg-gray-300 px-4 py-2 rounded-lg mr-2">Cancelar</button>
+                    <button id="confirmButton" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Confirmar</button>
+                </div>
+            </div>
         </div>
 
         {{-- <div id="myModal" class="modalMacro" style="display: none">
@@ -200,9 +207,6 @@
             </div>
         </div> --}}
 
-    </div>
-    </div>
-
     <script>
         //apagar o registro da pesquisa
         document.addEventListener("DOMContentLoaded", function() {
@@ -221,6 +225,29 @@
                 input.form.submit();
             });
         });
+//modal
+
+document.addEventListener('DOMContentLoaded', function() {
+        const toggleModalButton = document.getElementsByClassName('toggleModalButton');
+        const modal = document.getElementById('modal');
+        const cancelButton = document.getElementById('cancelButton');
+        const confirmButton = document.getElementById('confirmButton');
+
+        for (let i = 0; i < toggleModalButton.length; i++) {
+            toggleModalButton[i].addEventListener('click', function(event) {
+                event.preventDefault();
+                modal.classList.remove('hidden');
+            });
+        }
+
+        cancelButton.addEventListener('click', function() {
+            modal.classList.add('hidden');
+        });
+
+        confirmButton.addEventListener('click', function() {
+            document.getElementById('pedidoForm').submit();
+        });
+    });
 
     </script>
 </body>

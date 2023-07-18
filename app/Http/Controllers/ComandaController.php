@@ -16,9 +16,16 @@ class ComandaController extends Controller
     public function index(Request $request)
     {
         $comandas = Comanda::all();
-        $pedidosEntregues = Pedido::where('status', 'entregue')->get();
-        return view('pages.comanda.index', ['comandas' => $comandas,'pedidosEntregues' => $pedidosEntregues, 'request' => $request->all() ]);
+        // $pedidosEntregues = Pedido::where('status', 'entregue')->get();
+        // return view('pages.comanda.index', ['comandas' => $comandas,'pedidosEntregues' => $pedidosEntregues, 'request' => $request->all() ]);
 
+        $cpf = $request->session()->get('cpf'); // Obtém o CPF do cliente da sessão
+        $pedidosEntregues = Pedido::join('clientes', 'pedidos.cliente_id', '=', 'clientes.id')
+                    ->where('pedidos.status', 'entregue')
+                    ->where('clientes.cpf', $cpf)
+                    ->get(['pedidos.*']);
+
+        return view('pages.comanda.index', ['comandas' => $comandas, 'pedidosEntregues' => $pedidosEntregues, 'request' => $request->all() ]);
     }
 
     /**

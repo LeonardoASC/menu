@@ -152,6 +152,11 @@
 		transition duration-500 ease-in-out overflow-y-auto">
             @foreach ($pedidosEntregues as $pedidosEntregue)
                 <tr>
+                    Bem vindo, {{ session('nome') }}
+                    <br>
+                    cpf: {{ session('cpf') }}
+                    <br>
+                    <td>Id: {{ $pedidosEntregue->cliente_id }} |</td>
                     <td>{{ $pedidosEntregue->nome }} |</td>
                     <td>{{ $pedidosEntregue->quantidade }} |</td>
                     <td>{{ $pedidosEntregue->preco }} |</td>
