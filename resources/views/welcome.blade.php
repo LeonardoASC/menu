@@ -46,14 +46,14 @@
                                                         class="fa fa-envelope"></i></span>
                                                         <input
                                                         placeholder="Digite seu Nome"
-                                                        class="border-blueGray-300 px-3 py-2 m-1 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200 pl-10 "
+                                                        class="border-blueGray-300 px-3 py-2 m-1 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none  focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200 pl-10 "
                                                         type="text" id="name" name="nome"
                                                         value="{{ $cliente->nome ?? old('nome') }}"
                                                         >
                                                         {{ $errors->has('nome') ? $errors->first('nome') : '' }}
                                                         <input
                                                         placeholder="Digite seu CPF"
-                                                        class="border-blueGray-300 px-3 py-2 m-1 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200 pl-10 "
+                                                        class="border-blueGray-300 px-3 py-2 m-1 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none  focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 border border-solid transition duration-200 pl-10 "
                                                         type="number" id="name" pattern="[0-9]*" name="cpf"
                                                         value="{{ $cliente->cpf ?? old('cpf') }}"
                                                         >
