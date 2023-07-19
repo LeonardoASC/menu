@@ -45,20 +45,26 @@
                     </form>
                 </div>
 
-
-                <form action="{{ route('cardapio.index') }}" method="GET">
-                    <select name="categoriaId">
-                        <option value="">Todas as categorias</option>
-                        @foreach ($categorias as $categoria)
+                <div class="mx-20">
+                    <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm" class="flex items-center  rounded-md p-2">
+                        <div class="mr-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <select name="categoriaId" onchange="document.getElementById('filtroForm').submit()"
+                            class="bg-gray-100 outline-none text-gray-400 border border-gray-600 focus:border-blue-500 p-1 rounded-md">
+                            <option value="">Todas categorias</option>
+                            @foreach ($categorias as $categoria)
                             <option value="{{ $categoria->id }}" {{ $categoriaId == $categoria->id ? 'selected' : '' }}>
                                 {{ $categoria->nome }}
                             </option>
-                        @endforeach
-                    </select>
-                    <button type="submit">Buscar</button>
-                </form>
-                {{-- @dd($categoriaId) --}}
-
+                            @endforeach
+                        </select>
+                    </form>
+                </div>
 
 
                 <div class="lg:ml-40 ml-10 space-x-8">
@@ -164,7 +170,7 @@
         </div>
 
         {{-- //modal\\ --}}
-        <div id="modal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+        <div id="modal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75  items-center justify-center">
             <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
                 <div class="fixed inset-0 z-10 overflow-y-auto">

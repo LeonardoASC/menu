@@ -16,15 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::resource('produto', 'App\Http\Controllers\ProdutoController');
 Route::resource('cliente', 'App\Http\Controllers\ClienteController');
+Route::resource('mesa', 'App\Http\Controllers\MesaController');
 
 
 Route::group(['middleware' => 'verificar.credenciais'], function () {

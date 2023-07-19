@@ -20,4 +20,8 @@ class Cliente extends Model
         return $this->belongsTo(Pedido::class);
     }
 
+    public function comanda()
+    {
+        return $this->hasOne(Comanda::class);
+    }
 }

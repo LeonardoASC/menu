@@ -7,6 +7,7 @@ use App\Models\Pedido;
 use App\Http\Requests\StoreComandaRequest;
 use App\Http\Requests\UpdateComandaRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ComandaController extends Controller
 {
@@ -39,9 +40,19 @@ class ComandaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreComandaRequest $request)
+    public function store(Request $request)
     {
-        //
+        $totalComanda = $request->input('total');
+        $cliente_id = $request->input('cliente_id_total');
+        $mesa_id = $request->input('mesa_id_total');
+
+        $total = new Comanda();
+        $total->total = $totalComanda;
+        $total->cliente_id = $cliente_id;
+        $total->mesa_id = $mesa_id;
+        $total->save();
+        Session::flush();
+        return redirect()->route('home');
     }
 
     /**
@@ -49,7 +60,7 @@ class ComandaController extends Controller
      */
     public function show(Comanda $comanda)
     {
-        //
+
     }
 
     /**

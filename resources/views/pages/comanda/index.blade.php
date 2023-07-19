@@ -256,23 +256,33 @@
                 <a href="#" id="verTodos">Ver Todos!</a>
             </div>
             <span class="mt-4 text-gray-600">Total:</span>
+
+
             <span class="mt-1 text-3xl font-semibold">$ {{ $total }}</span>
 
 
 
-            <button
-                class="mt-8 flex items-center py-4 px-3 text-white rounded-lg
-         bg-green-400 shadow focus:outline-none">
 
 
-                <svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
-                    <path
-                        d="M9 16.17l-3.59-3.59a.996.996 0 1 0-1.41 1.41l4.24 4.24c.39.39 1.02.39 1.41 0L20.41 9.7a.996.996 0 1 0-1.41-1.41L9 16.17z" />
-                </svg>
 
-                <span>Finalizar COMANDA!</span>
+            <form action="{{ route('comanda.store', ['total' => $total]) }}" method="post">
+                @csrf
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <button type="submit"
+                        class="mt-8 flex items-center py-4 px-3 text-white rounded-lg bg-green-400 shadow focus:outline-none">
+                        <svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
+                            <path
+                                d="M9 16.17l-3.59-3.59a.996.996 0 1 0-1.41 1.41l4.24 4.24c.39.39 1.02.39 1.41 0L20.41 9.7a.996.996 0 1 0-1.41-1.41L9 16.17z" />
+                        </svg>
+                        <span>Finalizar COMANDA!</span>
+                    </button>
+                    <input type="hidden" name="total" value="{{$total}}">
+                    <input type="hidden" name="cliente_id_total" value="1">
+                    <input type="hidden" name="mesa_id_total" value="1">
+                </td>
+            </form>
 
-            </button>
+
 
         </aside>
 

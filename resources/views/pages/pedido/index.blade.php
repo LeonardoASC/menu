@@ -102,11 +102,9 @@
                                     @csrf
                                     @method('PATCH')
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-
-        <button class="toggleModalButton bg-green-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+                                    <button class="toggleModalButton bg-green-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
                                     data-produto-id="{{ $pedido->id }}">Entregar pedido</button>
                                     <input type="hidden" name="pedido_status" value="Entregue">
-
                                 </td>
                             </form>
                             </tr> @endforeach
@@ -118,7 +116,7 @@
 
         {{-- //modal\\ --}}
         <div id="modal"
-        class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+        class="hidden fixed inset-0 bg-gray-500 bg-opacity-75  items-center justify-center">
     <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
         <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -159,33 +157,33 @@
         </div>
     </div>
     </div>
-<script>
-    //modal
-    document.addEventListener('DOMContentLoaded', function() {
-                const toggleModalButtons = document.getElementsByClassName('toggleModalButton');
-                const modal = document.getElementById('modal');
-                const cancelButton = document.getElementById('cancelButton');
-                const confirmButton = document.getElementById('confirmButton');
+    <script>
+        //modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleModalButtons = document.getElementsByClassName('toggleModalButton');
+            const modal = document.getElementById('modal');
+            const cancelButton = document.getElementById('cancelButton');
+            const confirmButton = document.getElementById('confirmButton');
 
-                for (let i = 0; i < toggleModalButtons.length; i++) {
-                    toggleModalButtons[i].addEventListener('click', function(event) {
-                        event.preventDefault();
-                        const pedidoID = this.getAttribute('data-produto-id');
-                        const pedidoForm = document.getElementById('pedidoForm-' + pedidoID);
-                        modal.classList.remove('hidden');
+            for (let i = 0; i < toggleModalButtons.length; i++) {
+                toggleModalButtons[i].addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const pedidoID = this.getAttribute('data-produto-id');
+                    const pedidoForm = document.getElementById('pedidoForm-' + pedidoID);
+                    modal.classList.remove('hidden');
 
-                        confirmButton.addEventListener('click', function() {
-                            pedidoForm.submit();
-                            modal.classList.add('hidden');
-                        });
+                    confirmButton.addEventListener('click', function() {
+                        pedidoForm.submit();
+                        modal.classList.add('hidden');
                     });
-                }
-
-                cancelButton.addEventListener('click', function() {
-                    modal.classList.add('hidden');
                 });
+            }
+
+            cancelButton.addEventListener('click', function() {
+                modal.classList.add('hidden');
             });
-</script>
+        });
+    </script>
     </body>
 
 </html>

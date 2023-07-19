@@ -14,7 +14,13 @@ return new class extends Migration
         Schema::create('comandas', function (Blueprint $table) {
             $table->id();
             $table->decimal('total', 8, 2)->default(0);
+            $table->unsignedBigInteger('cliente_id');
+            $table->unsignedBigInteger('mesa_id');
             $table->timestamps();
+
+            // Definindo as chaves estrangeiras
+             $table->foreign('cliente_id')->references('id')->on('clientes');
+             $table->foreign('mesa_id')->references('id')->on('mesas');
         });
     }
 

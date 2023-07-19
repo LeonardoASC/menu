@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Mesa;
 use App\Http\Requests\StoreMesaRequest;
 use App\Http\Requests\UpdateMesaRequest;
+use Illuminate\Http\Request;
 
 class MesaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $mesas = Mesa::all();
+        return view('pages.mesa.index', ['mesas' => $mesas, 'request' => $request->all() ]);
+
     }
 
     /**

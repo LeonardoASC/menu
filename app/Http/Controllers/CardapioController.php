@@ -19,6 +19,7 @@ class CardapioController extends Controller
         // $produtos = Produto::all();
 
         $termo = $request->input('termo');
+        $categoriaId = $request->input('categoriaId');
         $produtos = Produto::query();
 
         if ($termo) {
