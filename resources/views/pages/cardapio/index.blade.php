@@ -59,38 +59,6 @@
             </div>
             <div class="flex flex-col">
                 <div class="flex flex-col">
-                    {{-- <div class="flex ">
-                        <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm"
-                            class="flex items-center  rounded-md p-2">
-                            <select name="categoriaId" onchange="document.getElementById('filtroForm').submit()"
-                                class="bg-gray-100 outline-none text-gray-400 border border-gray-600 focus:border-blue-500 p-1 rounded-md">
-                                <option value="">Todas categorias</option>
-                                @foreach ($categorias as $categoria)
-                                    <option value="{{ $categoria->id }}"
-                                        {{ $categoriaId == $categoria->id ? 'selected' : '' }}>
-                                        {{ $categoria->nome }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </form>
-                    </div> --}}
-
-                    {{-- <div class="flex ">
-                        <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm"
-                            class="flex items-center rounded-md p-2">
-                            @foreach ($categorias as $categoria)
-                                <button type="submit" name="categoriaId" value="{{ $categoria->id }}"
-                                    class="bg-gray-100 outline-none text-gray-400 border border-gray-600 focus:border-blue-500 p-1 rounded-md {{ $categoriaId == $categoria->id ? 'bg-blue-500 text-white' : '' }}">
-                                    {{ $categoria->nome }}
-                                </button>
-                            @endforeach
-                            <button type="submit" name="categoriaId" value=""
-                                class="bg-gray-100 outline-none text-gray-400 border border-gray-600 focus:border-blue-500 p-1 rounded-md {{ empty($categoriaId) ? 'bg-blue-500 text-white' : '' }}">
-                                Todas categorias
-                            </button>
-                        </form>
-                    </div> --}}
-
                     <div class="inline-block min-w-full overflow-hidden p-2">
                         <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm"
                             class="flex items-center rounded-md p-2 gap-2 min-w-full overflow-x-auto">
@@ -105,16 +73,13 @@
                             @endforeach
                         </form>
                     </div>
-
-
-
                 </div>
             </div>
 
             <div>
-                <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                    <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                        <table class="min-w-full leading-normal">
+                <div class="px-4 sm:px-8 py-4 overflow-x-auto 0">
+                    <div class="inline-block min-w-full shadow rounded-lg overflow-hidden ">
+                        <table class="min-w-full leading-normal ">
                             @if ($produtos->isEmpty())
                                 <p>Nenhum produto encontrado.</p>
                             @else
