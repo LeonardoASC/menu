@@ -43,8 +43,19 @@
                 </p>
             </div>
 
-            <div class="flex">
-
+            <div class="lg:ml-40 ml-10 space-x-8">
+                <a href="{{ route('pedido.index') }}">
+                    <button
+                        class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                        Carrinho
+                    </button>
+                </a>
+                <a href="{{ route('comanda.index') }}">
+                    <button
+                        class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                        Comanda
+                    </button>
+                </a>
             </div>
             <div class="flex flex-col">
                 <div class="flex flex-col">
@@ -80,35 +91,23 @@
                         </form>
                     </div> --}}
 
-                    <div class="flex">
+                    <div class="inline-block min-w-full overflow-hidden p-2">
                         <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm"
-                            class="flex items-center gap-2 border-b-2">
-                            <button type="submit" name="categoriaId" value="" class="text-gray-400"
+                            class="flex items-center rounded-md p-2 gap-2 min-w-full overflow-x-auto">
+                            <button type="submit" name="categoriaId" value=""
+                                class="text-gray-500"
                                 onclick="handleCategoryFilter('')">Todos</button>
 
                             @foreach ($categorias as $categoria)
                                 <button type="submit" name="categoriaId" value="{{ $categoria->id }}"
-                                    class="text-gray-400 "
+                                    class="text-gray-400"
                                     onclick="handleCategoryFilter('{{ $categoria->id }}')">{{ $categoria->nome }}</button>
                             @endforeach
                         </form>
                     </div>
 
 
-                    <div class="lg:ml-40 ml-10 space-x-8">
-                        <a href="{{ route('pedido.index') }}">
-                            <button
-                                class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                                Carrinho
-                            </button>
-                        </a>
-                        <a href="{{ route('comanda.index') }}">
-                            <button
-                                class="bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                                Comanda
-                            </button>
-                        </a>
-                    </div>
+
                 </div>
             </div>
 
@@ -208,17 +207,17 @@
                 const categoriaIdInput = document.querySelector('input[name="categoriaId"]');
 
                 if (categoriaIdInput.value === categoryId) {
-                    // If the selected category is already active, reset the value to empty and submit the form
+                    // If the selected category is already active, reset the value to empty and remove the "selected" class
                     categoriaIdInput.value = '';
-                    filtroForm.submit();
                 } else {
-                    // Otherwise, set the selected category and submit the form
+                    // Otherwise, set the selected category and add the "selected" class to the button
                     categoriaIdInput.value = categoryId;
-                    filtroForm.submit();
+                    document.querySelector(`button[value="${categoryId}"]`).class.add('bg-blue-400');
                 }
+
+                filtroForm.submit();
             }
         </script>
-
 </body>
 
 </html>
