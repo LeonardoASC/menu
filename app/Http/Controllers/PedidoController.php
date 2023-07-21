@@ -64,6 +64,7 @@ class PedidoController extends Controller
         $pedido->observacao = $produtoDescricao;
         $pedido->cliente_id = $sessionCliente->id;
         // $pedido->cliente_id = session('cpf');
+
         $pedido->save();
 
         return redirect()->route('cardapio.index');

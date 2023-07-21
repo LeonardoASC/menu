@@ -15,6 +15,7 @@
 
 <body>
     <x-caminho/>
+
     <div class="flex flex-col justify-center items-center">
         <div
             class="!z-5 relative items-center flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
@@ -33,14 +34,6 @@
 
 
 
-            {{-- @if (isset($categorias))
-            <div>sim</div>
-        @else
-            <div>nao</div>
-        @endif --}}
-
-
-
             @foreach ($categorias as $categoria)
                 <div class="h-full w-full flex justify-end">
                     <div class="mt-5 flex items-center justify-between p-2 ">
@@ -50,8 +43,8 @@
                             </p>
                         </div>
                         <a href="{{ route('categoria.edit', ['categoria' => $categoria->id]) }}">
-                            <button type="button"
-                                class="border border-indigo-500 bg-yellow-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                            <button
+                                class="border border-indigo-500  text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
                                 Editar
                             </button>
                         </a>

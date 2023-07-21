@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->integer('quantidade');
+            $table->integer('quantidade')->default(1);
             $table->decimal('preco', 8, 2);
             $table->string('status')->default('pendente');
             $table->string('observacao')->nullable();
