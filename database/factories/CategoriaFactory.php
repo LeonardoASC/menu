@@ -2,22 +2,24 @@
 
 namespace Database\Factories;
 
+use App\Models\Categoria;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Generator as Faker;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Categoria>
- */
 class CategoriaFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Categoria::class;
+
     public function definition(): array
     {
+        $categoriasComida = ['Pratos Principais', 'Sobremesas', 'Aperitivos', 'Saladas', 'Sanduíches'];
+        $categoriasBebida = ['Refrigerantes', 'Sucos', 'Cervejas', 'Vinhos', 'Cocktails'];
+
+        $categorias = $this->faker->boolean ? $categoriasComida : $categoriasBebida;
+        $nome = $this->faker->randomElement($categorias);
+
         return [
-            //
+            'nome' => $nome,
         ];
     }
 }

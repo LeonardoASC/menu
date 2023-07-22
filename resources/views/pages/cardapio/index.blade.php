@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
+
+
 </head>
 
 <body>
@@ -62,16 +64,16 @@
                     <div class="inline-block min-w-full overflow-hidden p-2">
                         <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm"
                             class="flex items-center rounded-md p-2 gap-2 min-w-full overflow-x-auto">
-                            <button type="submit" name="categoriaId" value=""
-                                class="text-gray-500"
+                            <button type="submit" name="categoriaId" value="" class="text-gray-500"
                                 onclick="handleCategoryFilter('')">Todos</button>
-
                             @foreach ($categorias as $categoria)
                                 <button type="submit" name="categoriaId" value="{{ $categoria->id }}"
                                     class="text-gray-400"
                                     onclick="handleCategoryFilter('{{ $categoria->id }}')">{{ $categoria->nome }}</button>
                             @endforeach
                         </form>
+
+
                     </div>
                 </div>
             </div>
@@ -85,28 +87,24 @@
                             @else
                                 @foreach ($produtos as $produto)
                                     <thead>
-                                        <tr>
+                                        <tr >
                                             <th
-                                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
                                                 {{ $produto->categoria->nome }}
                                             </th>
+                                            {{-- <th
+                                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
+
+                                            </th> --}}
                                             <th
-                                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                Descrição
-                                            </th>
-                                            <th
-                                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                class=" px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-right text-xs font-semibold text-gray-600 uppercase ">
                                                 Preço
                                             </th>
-                                            <th
-                                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-
-                                            </th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr onclick="submitForm({{ $produto->id }})"
+                                            class="cursor-pointer transition-all duration-300 hover:bg-green-500">
                                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0 w-10 h-10">
@@ -115,20 +113,23 @@
                                                             alt="" />
                                                     </div>
                                                     <div class="ml-3">
-                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                        <p class="text-gray-900 ">
                                                             {{ $produto->nome }}
+                                                        </p>
+                                                        <p class="text-gray-500 ">
+                                                            {{ $produto->descricao }}
                                                         </p>
                                                     </div>
                                                 </div>
                                             </td>
 
-                                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            {{-- <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    {{ $produto->descricao }}
-                                                </p>
-                                            </td>
 
-                                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                </p>
+                                            </td> --}}
+
+                                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
                                                 <p class="text-gray-900 whitespace-no-wrap">
                                                     R${{ $produto->preco }}
                                                 </p>
@@ -137,23 +138,20 @@
                                             <form id="pedidoForm-{{ $produto->id }}"
                                                 action="{{ route('pedido.store') }}" method="POST">
                                                 @csrf
-                                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                    <button
-                                                        class="toggleModalButton bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
-                                                        data-produto-id="{{ $produto->id }}"
-                                                        data-produto-nome="{{ $produto->nome }}"
-                                                        data-produto-descricao="{{ $produto->descricao }}"
-                                                        data-produto-preco="{{ $produto->preco }}">Pedir</button>
-                                                    <input type="hidden" name="produto_nome"
-                                                        value="{{ $produto->nome }}">
-                                                    <input type="hidden" name="produto_quantidade" value="1">
-                                                    <input type="hidden" name="produto_status" value="Solicitado">
-                                                    <input type="hidden" name="produto_preco"
-                                                        value="{{ $produto->preco }}">
-                                                    <input type="hidden" name="produto_descricao"
-                                                        value="{{ $produto->descricao }}">
-                                                </td>
+                                                <div class="w-full" onclick="submitForm({{ $produto->id }})">
+                                                    <td
+                                                        class=" border-b border-gray-200 bg-white text-sm cursor-pointer">
 
+                                                        <input type="hidden"
+                                                            name="produto_nome"value="{{ $produto->nome }}">
+                                                        <input type="hidden" name="produto_quantidade" value="1">
+                                                        <input type="hidden" name="produto_status" value="Solicitado">
+                                                        <input type="hidden" name="produto_preco"
+                                                            value="{{ $produto->preco }}">
+                                                        <input type="hidden" name="produto_descricao"
+                                                            value="{{ $produto->descricao }}">
+                                                    </td>
+                                                </div>
                                             </form>
                                         </tr>
                                     </tbody>
@@ -182,6 +180,16 @@
 
                 filtroForm.submit();
             }
+
+            function submitForm(produtoId) {
+                const form = document.getElementById(`pedidoForm-${produtoId}`);
+                form.submit();
+            }
+
+
+
+
+
         </script>
 </body>
 

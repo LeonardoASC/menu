@@ -32,6 +32,15 @@
             </div>
         </div>
     </div>
+
+     {{-- <button
+                                                        class="toggleModalButton bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+                                                        data-produto-id="{{ $produto->id }}"
+                                                        data-produto-nome="{{ $produto->nome }}"
+                                                        data-produto-descricao="{{ $produto->descricao }}"
+                                                        data-produto-preco="{{ $produto->preco }}">
+                                                        pedir</button> --}}
+                                                        
        {{-- //modal\\ --}}
         {{--
         <div id="modal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75  items-center justify-center">
