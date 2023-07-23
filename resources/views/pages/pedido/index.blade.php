@@ -157,6 +157,7 @@
         </div>
     </div>
     </div>
+    <x-rodape />
     <script>
         //modal
         document.addEventListener('DOMContentLoaded', function() {

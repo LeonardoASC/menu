@@ -287,6 +287,7 @@
         </aside>
 
     </div>
+    <x-rodape />
 </body>
 
 </html>

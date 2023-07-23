@@ -12,9 +12,9 @@
 <body>
     {{-- <x-caminho /> --}}
     <div class="bg-white p-2 rounded-md w-full flex flex-col">
-        <div class="justify-between pb-6 w-full flex flex-col">
+        <div class="justify-between w-full flex flex-col">
             <div
-                class="flex bg-gray-50 items-center w-4/5 rounded-xl border-solid border-2 p-2 border-[#e0cdc7] justify-between">
+                class="ml-4 mt-2 flex bg-gray-50 items-center w-4/5 rounded-xl border-solid border-2 p-2 border-[#e0cdc7] justify-between">
                 <form action="{{ route('cardapio.index') }}" method="GET" class="flex w-full  items-center">
                     <input class="bg-gray-50 outline-none ml-1  w-full text-xs" type="text" name="termo"
                         placeholder="O que voce gostaria de pedir hoje?" value="{{ $termo }}">
@@ -38,19 +38,18 @@
                 <p class=" text-sm">
                     Bem vindo, {{ session('nome') }}
                 </p>
-                <p class="text-sm">
-                    cpf: {{ session('cpf') }}
-                </p>
             </div>
+            {{-- <x-carouseloffer /> --}}
 
-
-            <div class="flex flex-col">
+            {{-- <div class="flex flex-col">
                 <div class="flex flex-col">
                     <div class="inline-block min-w-full overflow-hidden p-2 flex">
                         <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm"
                             class="flex items-center rounded-md p-2 gap-2 min-w-full overflow-x-auto">
+
                             <button type="submit" name="categoriaId" value="" class="text-gray-500"
                                 onclick="handleCategoryFilter('')">Todos</button>
+
                             @foreach ($categorias as $categoria)
                                 <button type="submit" name="categoriaId" value="{{ $categoria->id }}"
                                     class="text-gray-400 px-2"
@@ -59,11 +58,32 @@
                         </form>
                     </div>
                 </div>
+            </div> --}}
+
+            <div class="flex flex-col">
+                <div class="flex flex-col">
+                    <div class="inline-block min-w-full overflow-hidden p-2 flex">
+                        <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm"
+                            class="flex items-center rounded-md p-2 gap-2 min-w-full overflow-x-auto">
+                            <button type="submit" name="categoriaId" value=""
+                                class="text-zinc-400  @if (empty(request('categoriaId'))) text-zinc-700 font-semibold underline underline-offset-8 @endif">Todos</button>
+
+                            @foreach ($categorias as $categoria)
+                                <button type="submit" name="categoriaId" value="{{ $categoria->id }}"
+                                    class="text-zinc-400
+                                @if (request('categoriaId') == $categoria->id) text-zinc-700 font-semibold underline underline-offset-8 @endif">{{ $categoria->nome }}</button>
+                            @endforeach
+                        </form>
+                    </div>
+                </div>
             </div>
+
+
             <hr>
+
             <div>
                 <div class="px-4 sm:px-8 py-4 overflow-x-auto 0">
-                    <div class="inline-block min-w-full shadow rounded-lg overflow-hidden ">
+                    <div class="inline-block min-w-full overflow-hidden ">
                         <table class="min-w-full leading-normal ">
                             @if ($produtos->isEmpty())
                                 <p>Nenhum produto encontrado.</p>
@@ -71,38 +91,37 @@
                                 @foreach ($produtos as $produto)
                                     <thead>
                                         <tr>
-                                            <th
-                                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
-                                                {{ $produto->categoria->nome }}
+                                            <th>
+                                                {{-- class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase"> --}}
+                                                {{-- {{ $produto->categoria->nome }} --}}
                                             </th>
-                                            <th
-                                                class=" px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-right text-xs font-semibold text-gray-600 uppercase ">
-                                                Preço
+                                            <th {{-- class=" px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-right text-xs font-semibold text-gray-600 uppercase " --}}>
+                                                {{-- Preço --}}
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr onclick="submitForm({{ $produto->id }})"
                                             class="cursor-pointer transition-all duration-300 hover:bg-green-500">
-                                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <td class="px-2 py-4 bg-white text-sm">
                                                 <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-full h-full rounded-full"
+                                                    <div class="flex-shrink-0 w-14 h-14">
+                                                        <img class="w-full h-full rounded-full bg-slate-600"
                                                             src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024"
                                                             alt="" />
                                                     </div>
                                                     <div class="ml-3">
-                                                        <p class="text-gray-900 ">
+                                                        <p class="text-gray-900 text-base mb-2">
                                                             {{ $produto->nome }}
                                                         </p>
-                                                        <p class="text-gray-500 ">
+                                                        <p class="text-gray-500 text-xs">
                                                             {{ $produto->descricao }}
                                                         </p>
                                                     </div>
                                                 </div>
                                             </td>
 
-                                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
+                                            <td class="px-5 py-4 bg-white text-base flex justify-end items-end">
                                                 <p class="text-gray-900 whitespace-no-wrap">
                                                     R${{ $produto->preco }}
                                                 </p>
@@ -113,19 +132,22 @@
                                                 method="GET">
                                                 @csrf
                                                 <div class="w-full" onclick="submitForm({{ $produto->id }})">
-                                                    <td
-                                                    class=" border-b border-gray-200 bg-white text-sm cursor-pointer">
-                                                    <input type="hidden" name="produto_id" value="{{ $produto->id }}">
-                                                    <input type="hidden" name="produto_nome" value="{{ $produto->nome }}">
-                                                    <input type="hidden" name="produto_quantidade" value="1">
-                                                    <input type="hidden" name="produto_status" value="Solicitado">
-                                                    <input type="hidden" name="produto_preco" value="{{ $produto->preco }}">
-                                                    <input type="hidden" name="produto_descricao" value="{{ $produto->descricao }}">
-                                                </td>
-                                            </div>
-                                        </form>
-                                    </tr>
-                                </tbody>
+                                                    <td class="bg-white text-sm cursor-pointer">
+                                                        <input type="hidden" name="produto_id"
+                                                            value="{{ $produto->id }}">
+                                                        <input type="hidden" name="produto_nome"
+                                                            value="{{ $produto->nome }}">
+                                                        <input type="hidden" name="produto_quantidade" value="1">
+                                                        <input type="hidden" name="produto_status" value="Solicitado">
+                                                        <input type="hidden" name="produto_preco"
+                                                            value="{{ $produto->preco }}">
+                                                        <input type="hidden" name="produto_descricao"
+                                                            value="{{ $produto->descricao }}">
+                                                    </td>
+                                                </div>
+                                            </form>
+                                        </tr>
+                                    </tbody>
                                 @endforeach
                             @endif
                         </table>
@@ -134,30 +156,33 @@
             </div>
         </div>
     </div>
-        <x-rodape />
+    <x-rodape />
 
-        <script>
-            function handleCategoryFilter(categoryId) {
-                const filtroForm = document.getElementById('filtroForm');
-                const categoriaIdInput = document.querySelector('input[name="categoriaId"]');
 
-                if (categoriaIdInput.value === categoryId) {
-                    // If the selected category is already active, reset the value to empty and remove the "selected" class
-                    categoriaIdInput.value = '';
-                } else {
-                    // Otherwise, set the selected category and add the "selected" class to the button
-                    categoriaIdInput.value = categoryId;
-                    document.querySelector(`button[value="${categoryId}"]`).class.add('bg-blue-400');
-                }
+    <script>
+        // function handleCategoryFilter(categoryId) {
+        //     const filtroForm = document.getElementById('filtroForm');
+        //     const categoriaIdInput = document.querySelector('input[name="categoriaId"]');
 
-                filtroForm.submit();
-            }
+        //     if (categoriaIdInput.value === categoryId) {
+        //         // If the selected category is already active, reset the value to empty and remove the "selected" class
+        //         categoriaIdInput.value = '';
+        //     } else {
+        //         // Otherwise, set the selected category and add the "selected" class to the button
+        //         categoriaIdInput.value = categoryId;
+        //         document.querySelector(`button[value="${categoryId}"]`).class.add('bg-blue-400');
+        //     }
 
-            function submitForm(produtoId) {
-                const form = document.getElementById(`pedidoForm-${produtoId}`);
-                form.submit();
-            }
-        </script>
+        //     filtroForm.submit();
+        // }
+
+        function submitForm(produtoId) {
+            const form = document.getElementById(`pedidoForm-${produtoId}`);
+            form.submit();
+        }
+
+        //
+    </script>
 </body>
 
 </html>
