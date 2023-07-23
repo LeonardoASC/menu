@@ -48,9 +48,19 @@ class CardapioController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $produto_id = $request->input('produto_id');
+        $produto_nome = $request->input('produto_nome');
+        $produto_quantidade = $request->input('produto_quantidade');
+        $produto_status = $request->input('produto_status');
+        $produto_preco = $request->input('produto_preco');
+        $produto_descricao = $request->input('produto_descricao');
+
+        // dd($produto_id);
+        // Agora você pode usar o $produto_id para recuperar os detalhes do produto, se necessário.
+        $produto = Produto::find($produto_id);
+        return view('pages.cardapio.create', compact('produto','produto_id', 'produto_nome', 'produto_quantidade', 'produto_status', 'produto_preco', 'produto_descricao'));
     }
 
     /**

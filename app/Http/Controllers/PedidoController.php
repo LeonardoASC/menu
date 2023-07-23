@@ -39,7 +39,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -48,13 +48,15 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
 
+        $produtoId = $request->input('produto_id');
+
         $produtoNome = $request->input('produto_nome');
         $produtoQuantidade = $request->input('produto_quantidade');
         $produtoStatus = $request->input('produto_status');
         $produtoPreco = $request->input('produto_preco');
         $produtoDescricao = $request->input('produto_descricao');
         $sessionCliente = Cliente::where('cpf', '=',session('cpf'))->get()->first();
-
+        
         // Salve os valores na tabela de pedidos
         $pedido = new Pedido();
         $pedido->nome = $produtoNome;
