@@ -73,7 +73,7 @@
             </div>
         </div>
         <br>
-    </div> --}}
+</div> --}}
 
     <div class="sliderAx h-auto rounded-lg">
         <div id="slider-1" class="container mx-auto rounded-lg">

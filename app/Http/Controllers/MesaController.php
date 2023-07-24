@@ -15,16 +15,18 @@ class MesaController extends Controller
      */
     public function index(Request $request)
     {
-        $mesa = Mesa::find(1);
-        $comandasDaMesa = $mesa->comandas; // Retorna uma coleção das comandas pertencentes a essa mesa
+        $mesas = Mesa::with('comandas')->get();
+        // $comandasDaMesa = $mesas->comandas; // Retorna uma coleção das comandas pertencentes a essa mesa
 
-        $comanda = Comanda::find(1);
-        $mesaDaComanda = $comanda->mesa; // Retorna o objeto da mesa à qual a comanda pertence
+        $comanda = Comanda::all();
+        // $mesaDaComanda = $comanda->mesas; // Retorna o objeto da mesa à qual a comanda pertence
 
-
-
-        $mesas = Mesa::all();
-        return view('pages.mesa.index', ['mesas' => $mesas,'comandasDaMesa' => $comandasDaMesa, 'mesaDaComanda' => $mesaDaComanda, 'request' => $request->all() ]);
+        return view('pages.mesa.index', [
+            'mesas' => $mesas,
+            // 'comandasDaMesa' => $comandasDaMesa,
+            // 'mesaDaComanda' => $mesaDaComanda,
+            'request' => $request->all()
+            ]);
 
     }
 
