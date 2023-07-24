@@ -58,12 +58,12 @@
                         <div id="mesa-{{ $mesa->id }}" class="bg-white hidden absolute w-1/2 right-0 ml-8 border text-black">
                             <p>Mesa n°: {{ $mesa->id }}</p>
                             <p>
+                                {{-- @if ($produtos->isEmpty())
+                                <p>Nenhuma comanda nesta mesa.</p> --}}
                                 @foreach ($mesa->comandas as $comanda)
                                     <p>Numero da comanda: {{ $comanda->id }}, Total: {{ $comanda->total }}</p>
                                 @endforeach
-
                             </p>
-
                         </div>
 
                     </td>
