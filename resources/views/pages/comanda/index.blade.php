@@ -12,10 +12,8 @@
 <body>
 
     <!-- component -->
-    <div class="h-screen w-full flex overflow-hidden select-none">
-        <main
-            class="my-1 pt-2 pb-2 px-10 flex-1 bg-white-200 dark:bg-black rounded-l-lg
-		transition duration-500 ease-in-out overflow-y-auto">
+    <div class="h-screen w-full flex flex-col overflow-hidden bg-white select-none">
+        <main class="">
             @foreach ($pedidosEntregues as $pedidosEntregue)
                 <tr>
                     Bem vindo, {{ session('nome') }}
@@ -33,54 +31,13 @@
         </main>
 
         <aside
-            class="w-1/4 my-1 mr-1 px-6 py-4 flex flex-col bg-gray-200 dark:bg-black
+            class="w-full px-6 py-4 flex flex-col  dark:bg-black
 		    dark:text-gray-400 rounded-r-lg overflow-y-auto">
             <!-- Right side NavBar -->
 
-            <div class="flex items-center justify-between">
-                <!-- Info -->
-
-                <div class="flex">
-                    <a href="{{ route('pedido.index') }}">
-                        <button class="mr-2 bg-green-400 px-2 py-1 rounded-md text-white font-semibold cursor-pointer">
-                            Carrinho
-                        </button>
-                    </a>
-                    <a href="{{ route('cardapio.index') }}">
-                        <button class="bg-green-400 px-2 py-1 rounded-md text-white font-semibold cursor-pointer">
-                            Cardapio
-                        </button>
-                    </a>
-                </div>
-
-                <div class="flex items-center">
-                    <!-- Right side -->
-
-                    <img class="h-10 w-10 rounded-full object-cover"
-                        src="https://i.pinimg.com/originals/68/e1/e1/68e1e137959d363f172dc3cc50904669.jpg"
-                        alt="tempest profile" />
-
-                    <button class="ml-1 focus:outline-none">
-
-                        <svg class="h-4 w-4 fill-current" viewBox="0 0 192 512">
-                            <path
-                                d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72
-							72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72
-							72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0
-							352c0 39.8 32.2 72 72 72s72-32.2
-							72-72-32.2-72-72-72-72 32.2-72 72z">
-                            </path>
-                        </svg>
-
-                    </button>
-
-                </div>
-
-            </div>
-
             <div class="mt-12 flex items-center">
                 <!-- Payments -->
-                <span>Pedidos</span>
+                <span>Pedidos entregues</span>
                 <button class="ml-2 focus:outline-none">
                     <svg class="h-5 w-5 fill-current" viewBox="0 0 256 512">
                         <path
@@ -100,7 +57,7 @@
             @endphp
             @foreach ($pedidosEntregues as $pedidosEntregue)
                 <a href="#"
-                    class="mt-8 p-4 flex justify-between bg-gray-300 rounded-lg
+                    class="mt-8 p-4 flex justify-between bg-gray-100 rounded-lg
 			font-semibold capitalize">
                     <!-- link -->
                     <div class="flex">
@@ -115,7 +72,7 @@
                     <span>$ {{ $pedidosEntregue->preco }}</span>
                 </a>
                 @php
-                    $total += $pedidosEntregue->preco; // atualiza o valor total
+                    $total += ($pedidosEntregue->preco*$pedidosEntregue->quantidade); // atualiza o valor total
                 @endphp
             @endforeach
             <div class="mt-4 flex justify-center capitalize text-blue-600">
@@ -125,11 +82,6 @@
 
 
             <span class="mt-1 text-3xl font-semibold">$ {{ $total }}</span>
-
-
-
-
-
 
             <form action="{{ route('comanda.store', ['total' => $total]) }}" method="post">
                 @csrf

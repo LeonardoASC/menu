@@ -55,15 +55,16 @@ class PedidoController extends Controller
         $produtoStatus = $request->input('produto_status');
         $produtoPreco = $request->input('produto_preco');
         $produtoDescricao = $request->input('produto_descricao');
+        $pedidoObservacao = $request->input('pedido_observacao');
         $sessionCliente = Cliente::where('cpf', '=',session('cpf'))->get()->first();
-        
+
         // Salve os valores na tabela de pedidos
         $pedido = new Pedido();
         $pedido->nome = $produtoNome;
         $pedido->quantidade = $produtoQuantidade;
         $pedido->status = $produtoStatus;
         $pedido->preco = $produtoPreco;
-        $pedido->observacao = $produtoDescricao;
+        $pedido->observacao = $pedidoObservacao;
         $pedido->cliente_id = $sessionCliente->id;
         // $pedido->cliente_id = session('cpf');
 

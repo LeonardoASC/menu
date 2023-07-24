@@ -20,6 +20,7 @@
 
     {{-- //modal\\ --}}
 {{-- @dd($produto) --}}
+
     <div id="modal" class="fixed inset-0 bg-gray-500 bg-opacity-75  items-center justify-center">
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
@@ -57,8 +58,10 @@
                                     </div>
 
                                 </div>
-
                             </div>
+
+
+
 
                             <div class="flex items-center justify-end">
                                 <button id="decrementBtn" class="bg-green-200 text-green-900 hover:bg-green-300 rounded-l-md px-2 py-1" onclick="decrementarContador()">
@@ -70,6 +73,7 @@
                                     +
                                 </button>
                             </div>
+
                             {{-- @dd($produto) --}}
                             <form action="{{ route('pedido.store', ['produto' => $produto]) }}" method="post">
                                 @csrf
@@ -77,10 +81,11 @@
                                     <td class="border-b border-gray-200 bg-white text-sm cursor-pointer">
                                         <input type="hidden" name="produto_id" value="{{ $produto->id }}">
                                         <input type="hidden" name="produto_nome" value="{{ $produto->nome }}">
-                                        <input type="hidden" id="campoEscondidoQuantidade" name="produto_quantidade" value="">
+                                        <input type="hidden" id="campoEscondidoQuantidade" name="produto_quantidade" value="1">
                                         <input type="hidden" name="produto_status" value="Solicitado">
                                         <input type="hidden" name="produto_preco" value="{{ $produto->preco }}">
                                         <input type="hidden" name="produto_descricao" value="{{ $produto->descricao }}">
+                                        <textarea name="pedido_observacao" id="" cols="30" rows="10" class="text-sm text-zinc-500 border w-full" placeholder="Exemplo: 2 copos, gelo e limao, Sem tomate..."></textarea>
                                     </td>
                                 </div>
                                 {{-- @dd($produto->quantidade) --}}

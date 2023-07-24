@@ -1,5 +1,5 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-<script>
+{{-- <script>
     var cont = 0;
     function loopSlider() {
         var xx = setInterval(function() {
@@ -57,7 +57,7 @@
         loopSlider();
     });
 
-</script>
+</script> --}}
 
 {{-- <div class="sliderAx h-auto">
     <div id="slider-1" class="container mx-auto">

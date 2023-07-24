@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mesa;
+use App\Models\Comanda;
 use App\Http\Requests\StoreMesaRequest;
 use App\Http\Requests\UpdateMesaRequest;
 use Illuminate\Http\Request;
@@ -14,8 +15,16 @@ class MesaController extends Controller
      */
     public function index(Request $request)
     {
+        $mesa = Mesa::find(1);
+        $comandasDaMesa = $mesa->comandas; // Retorna uma coleção das comandas pertencentes a essa mesa
+
+        $comanda = Comanda::find(1);
+        $mesaDaComanda = $comanda->mesa; // Retorna o objeto da mesa à qual a comanda pertence
+
+
+
         $mesas = Mesa::all();
-        return view('pages.mesa.index', ['mesas' => $mesas, 'request' => $request->all() ]);
+        return view('pages.mesa.index', ['mesas' => $mesas,'comandasDaMesa' => $comandasDaMesa, 'mesaDaComanda' => $mesaDaComanda, 'request' => $request->all() ]);
 
     }
 

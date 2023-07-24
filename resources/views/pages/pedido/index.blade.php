@@ -13,29 +13,14 @@
 </head>
 
 <body>
-    <x-caminho />
-        <div class="w-3/4 px-4 mx-auto mt-24">
-            <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white ">
-                <div class="rounded-t mb-0 px-4 py-3 border-0">
+        <div class="w-full px-4 mx-auto border bg-white">
+            <div class="relative flex flex-col mt-10 border break-words w-full shadow-lg rounded bg-white">
+                <div class="rounded-t px-4 py-3 border-0 ">
                     <div class="flex flex-wrap items-center">
                         <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-blueGray-700">
+                            <h3 class="font-semibold text-base text-blueGray-700 ">
                                 Pedidos
                             </h3>
-                        </div>
-                        <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                            <div class="flex justify-end">
-                                <a href="{{ route('comanda.index') }}">
-                                    <button class="mr-2 bg-green-400 px-2 py-1 rounded-md text-white font-semibold cursor-pointer">
-                                        Comanda
-                                    </button>
-                                </a>
-                                <a href="{{ route('cardapio.index') }}">
-                                    <button class="bg-green-400 px-2 py-1 rounded-md text-white font-semibold cursor-pointer">
-                                        Cardapio
-                                    </button>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,19 +32,19 @@
                             <tr>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Item
+
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Quantidade
+
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Observações
+
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Status de entrega
+
                                 </th>
                                 <th
                                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
@@ -72,16 +57,19 @@
                         <tbody>
                             @foreach ($pedidos as $pedido)
                             <tr>
-                                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                                     {{ $pedido->nome }}
-                                </th>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    {{ $pedido->quantidade }}
+                                    <br>
+                                    {{ $pedido->quantidade }}x
+                                    <br>
+                                    {{ $pedido->observacao }}
                                 </td>
+                                {{-- <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                    {{ $pedido->quantidade }}x
+                                </td> --}}
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                     {{ $pedido->cliente_id }}
                                     <br>
-                                    {{ $pedido->observacao }}
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                     {{ $pedido->status }}
@@ -98,6 +86,7 @@
                                 </td>
 
 
+                                
                             <form id="pedidoForm-{{ $pedido->id }}" action="{{ route('pedido.update', ['pedido' => $pedido]) }}" method="post">
                                     @csrf
                                     @method('PATCH')
@@ -113,7 +102,6 @@
                 </div>
             </div>
         </div>
-
         {{-- //modal\\ --}}
         <div id="modal"
         class="hidden fixed inset-0 bg-gray-500 bg-opacity-75  items-center justify-center">
@@ -131,8 +119,6 @@
                                     stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
-
-
                             </div>
                             <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                 <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
