@@ -26,6 +26,7 @@ Auth::routes();
 Route::resource('produto', 'App\Http\Controllers\ProdutoController');
 Route::resource('cliente', 'App\Http\Controllers\ClienteController');
 Route::resource('mesa', 'App\Http\Controllers\MesaController');
+Route::resource('pedidoadm2', 'App\Http\Controllers\PedidoADMController');
 
 
 Route::group(['middleware' => 'verificar.credenciais'], function () {

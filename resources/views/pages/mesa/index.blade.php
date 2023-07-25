@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Mesas</title>
     @vite('resources/css/app.css')
 
 
@@ -38,15 +38,18 @@
         <table class="w-full">
             <tr>
                 @foreach ($mesas as $mesa)
-                    <td class="flex justify-between px-2 py-2 w-full items-center">
-                        <p class="flex text-gray-700">
-                            <span class="relative flex h-6 w-6 mx-2">
-                                <span
-                                    class="{{ $mesa->status === 'ativo' ? 'animate-ping ' : ' ' }} absolute inline-flex h-full w-full rounded-full {{ $mesa->status === 'ativo' ? 'bg-green-400 ' : ' bg-gray-500' }} opacity-75"></span>
-                                <span
-                                    class="relative inline-flex rounded-full h-6 w-6 {{ $mesa->status === 'ativo' ? 'bg-green-400 ' : ' bg-gray-500' }}"></span>
-                            </span>
-                            Mesa N°{{ $mesa->id }}.
+                    <td class="flex justify-evenly px-2 py-2 w-full items-center text-gray-600">
+                        <p class="text-xs">{{ $mesa->status }}</p>
+                        <span class="relative flex h-6 w-6 mx-2">
+                            <span
+                                class="{{ $mesa->status === 'Disponivel' ? 'animate-ping ' : ' ' }} absolute inline-flex h-full w-full rounded-full {{ $mesa->status === 'Disponivel' ? 'bg-green-400 ' : ' bg-amber-400' }} opacity-75"></span>
+                            <span
+                                class="relative inline-flex rounded-full h-6 w-6 {{ $mesa->status === 'Disponivel' ? 'bg-green-400 ' : ' bg-amber-400' }}"></span>
+                        </span>
+
+                        <p>Mesa N°{{ $mesa->id }}.</p>
+
+
                         </p>
                         <a href="#">
                             <button
@@ -55,14 +58,20 @@
                                 Ver
                             </button>
                         </a>
-                        <div id="mesa-{{ $mesa->id }}" class="bg-white hidden absolute w-1/2 right-0 ml-8 border text-black">
+                        <div id="mesa-{{ $mesa->id }}"
+                            class="bg-white hidden absolute w-1/2 right-0 ml-8 border rounded-md p-2 text-black">
                             <p>Mesa n°: {{ $mesa->id }}</p>
+                            <hr>
                             <p>
                                 {{-- @if ($produtos->isEmpty())
                                 <p>Nenhuma comanda nesta mesa.</p> --}}
-                                @foreach ($mesa->comandas as $comanda)
-                                    <p>Numero da comanda: {{ $comanda->id }}, Total: {{ $comanda->total }}</p>
-                                @endforeach
+                                @if ($mesa->comandas->isEmpty())
+                                    <p>Nenhuma comanda nesta mesa.</p>
+                                @else
+                                    @foreach ($mesa->comandas as $comanda)
+                                        <p>Numero da comanda: {{ $comanda->id }}, Total: {{ $comanda->total }}</p>
+                                    @endforeach
+                                @endif
                             </p>
                         </div>
 
@@ -76,17 +85,17 @@
 
     <script>
         function toggleId(id) {
-        const pTag = document.getElementById('mesa-' + id);
-        const allPTags = document.querySelectorAll('div[id^="mesa-"]');
+            const pTag = document.getElementById('mesa-' + id);
+            const allPTags = document.querySelectorAll('div[id^="mesa-"]');
 
-        allPTags.forEach(tag => {
-            if (tag.id === 'mesa-' + id) {
-                tag.classList.toggle('hidden');
-            } else {
-                tag.classList.add('hidden');
-            }
-        });
-    }
+            allPTags.forEach(tag => {
+                if (tag.id === 'mesa-' + id) {
+                    tag.classList.toggle('hidden');
+                } else {
+                    tag.classList.add('hidden');
+                }
+            });
+        }
     </script>
 
 </body>

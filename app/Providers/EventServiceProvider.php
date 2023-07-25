@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        \App\Models\Comanda::class => [
+            \App\Observers\ComandaObserver::class,
+        ],
     ];
 
     /**
