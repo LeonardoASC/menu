@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    
+
     <div class="pb-12 flex justify-center flex-col items-center">
         <div class="flex w-full h-32 justify-center items-center">
             <svg width="90" height="90" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,15 +55,15 @@
                         <input placeholder="ex: Leonardo Augusto"
                             class="bg-gray-50 py-2 border border-gray-200 rounded-md px-2 text-sm" type="text"
                             id="name" name="nome" value="{{ $cliente->nome ?? old('nome') }}">
-                            <p class="text-xs  text-gray-500">
-                        {{ $errors->has('nome') ? $errors->first('nome') : '' }}
+                        <p class="text-xs  text-gray-500">
+                            {{ $errors->has('nome') ? $errors->first('nome') : '' }}
                         </p>
                         <p class="text-sm text-[#d8a390] px-2 font-semibold mt-2">CPF</p>
                         <input placeholder="ex: 10000000000"
                             class="bg-gray-50 py-2 border border-gray-200 rounded-md px-2 text-sm" type="number"
                             id="name" pattern="[0-9]*" name="cpf" value="{{ $cliente->cpf ?? old('cpf') }}">
-                            <p class="text-xs  text-gray-500">
-                        {{ $errors->has('cpf') ? $errors->first('cpf') : '' }}
+                        <p class="text-xs  text-gray-500">
+                            {{ $errors->has('cpf') ? $errors->first('cpf') : '' }}
                         </p>
                     </div>
                     <div class="w-full">
@@ -73,13 +73,23 @@
                             Gerar Comanda
                         </button>
                     </div>
+                    <label class="text-xs" for="opcoes">Selecione o numero da Mesa:</label>
+                    <select class="text-xs" id="opcoes" name="mesa">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                 </form>
             </div>
+
             <div class="text-center w-3/5">
                 <p class="text-xs my-3 text-gray-500">Ao efetuar o pagamento da
                     comanda o seu CPF sera retirado do sistema!</p>
             </div>
         </div>
+
         <div class="w-[80%] h-px my-2 bg-black"></div>
         <p class="text-sm my-2 text-gray-500 drop-shadow-md">Feito por Leonardo Augusto</p>
     </div>

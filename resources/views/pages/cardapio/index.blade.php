@@ -36,8 +36,16 @@
 
             <div class="p-3 flex flex-col" id="cliente-info">
                 <p class=" text-sm">
-                    Bem vindo, {{ session('nome') }}
+                    Bem vindo Sr.{{ session('nome') }}, o que deseja pedir?
                 </p>
+                <div class="flex">
+                    <p class=" text-xs pr-2">
+                        Mesa: 10
+                    </p>
+                    <p class=" text-xs pl-2">
+                        comanda: 1
+                    </p>
+                </div>
             </div>
             {{-- <x-carouseloffer /> --}}
 

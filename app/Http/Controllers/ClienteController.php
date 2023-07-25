@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Comanda;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class ClienteController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
+    {
         $regras = [
             'nome' => 'required|min:3|max:40',
             'cpf' => 'required|digits:11'
@@ -45,6 +46,7 @@ class ClienteController extends Controller
 
         $request->validate($regras, $feedback);
 
+        //recebe o cpf
         $cpf = $request->input('cpf');
 
         // Verificar se o CPF já existe no banco de dados
@@ -59,14 +61,25 @@ class ClienteController extends Controller
             $cliente->cpf = $cpf;
         }
 
-        // Definir os outros atributos do cliente
+        // Definir o nome digitado para o cliente
         $cliente->nome = $request->input('nome');
-
-        // Salvar o cliente no banco de dados
         $cliente->save();
 
-        // Armazenar na sessão
+        $cliente_dados = Cliente::where('cpf', $cpf)->get()->first();
+        $cliente_id = $cliente_dados->id;
+
         session(['nome' => $cliente->nome, 'cpf' => $cliente->cpf]);
+
+        $atribuicaomesa = new Comanda();
+        $atribuicaomesa->mesa_id = $request->input('mesa');
+        $atribuicaomesa->total = 0;
+        $atribuicaomesa->cliente_id = $cliente_id;
+        // dd($atribuicaomesa);
+        // Salvar o cliente no banco de dados
+
+        $atribuicaomesa->save();
+
+        // Armazenar na sessão
 
         return redirect()->route('cardapio.index');
     }

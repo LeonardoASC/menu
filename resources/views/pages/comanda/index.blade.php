@@ -13,7 +13,7 @@
 
     <!-- component -->
     <div class="h-screen w-full flex flex-col overflow-hidden bg-white select-none">
-        <main class="">
+        {{-- <main class="">
             @foreach ($pedidosEntregues as $pedidosEntregue)
                 <tr>
                     Bem vindo, {{ session('nome') }}
@@ -28,7 +28,7 @@
                     <br>
                 </tr>
             @endforeach
-        </main>
+        </main> --}}
 
         <aside
             class="w-full px-6 py-4 flex flex-col  dark:bg-black
@@ -51,40 +51,71 @@
                 </button>
             </div>
 
-
+            {{-- @dd($pedidosEntregues) --}}
             @php
                 $total = 0; // variável para manter o valor total
+                $garcom10 = 0; // variável para manter o valor total
+                $TotalFinal = 0; // variável para manter o valor total
             @endphp
-            @foreach ($pedidosEntregues as $pedidosEntregue)
-                <a href="#"
-                    class="mt-8 p-4 flex justify-between bg-gray-100 rounded-lg
+
+            {{-- vai por fora do foreach --}}
+            @if ($pedidosEntregues->isEmpty())
+                <p class="p-4 text-center italic">Nenhum pedido foi feito ainda.</p>
+            @else
+                @foreach ($pedidosEntregues as $pedidosEntregue)
+                    <a href=""
+                        class="mt-8 p-4 flex justify-between bg-gray-100 rounded-lg
 			font-semibold capitalize">
-                    <!-- link -->
-                    <div class="flex">
-                        <img class="h-10 w-10 rounded-full object-cover"
-                            src="https://lh3.googleusercontent.com/cX0xwvJKCNIFrl2wIwoYiIURxmZt1y7tF3wJvynqcnQG5tmYdKBLpDDvhXzmVZzrstAEkw=s151"
-                            alt="veldora profile" />
-                        <div class="flex flex-col ml-4">
-                            <span>{{ $pedidosEntregue->nome }}</span>
-                            <span class="text-sm text-gray-600">{{ $pedidosEntregue->quantidade }}x</span>
+                        <!-- link -->
+                        <div class="flex">
+                            <img class="h-10 w-10 rounded-full object-cover"
+                                src="https://lh3.googleusercontent.com/cX0xwvJKCNIFrl2wIwoYiIURxmZt1y7tF3wJvynqcnQG5tmYdKBLpDDvhXzmVZzrstAEkw=s151"
+                                alt="veldora profile" />
+                            <div class="flex flex-col ml-4">
+                                <span>{{ $pedidosEntregue->nome }}</span>
+                                <span class="text-sm text-gray-600">{{ $pedidosEntregue->quantidade }}x</span>
+                            </div>
                         </div>
-                    </div>
-                    <span>$ {{ $pedidosEntregue->preco }}</span>
-                </a>
-                @php
-                    $total += ($pedidosEntregue->preco*$pedidosEntregue->quantidade); // atualiza o valor total
-                @endphp
-            @endforeach
+                        <span>R$ {{ $pedidosEntregue->preco }}</span>
+                    </a>
+
+                    @php
+                        $total += $pedidosEntregue->preco * $pedidosEntregue->quantidade; // atualiza o valor total
+                        $garcom10 = intval(($total * 10) / 100);
+                        $cover = 10;
+                        $TotalFinal = $total + $cover + $garcom10;
+                    @endphp
+                @endforeach
+            @endif
             <div class="mt-4 flex justify-center capitalize text-blue-600">
                 <a href="#" id="verTodos">Ver Todos!</a>
             </div>
-            <span class="mt-4 text-gray-600">Total:</span>
+            <div class="flex flex-col">
+                <div class="flex justify-between">
+                    <span class="mt-4 text-gray-600">Sub-Total:</span>
+                    <span class="mt-4 text-gray-600">{{ $total }}</span>
+                </div>
 
+                <span class="mt-4 text-gray-600 text-sm">Taxa de {...}:</span>
+                <div class="flex justify-between">
+                    <span class=" text-gray-600 text-xs pl-3">10% Garçom:</span>
+                    <span class=" text-gray-600 text-xs pl-3 ">R$ {{ $garcom10 }}</span>
+                </div>
 
-            <span class="mt-1 text-3xl font-semibold">$ {{ $total }}</span>
+                <div class="flex justify-between">
+                    <span class=" text-gray-600 text-xs pl-3">Cover da noite:</span>
+                    <span class=" text-gray-600 text-xs pl-3">R$ 10</span>
+                </div>
 
-            <form action="{{ route('comanda.store', ['total' => $total]) }}" method="post">
+                <span class="mt-4 text-gray-600 font-bold">Total:</span>
+            </div>
+
+            <span class="mt-1 text-3xl font-semibold">$ {{ $TotalFinal }}</span>
+@dd($comandas)
+            <form action="{{ route('comanda.update', $comandas->id) }}" method="post">
                 @csrf
+                @method('PUT')
+
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <button type="submit"
                         class="mt-8 flex items-center py-4 px-3 text-white rounded-lg bg-green-400 shadow focus:outline-none">
@@ -94,9 +125,7 @@
                         </svg>
                         <span>Finalizar COMANDA!</span>
                     </button>
-                    <input type="hidden" name="total" value="{{ $total }}">
-                    <input type="hidden" name="cliente_id_total" value="1">
-                    <input type="hidden" name="mesa_id_total" value="1">
+                    <input type="hidden" name="totalfinal" value="{{ $TotalFinal }}">
                 </td>
             </form>
 
