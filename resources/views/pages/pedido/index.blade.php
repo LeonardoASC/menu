@@ -13,95 +13,54 @@
 </head>
 
 <body>
-    <div class="w-full px-4 mx-auto border bg-white">
-            <div class="relative flex flex-col mt-10 border break-words w-full shadow-lg rounded bg-white">
-                <div class="rounded-t px-4 py-3 border-0 ">
-                    <div class="flex flex-wrap items-center">
-                        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-blueGray-700 ">
-                                Pedidos
-                            </h3>
+    <div class="bg-white ">
+        <div class="flex justify-center py-2 bg-white border-b shadow-md mb-1 rounded-xl">
+            <h2>Estamos preparando os pedidos para voce!</h2>
+        </div>
+
+        @if ($pedidos->isEmpty())
+            <p class="text-center">Nenhum pedido realizado.</p>
+        @else
+            @foreach ($pedidos as $pedido)
+                <ul role="list" class="divide-y divide-gray-100 bg-white p-5">
+                    <li class="flex flex-col justify-between gap-x-6 py-5 border rounded-3xl shadow-md p-4 bg-gray-100">
+                        <div class="flex gap-x-4">
+                            <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
+                                src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024"
+                                alt="">
+                            <div class="min-w-0 flex-auto">
+                                <div class="flex justify-between">
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->nome }}</p>
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->preco }}</p>
+                                </div>
+                                <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->quantidade }}x</p>
+                                <p class="mt-1 truncate text-xs leading-5 text-gray-500"> {{ $pedido->observacao }}Observação do pedido aqui</p>
+                            <div class="flex items-center">
+                                <p class="text-sm leading-6 text-gray-900 mr-2">{{ $pedido->status }}</p>
+                                <div class="w-4 h-4  flex justify-center items-center rounded-full bg-gradient-to-t from-green-400 to-gray-100 animate-spin">
+                                    <div class="w-3 h-3 bg-gray-100 rounded-full"></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        </div>
 
-                <div class="block w-full overflow-x-auto">
-                    <table class="items-center w-full border-collapse text-blueGray-700  ">
-
-                        <thead class="thead-light">
-                            <tr>
-                                <th
-                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-
-                                </th>
-                                <th
-                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-
-                                </th>
-                                <th
-                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-
-                                </th>
-                                <th
-                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-
-                                </th>
-                                <th
-                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-
-                                </th>
-                            </tr>
-                        </thead>
-
-
-                        <tbody>
-                            @if ($pedidos->isEmpty())
-                                    <p class="text-center">Nenhum pedido realizado.</p>
-                                @else
-                            @foreach ($pedidos as $pedido)
-                            <tr>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                    {{ $pedido->nome }}
-                                    <br>
-                                    {{ $pedido->quantidade }}x
-                                    <br>
-                                    {{ $pedido->observacao }}
-                                </td>
-                                {{-- <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    {{ $pedido->quantidade }}x
-                                </td> --}}
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    {{ $pedido->cliente_id }}
-                                    <br>
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    {{ $pedido->status }}
-
-                                    <div class="w-4 h-4  flex justify-center items-center rounded-full bg-gradient-to-t from-green-400 to-gray-50 animate-spin">
-                                        <div class="w-3 h-3 bg-white rounded-full">
-
-                                        </div>
-                                    </div>
-                                </td>
-
-                                 <form id="pedidoForm-{{ $pedido->id }}" action="{{ route('pedido.update', ['pedido' => $pedido]) }}" method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <button class="toggleModalButton bg-green-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
-                                    data-produto-id="{{ $pedido->id }}">Entregar pedido</button>
-                                    <input type="hidden" name="pedido_status" value="Entregue">
-                                </td>
-                                    </form>
-
-                            </tr> @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-    </div>
-        {{-- //modal\\ --}}
+                        <div class="">
+                            <form id="pedidoForm-{{ $pedido->id }}" action="{{ route('pedido.update', ['pedido' => $pedido]) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                            <div class="text-sm flex justify-center mt-2">
+                                <button class="toggleModalButton bg-green-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+                                data-produto-id="{{ $pedido->id }}">Entregar pedido</button>
+                                <input type="hidden" name="pedido_status" value="Entregue">
+                            </div>
+                                </form>
+                        </div>
+                    </li>
+                </ul>
+            @endforeach
+        @endif
+</div>
+    {{-- //modal\\ --}}
     <div id="modal"
         class="hidden fixed inset-0 bg-gray-500 bg-opacity-75  items-center justify-center">
     <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">

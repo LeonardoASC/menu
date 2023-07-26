@@ -62,15 +62,11 @@
             @if ($pedidosEntregues->isEmpty())
                 <p class="p-4 text-center italic">Nenhum pedido foi feito ainda.</p>
             @else
-                @foreach ($pedidosEntregues as $pedidosEntregue)
-                    <a href=""
-                        class="mt-8 p-4 flex justify-between bg-gray-100 rounded-lg
-			font-semibold capitalize">
-                        <!-- link -->
+                @foreach ($pedidosEntregues->take(3) as $pedidosEntregue)
+
+                    <a href=""class="mt-8 p-4 flex justify-between bg-gray-100 rounded-lg font-semibold capitalize">
                         <div class="flex">
-                            <img class="h-10 w-10 rounded-full object-cover"
-                                src="https://lh3.googleusercontent.com/cX0xwvJKCNIFrl2wIwoYiIURxmZt1y7tF3wJvynqcnQG5tmYdKBLpDDvhXzmVZzrstAEkw=s151"
-                                alt="veldora profile" />
+                            <img class="h-10 w-10 rounded-full object-cover" src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024" alt="veldora profile" />
                             <div class="flex flex-col ml-4">
                                 <span>{{ $pedidosEntregue->nome }}</span>
                                 <span class="text-sm text-gray-600">{{ $pedidosEntregue->quantidade }}x</span>
@@ -87,9 +83,33 @@
                     @endphp
                 @endforeach
             @endif
-            <div class="mt-4 flex justify-center capitalize text-blue-600">
-                <a href="#" id="verTodos">Ver Todos!</a>
-            </div>
+
+            <div id="itensRestantes" class="hidden">
+                @foreach ($pedidosEntregues->skip(4) as $pedidosEntregue)
+
+                    <div class="mt-8 p-4 flex  justify-between bg-gray-100 rounded-lg font-semibold capitalize">
+                        <div class="flex">
+                            <img class="h-10 w-10 rounded-full object-cover" src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024" alt="veldora profile" />
+                            <div class="flex flex-col ml-4">
+                                <span>{{ $pedidosEntregue->nome }}</span>
+                                <span class="text-sm text-gray-600">{{ $pedidosEntregue->quantidade }}x</span>
+                            </div>
+                        </div>
+                        <span>R$ {{ $pedidosEntregue->preco }}</span>
+                    </div>
+                    @endforeach
+                </div>
+
+
+                @if ($pedidosEntregues->count() > 4)
+                <button id="verMaisBtn" class="mt-4 flex justify-center items-center flex-col capitalize text-blue-600 bg-white">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#000000" viewBox="0 0 256 256"><path d="M112,60a16,16,0,1,1,16,16A16,16,0,0,1,112,60Zm16,52a16,16,0,1,0,16,16A16,16,0,0,0,128,112Zm0,68a16,16,0,1,0,16,16A16,16,0,0,0,128,180Z"></path></svg>
+                    Ver Todos!
+                </button>
+            @endif
+
+
             <div class="flex flex-col">
                 <div class="flex justify-between">
                     <span class="mt-4 text-gray-600">Sub-Total:</span>
@@ -129,12 +149,18 @@
                         <input type="hidden" name="mesa_id_total" value="1">
                     </td>
                 </form>
-           
+
 
         </aside>
 
     </div>
     <x-rodape />
+    <script>
+        // Script para mostrar/ocultar os itens restantes ao clicar no botão "Ver mais"
+        document.getElementById('verMaisBtn').addEventListener('click', function() {
+            document.getElementById('itensRestantes').classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>
