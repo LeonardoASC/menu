@@ -13,7 +13,7 @@
 
     <!-- component -->
     <div class="h-screen w-full flex flex-col overflow-hidden bg-white select-none">
-        {{-- <main class="">
+        <main class="">
             @foreach ($pedidosEntregues as $pedidosEntregue)
                 <tr>
                     Bem vindo, {{ session('nome') }}
@@ -28,7 +28,7 @@
                     <br>
                 </tr>
             @endforeach
-        </main> --}}
+        </main>
 
         <aside
             class="w-full px-6 py-4 flex flex-col  dark:bg-black
@@ -111,25 +111,24 @@
             </div>
 
             <span class="mt-1 text-3xl font-semibold">$ {{ $TotalFinal }}</span>
-@dd($comandas)
-            <form action="{{ route('comanda.update', $comandas->id) }}" method="post">
-                @csrf
-                @method('PUT')
-
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <button type="submit"
-                        class="mt-8 flex items-center py-4 px-3 text-white rounded-lg bg-green-400 shadow focus:outline-none">
-                        <svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
-                            <path
-                                d="M9 16.17l-3.59-3.59a.996.996 0 1 0-1.41 1.41l4.24 4.24c.39.39 1.02.39 1.41 0L20.41 9.7a.996.996 0 1 0-1.41-1.41L9 16.17z" />
-                        </svg>
-                        <span>Finalizar COMANDA!</span>
-                    </button>
-                    <input type="hidden" name="totalfinal" value="{{ $TotalFinal }}">
-                </td>
-            </form>
-
-
+            @foreach ($pedidosEntregues as $pedidosEntregue)
+                <form action="{{ route('comanda.store', ['totalfinal' => $TotalFinal]) }}" method="post">
+                    @csrf
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <button type="submit"
+                            class="mt-8 flex items-center py-4 px-3 text-white rounded-lg bg-green-400 shadow focus:outline-none">
+                            <svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
+                                <path
+                                    d="M9 16.17l-3.59-3.59a.996.996 0 1 0-1.41 1.41l4.24 4.24c.39.39 1.02.39 1.41 0L20.41 9.7a.996.996 0 1 0-1.41-1.41L9 16.17z" />
+                            </svg>
+                            <span>Finalizar COMANDA!</span>
+                        </button>
+                        <input type="hidden" name="totalfinal" value="{{ $TotalFinal }}">
+                        <input type="hidden" name="cliente_id_total" value=" {{ $pedidosEntregue->cliente_id }}">
+                        <input type="hidden" name="mesa_id_total" value="1">
+                    </td>
+                </form>
+            @endforeach
 
         </aside>
 

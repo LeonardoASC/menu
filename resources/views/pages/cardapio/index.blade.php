@@ -40,6 +40,7 @@
                 </p>
                 <div class="flex">
                     <p class=" text-xs pr-2">
+                        cpf:{{ session('cpf') }}
                         Mesa: 10
                     </p>
                     <p class=" text-xs pl-2">

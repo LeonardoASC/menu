@@ -59,35 +59,35 @@ class ComandaController extends Controller
     }
 
 
-//     public function store(Request $request)
-// {
-//     $totalComanda = $request->input('total');
-//     $cliente_id = $request->input('cliente_id_total');
-//     $mesa_id = $request->input('mesa_id_total');
+    // public function store(Request $request)
+    // {
+    // $totalComanda = $request->input('total');
+    // $cliente_id = $request->input('cliente_id_total');
+    // $mesa_id = $request->input('mesa_id_total');
 
-//     // Verifica se já existe uma comanda com o cliente_id e mesa_id informados
-//     $comandaExistente = Comanda::where('cliente_id', $cliente_id)
-//                                ->where('mesa_id', $mesa_id)
-//                                ->first();
+    // // Verifica se já existe uma comanda com o cliente_id e mesa_id informados
+    // $comandaExistente = Comanda::where('cliente_id', $cliente_id)
+    //                            ->where('mesa_id', $mesa_id)
+    //                            ->first();
 
-//     if ($comandaExistente) {
-//         // Atualiza o total da comanda existente
-//         $comandaExistente->total = $totalComanda;
-//         $comandaExistente->save();
-//     } else {
-//         // Cria uma nova comanda, pois não existe uma comanda com o cliente_id e mesa_id informados
-//         $novaComanda = new Comanda();
-//         $novaComanda->total = $totalComanda;
-//         $novaComanda->cliente_id = $cliente_id;
-//         $novaComanda->mesa_id = $mesa_id;
-//         $novaComanda->save();
-//     }
+    // if ($comandaExistente) {
+    //     // Atualiza o total da comanda existente
+    //     $comandaExistente->total = $totalComanda;
+    //     $comandaExistente->save();
+    // } else {
+    //     // Cria uma nova comanda, pois não existe uma comanda com o cliente_id e mesa_id informados
+    //     $novaComanda = new Comanda();
+    //     $novaComanda->total = $totalComanda;
+    //     $novaComanda->cliente_id = $cliente_id;
+    //     $novaComanda->mesa_id = $mesa_id;
+    //     $novaComanda->save();
+    // }
 
-//     // Limpando a sessão (se necessário)
-//     Session::flush();
+    // // Limpando a sessão (se necessário)
+    // Session::flush();
 
-//     return redirect()->route('home');
-// }
+    // return redirect()->route('home');
+    // }
 
     /**
      * Display the specified resource.
@@ -108,31 +108,12 @@ class ComandaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-{
-    dd($id);
-    dd($request->all());
-    $totalComanda = $request->input('totalfinal');
 
-    // Busca a comanda existente no banco de dados com os valores de cliente_id e mesa_id informados
-    $comandaExistente = Comanda::where('cliente_id', $cliente_id)
-                            ->where('mesa_id', $mesa_id)
-                            ->first();
+    public function update(Request $request)
+    {
 
-    if ($comandaExistente) {
-        // Atualiza o total da comanda existente
-        $comandaExistente->total = $totalComanda;
-        $comandaExistente->save(); // Use save() para salvar as alterações no banco
-    } else {
-        // Se a comanda não existir, você pode retornar uma resposta de erro ou criar uma nova comanda aqui
-        // Exemplo: return response()->json(['message' => 'Comanda não encontrada'], 404);
     }
 
-    // Limpando a sessão (se necessário)
-    Session::flush();
-
-    return redirect()->route('home');
-}
 
     /**
      * Remove the specified resource from storage.
