@@ -13,7 +13,7 @@
 </head>
 
 <body>
-        <div class="w-full px-4 mx-auto border bg-white">
+    <div class="w-full px-4 mx-auto border bg-white">
             <div class="relative flex flex-col mt-10 border break-words w-full shadow-lg rounded bg-white">
                 <div class="rounded-t px-4 py-3 border-0 ">
                     <div class="flex flex-wrap items-center">
@@ -55,6 +55,9 @@
 
 
                         <tbody>
+                            @if ($pedidos->isEmpty())
+                                    <p class="text-center">Nenhum pedido realizado.</p>
+                                @else
                             @foreach ($pedidos as $pedido)
                             <tr>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
@@ -73,21 +76,15 @@
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                     {{ $pedido->status }}
-                                    <div class="flex items-center">
-                                        <span class="mr-2">60%</span>
-                                        <div class="relative w-full">
-                                            <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                                                <div style="width: 60%"
-                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
-                                                </div>
-                                            </div>
+
+                                    <div class="w-4 h-4  flex justify-center items-center rounded-full bg-gradient-to-t from-green-400 to-gray-50 animate-spin">
+                                        <div class="w-3 h-3 bg-white rounded-full">
+
                                         </div>
                                     </div>
                                 </td>
 
-
-                                
-                            <form id="pedidoForm-{{ $pedido->id }}" action="{{ route('pedido.update', ['pedido' => $pedido]) }}" method="post">
+                                 <form id="pedidoForm-{{ $pedido->id }}" action="{{ route('pedido.update', ['pedido' => $pedido]) }}" method="post">
                                     @csrf
                                     @method('PATCH')
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -95,18 +92,21 @@
                                     data-produto-id="{{ $pedido->id }}">Entregar pedido</button>
                                     <input type="hidden" name="pedido_status" value="Entregue">
                                 </td>
-                            </form>
+                                    </form>
+
                             </tr> @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
+    </div>
         {{-- //modal\\ --}}
-        <div id="modal"
+    <div id="modal"
         class="hidden fixed inset-0 bg-gray-500 bg-opacity-75  items-center justify-center">
     <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity">
+        </div>
         <div class="fixed inset-0 z-10 overflow-y-auto">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <div
@@ -144,6 +144,7 @@
     </div>
     </div>
     <x-rodape />
+
     <script>
         //modal
         document.addEventListener('DOMContentLoaded', function() {

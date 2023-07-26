@@ -52,35 +52,75 @@ class ClienteController extends Controller
         // Verificar se o CPF já existe no banco de dados
         $clienteExistente = Cliente::where('cpf', $cpf)->first();
 
-        if ($clienteExistente) {
-            // CPF já existe, usar o cliente existente
-            $cliente = $clienteExistente;
-        } else {
-            // CPF não existe, criar um novo cliente
-            $cliente = new Cliente();
-            $cliente->cpf = $cpf;
-        }
+        // if ($clienteExistente) {
+        //     // CPF já existe, usar o cliente existente
+        //     $cliente = $clienteExistente;
+        // } else {
+        //     // CPF não existe, criar um novo cliente
+        //     $cliente = new Cliente();
+        //     $cliente->cpf = $cpf;
+        // }
 
-        // Definir o nome digitado para o cliente
-        $cliente->nome = $request->input('nome');
-        $cliente->save();
+        // // Definir o nome digitado para o cliente
+        // $cliente->nome = $request->input('nome');
+        // $cliente->save();
 
-        $cliente_dados = Cliente::where('cpf', $cpf)->get()->first();
-        $cliente_id = $cliente_dados->id;
+        // $cliente_dados = Cliente::where('cpf', $cpf)->get()->first();
+        // $cliente_id = $cliente_dados->id;
 
-        session(['nome' => $cliente->nome, 'cpf' => $cliente->cpf]);
 
+
+        // $atribuicaomesa = new Comanda();
+        // $atribuicaomesa->total = 0;
+        // $atribuicaomesa->mesa_id = $request->input('mesa');
+        // $atribuicaomesa->cliente_id = $cliente_id;
+        // // dd($atribuicaomesa);
+        // // Salvar o cliente no banco de dados
+        // $atribuicaomesa->save();
+
+// --------------------------------------------------------
+
+
+if ($clienteExistente) {
+    // CPF já existe, usar o cliente existente
+    $cliente = $clienteExistente;
+
+    // Verificar se o cliente já possui uma comanda associada
+    $comandaExistente = Comanda::where('cliente_id', $cliente->id)->first();
+
+    if ($comandaExistente) {
+        // Utilizar a comanda existente associada ao cliente
+        $atribuicaomesa = $comandaExistente;
+    } else {
+        // Caso não tenha comanda associada, criar uma nova comanda
         $atribuicaomesa = new Comanda();
-        $atribuicaomesa->mesa_id = $request->input('mesa');
         $atribuicaomesa->total = 0;
-        $atribuicaomesa->cliente_id = $cliente_id;
-        // dd($atribuicaomesa);
-        // Salvar o cliente no banco de dados
-
+        $atribuicaomesa->mesa_id = $request->input('mesa');
+        $atribuicaomesa->cliente_id = $cliente->id;
         $atribuicaomesa->save();
+    }
+} else {
+    // CPF não existe, criar um novo cliente
+    $cliente = new Cliente();
+    $cliente->cpf = $cpf;
+    $cliente->nome = $request->input('nome');
+    $cliente->save();
+
+    // Criar uma nova comanda para o cliente recém-criado
+    $atribuicaomesa = new Comanda();
+    $atribuicaomesa->total = 0;
+    $atribuicaomesa->mesa_id = $request->input('mesa');
+    $atribuicaomesa->cliente_id = $cliente->id;
+    $atribuicaomesa->save();
+}
+
+
+
+
+        session(['nome' => $cliente->nome, 'cpf' => $cliente->cpf, 'idcomanda' => $atribuicaomesa->id, 'idmesa' => $atribuicaomesa->mesa_id]);
+        // dd(session()->all());
 
         // Armazenar na sessão
-
         return redirect()->route('cardapio.index');
     }
 

@@ -13,7 +13,7 @@
 
     <!-- component -->
     <div class="h-screen w-full flex flex-col overflow-hidden bg-white select-none">
-        <main class="">
+        {{-- <main class="">
             @foreach ($pedidosEntregues as $pedidosEntregue)
                 <tr>
                     Bem vindo, {{ session('nome') }}
@@ -28,7 +28,7 @@
                     <br>
                 </tr>
             @endforeach
-        </main>
+        </main> --}}
 
         <aside
             class="w-full px-6 py-4 flex flex-col  dark:bg-black
@@ -111,9 +111,10 @@
             </div>
 
             <span class="mt-1 text-3xl font-semibold">$ {{ $TotalFinal }}</span>
-            @foreach ($pedidosEntregues as $pedidosEntregue)
-                <form action="{{ route('comanda.store', ['totalfinal' => $TotalFinal]) }}" method="post">
+
+                <form action="{{ route('comanda.update', session('idcomanda')) }}" method="post">
                     @csrf
+                    @method('PUT')
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <button type="submit"
                             class="mt-8 flex items-center py-4 px-3 text-white rounded-lg bg-green-400 shadow focus:outline-none">
@@ -123,12 +124,12 @@
                             </svg>
                             <span>Finalizar COMANDA!</span>
                         </button>
-                        <input type="hidden" name="totalfinal" value="{{ $TotalFinal }}">
+                        <input type="hidden" name="total" value="{{ $TotalFinal }}">
                         <input type="hidden" name="cliente_id_total" value=" {{ $pedidosEntregue->cliente_id }}">
                         <input type="hidden" name="mesa_id_total" value="1">
                     </td>
                 </form>
-            @endforeach
+           
 
         </aside>
 

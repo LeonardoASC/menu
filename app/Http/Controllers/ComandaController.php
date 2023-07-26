@@ -45,7 +45,7 @@ class ComandaController extends Controller
      */
     public function store(Request $request)
     {
-        $totalComanda = $request->input('totalfinal');
+        $totalComanda = $request->input('total');
         $cliente_id = $request->input('cliente_id_total');
         $mesa_id = $request->input('mesa_id_total');
 
@@ -109,9 +109,10 @@ class ComandaController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(Request $request)
+    public function update(Request $request, Comanda $comanda)
     {
-
+        $comanda->update($request->all());
+        return redirect()->route('home');
     }
 
 
