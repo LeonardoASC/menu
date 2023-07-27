@@ -43,14 +43,15 @@ class MesaController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $regras = [
-            'id' => 'required',
+            // 'id' => 'required',
             'numero_cadeiras' => 'required|min:1|max:99',
             'status' => ''
         ];
 
         $feedback = [
-            'id.required' => 'A mesa deve ser selecionada',
+            // 'id.required' => 'A mesa deve ser selecionada',
             'required' => 'O campo :attribute deve ser preenchido',
             'numero_cadeiras.min' => 'Mesa deve ter no mínimo 1 cadeira',
             'numero_cadeiras.max' => 'Mesa deve ter no maximo 99 cadeiras',

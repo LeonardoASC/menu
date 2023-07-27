@@ -87,11 +87,14 @@
                             @endforeach
                         </select>
                         <p class="text-xs  text-gray-500">
-                        {{ $errors->has('id') ? $errors->first('id') : '' }}
+                        {{ $errors->has('mesa') ? $errors->first('mesa') : '' }}
                         </p>
                     </div>
                 </form>
             </div>
+
+
+
 
             <div class="text-center w-3/5">
                 <p class="text-xs my-3 text-gray-500">Ao efetuar o pagamento da

@@ -31,19 +31,22 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $regras = [
-
+            'mesa' => 'required|exists:mesas,id',
             'nome' => 'required|min:3|max:40',
             'cpf' => 'required|digits:11'
         ];
 
         $feedback = [
-            
+
             'required' => 'O campo :attribute deve ser preenchido.',
             'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres.',
             'nome.max' => 'O campo nome deve ter no máximo 40 caracteres.',
             'cpf.required' => 'O campo CPF deve ser preenchido.',
-            'cpf.digits' => 'O campo CPF deve ter exatamente 11 dígitos.'
+            'cpf.digits' => 'O campo CPF deve ter exatamente 11 dígitos.',
+            'mesa.required' => 'Selecione o número da mesa.',
+    'mesa.exists' => 'A mesa selecionada não existe.'
         ];
 
         $request->validate($regras, $feedback);
