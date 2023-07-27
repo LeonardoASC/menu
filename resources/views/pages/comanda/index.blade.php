@@ -29,6 +29,20 @@
                 </tr>
             @endforeach
         </main> --}}
+        <div class="p-3 flex flex-col" id="cliente-info">
+            <p class=" text-sm">
+                Bem vindo Sr.{{ session('nome') }}, o que deseja pedir?
+            </p>
+            <div class="flex">
+                <p class=" text-xs pr-2">
+                    cpf:{{ session('cpf') }}
+                    Mesa: {{ session('idmesa') }}
+                </p>
+                <p class=" text-xs pl-2">
+                    comanda: {{ session('idcomanda') }}
+                </p>
+            </div>
+        </div>
 
         <aside
             class="w-full px-6 py-4 flex flex-col  dark:bg-black

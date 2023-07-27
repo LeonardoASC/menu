@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -93,6 +94,17 @@
         <div class="w-[80%] h-px my-2 bg-black"></div>
         <p class="text-sm my-2 text-gray-500 drop-shadow-md">Feito por Leonardo Augusto</p>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @if (Session::has('message'))
+    <script>
+        // toastr.options ={
+        //     "progressBar" : true,
+        //     "closeButton" : true,
+        // }
+        toastr.sucess("{{ Session::get('message') }}");
+    </script>
+    @endif
 </body>
 
 </html>

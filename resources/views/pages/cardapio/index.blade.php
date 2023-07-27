@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
+    
 </head>
 
 <body>
@@ -33,7 +34,7 @@
                     </path>
                 </svg>
             </div>
-
+            {{-- @dd(session()->all()) --}}
             <div class="p-3 flex flex-col" id="cliente-info">
                 <p class=" text-sm">
                     Bem vindo Sr.{{ session('nome') }}, o que deseja pedir?
@@ -41,10 +42,10 @@
                 <div class="flex">
                     <p class=" text-xs pr-2">
                         cpf:{{ session('cpf') }}
-                        Mesa: 10
+                        Mesa: {{ session('idmesa') }}
                     </p>
                     <p class=" text-xs pl-2">
-                        comanda: 1
+                        comanda: {{ session('idcomanda') }}
                     </p>
                 </div>
             </div>
@@ -116,7 +117,7 @@
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0 w-14 h-14">
                                                         <img class="w-full h-full rounded-full bg-slate-600"
-                                                            src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024"
+                                                            src="{{$produto->imagem}}"
                                                             alt="" />
                                                     </div>
                                                     <div class="ml-3">
@@ -192,6 +193,7 @@
 
         //
     </script>
+
 </body>
 
 </html>

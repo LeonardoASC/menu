@@ -45,6 +45,7 @@
             <p class="@if (request()->routeIs('comanda.index')) text-amber-950 @else text-zinc-400 @endif">Comanda</p>
         </a>
     </div>
+    {{-- @dd(Session()->all()) --}}
 </div>
 
 

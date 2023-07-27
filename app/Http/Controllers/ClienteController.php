@@ -121,7 +121,8 @@ if ($clienteExistente) {
         // dd(session()->all());
 
         // Armazenar na sessão
-        return redirect()->route('cardapio.index');
+        // return redirect()->route('cardapio.index')->with('message', 'Bem vindo ao DayerMenu');
+        return back()->with('message', 'Bem vindo!' );
     }
 
     /**
