@@ -70,7 +70,7 @@ class PedidoController extends Controller
 
         $pedido->save();
 
-        return redirect()->route('cardapio.index');
+        return redirect()->route('cardapio.index')->with('message', 'Pedido realizado com sucesso!');
     }
 
     /**

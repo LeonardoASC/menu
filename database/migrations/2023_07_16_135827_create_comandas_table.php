@@ -16,6 +16,7 @@ return new class extends Migration
             $table->decimal('total', 8, 2)->default(0);
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('mesa_id');
+            $table->boolean('status')->default(true);
             $table->timestamps();
 
             // Definindo as chaves estrangeiras

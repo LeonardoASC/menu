@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Menu</title>
     @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -17,7 +17,7 @@
             <svg width="90" height="90" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M16 2C8.27813 2 2 8.27812 2 16C2 23.7219 8.27813 30 16 30C23.7219 30 30 23.7219 30 16C30 8.27812 23.7219 2 16 2Z"
-                    fill="#D8A390" />
+                    fill="#edce1f" />
                 <path
                     d="M9.86884 19.6502C9.56272 19.1867 10.3327 18.4853 10.0195 17.8963C9.83897 17.5567 9.54389 17.345 9.18952 17.3006C8.84941 17.2579 8.49905 17.3824 8.27573 17.6257C7.92315 18.0094 7.86832 18.5317 7.93652 18.7165C7.96148 18.7842 8.00071 18.8027 8.02879 18.8067C8.22083 18.832 8.32889 18.3391 8.39519 18.2364C8.57851 17.9535 8.99476 17.8679 9.28223 18.0538C9.82731 18.4064 9.35467 18.9762 9.39545 19.4574C9.43513 19.926 9.72709 20.1144 9.98919 20.1342C10.2442 20.1438 10.4225 20.0022 10.4675 19.8988C10.5754 19.6519 10.1207 20.0315 9.86884 19.6502Z"
                     fill="black" />
@@ -41,7 +41,7 @@
         <div class="w-[80%] h-px my-2 bg-black"></div>
         <div class="min-h-[70vh] w-full flex justify-center items-center flex-col">
             <div class="flex justify-center my-5">
-                <h1 class="text-2xl font-semibold text-[#D8A390]">Bem Vindo</h1>
+                <h1 class="text-2xl font-semibold text-primary">Bem Vindo</h1>
             </div>
             <h2 class="text-md font-semibold text-zinc-700 my-2 w-4/5 text-center">Coloque seu CPF para gerar uma
                 comanda
@@ -69,19 +69,27 @@
                     </div>
                     <div class="w-full">
                         <button
-                            class="w-full py-2 rounded-md bg-[#d8a390] shadow-sm text-sm text-[#5D4037] font-semibold"
+                            class="w-full py-2 rounded-md bg-primary shadow-sm text-sm text-white font-semibold"
                             type="submit">
                             Gerar Comanda
                         </button>
                     </div>
-                    <label class="text-xs" for="opcoes">Selecione o numero da Mesa:</label>
-                    <select class="text-xs" id="opcoes" name="mesa">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+
+
+                    <div class="flex flex-col">
+                        <label class="text-xs" for="opcoes">Selecione o numero da Mesa:</label>
+                        <select class="text-xs" id="opcoes" name="mesa">
+                            <option class="text-zinc-400 w-6">-- Selecione --</option>
+                            @foreach($mesas as $mesa)
+                                <option class="text-blue-500" value="{{ $mesa->id }}">
+                                    {{ $mesa->id }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <p class="text-xs  text-gray-500">
+                        {{ $errors->has('id') ? $errors->first('id') : '' }}
+                        </p>
+                    </div>
                 </form>
             </div>
 
@@ -94,17 +102,8 @@
         <div class="w-[80%] h-px my-2 bg-black"></div>
         <p class="text-sm my-2 text-gray-500 drop-shadow-md">Feito por Leonardo Augusto</p>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    @if (Session::has('message'))
-    <script>
-        // toastr.options ={
-        //     "progressBar" : true,
-        //     "closeButton" : true,
-        // }
-        toastr.sucess("{{ Session::get('message') }}");
-    </script>
-    @endif
+
 </body>
 
 </html>

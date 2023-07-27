@@ -7,7 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
-    
+     {{-- toastr --}}
+     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
 </head>
 
 <body>
@@ -169,6 +172,18 @@
     <x-rodape />
 
 
+      {{-- Toastr --}}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+      <script>
+          @if (Session::has('message'))
+              toastr.options = {
+                  "closeButton": true,
+                  "progressBar": true
+              }
+              toastr.success("{{ session('message') }}");
+          @endif
+      </script>
     <script>
         // function handleCategoryFilter(categoryId) {
         //     const filtroForm = document.getElementById('filtroForm');

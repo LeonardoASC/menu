@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>DayerMenu</title>
     @vite('resources/css/app.css')
 </head>
 
@@ -159,8 +159,6 @@
                             <span>Finalizar COMANDA!</span>
                         </button>
                         <input type="hidden" name="total" value="{{ $TotalFinal }}">
-                        <input type="hidden" name="cliente_id_total" value=" {{ $pedidosEntregue->cliente_id }}">
-                        <input type="hidden" name="mesa_id_total" value="1">
                     </td>
                 </form>
 
@@ -169,6 +167,7 @@
 
     </div>
     <x-rodape />
+
     <script>
         // Script para mostrar/ocultar os itens restantes ao clicar no botão "Ver mais"
         document.getElementById('verMaisBtn').addEventListener('click', function() {

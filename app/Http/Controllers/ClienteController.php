@@ -32,11 +32,13 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $regras = [
+
             'nome' => 'required|min:3|max:40',
             'cpf' => 'required|digits:11'
         ];
 
         $feedback = [
+            
             'required' => 'O campo :attribute deve ser preenchido.',
             'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres.',
             'nome.max' => 'O campo nome deve ter no máximo 40 caracteres.',
@@ -121,8 +123,8 @@ if ($clienteExistente) {
         // dd(session()->all());
 
         // Armazenar na sessão
-        // return redirect()->route('cardapio.index')->with('message', 'Bem vindo ao DayerMenu');
-        return back()->with('message', 'Bem vindo!' );
+        return redirect()->route('cardapio.index');
+        // return back()->with('message', 'Bem vindo!' );
     }
 
     /**

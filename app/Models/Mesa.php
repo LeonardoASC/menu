@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mesa extends Model
 {
     use HasFactory;
+    protected $fillable = ['numero_cadeiras', 'status'];
 
     public function comandas()
     {

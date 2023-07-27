@@ -38,7 +38,27 @@
         <table class="w-full">
             <tr>
                 @foreach ($mesas as $mesa)
+
                     <td class="flex justify-evenly px-2 py-2 w-full items-center text-gray-600">
+                        <div class="h-full w-full flex">
+                            <div class="mt-5 flex items-center justify-between p-2 ">
+
+                                <a href="{{ route('mesa.edit', ['mesa' => $mesa->id]) }}">
+                                    <button
+                                        class="border border-indigo-500  text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                                        Editar
+                                    </button>
+                                </a>
+                                <form method="POST" action="{{ route('mesa.destroy', ['mesa' => $mesa->id])}}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit"
+                                    class="border border-indigo-500 bg-red-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                                    Excluir
+                                </button>
+                            </form>
+
+                            </div>
                         <p class="text-xs">{{ $mesa->status }}</p>
                         <span class="relative flex h-6 w-6 mx-2">
                             <span
@@ -82,7 +102,12 @@
 
 
     </div>
-
+    <a href="{{ route('mesa.create') }}">
+        <button type="button"
+            class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+            Adicionar Mesa
+        </button>
+    </a>
     <script>
         function toggleId(id) {
             const pTag = document.getElementById('mesa-' + id);
