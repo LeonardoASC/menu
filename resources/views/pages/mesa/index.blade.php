@@ -40,25 +40,9 @@
                 @foreach ($mesas as $mesa)
 
                     <td class="flex justify-evenly px-2 py-2 w-full items-center text-gray-600">
-                        <div class="h-full w-full flex">
-                            <div class="mt-5 flex items-center justify-between p-2 ">
 
-                                <a href="{{ route('mesa.edit', ['mesa' => $mesa->id]) }}">
-                                    <button
-                                        class="border border-indigo-500  text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
-                                        Editar
-                                    </button>
-                                </a>
-                                <form method="POST" action="{{ route('mesa.destroy', ['mesa' => $mesa->id])}}">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit"
-                                    class="border border-indigo-500 bg-red-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
-                                    Excluir
-                                </button>
-                            </form>
 
-                            </div>
+
                         <p class="text-xs">{{ $mesa->status }}</p>
                         <span class="relative flex h-6 w-6 mx-2">
                             <span
@@ -67,7 +51,30 @@
                                 class="relative inline-flex rounded-full h-6 w-6 {{ $mesa->status === 'Disponivel' ? 'bg-green-400 ' : ' bg-amber-400' }}"></span>
                         </span>
 
-                        <p>Mesa N°{{ $mesa->id }}.</p>
+
+                        <div class="flex flex-col">
+                           <p>
+                               Mesa N°{{ $mesa->id }}.
+                            </p>
+                            <div class="flex ">
+
+                                <a href="{{ route('mesa.edit', ['mesa' => $mesa->id]) }}">
+                                    <button
+                                        class="border text-white rounded-md px-1 py-1 m-1 ">
+                                        Editar
+                                    </button>
+                                </a>
+                                <form method="POST" action="{{ route('mesa.destroy', ['mesa' => $mesa->id])}}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit"
+                                    class="border bg-red-400 text-white rounded-md px-1 py-1 m-1 ">
+                                    Excluir
+                                </button>
+                                </form>
+
+                            </div>
+                        </div>
 
 
                         </p>
@@ -82,6 +89,9 @@
                             class="bg-white hidden absolute w-1/2 right-0 ml-8 border rounded-md p-2 text-black">
                             <p>Mesa n°: {{ $mesa->id }}</p>
                             <hr>
+
+
+
                             <p>
                                 {{-- @if ($produtos->isEmpty())
                                 <p>Nenhuma comanda nesta mesa.</p> --}}
@@ -93,6 +103,7 @@
                                     @endforeach
                                 @endif
                             </p>
+
                         </div>
 
                     </td>
@@ -104,7 +115,7 @@
     </div>
     <a href="{{ route('mesa.create') }}">
         <button type="button"
-            class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+            class="border bg-primary text-white rounded-md px-4 py-2 m-2 select-none">
             Adicionar Mesa
         </button>
     </a>
