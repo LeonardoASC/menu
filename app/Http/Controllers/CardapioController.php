@@ -57,6 +57,8 @@ class CardapioController extends Controller
         $produto_preco = $request->input('produto_preco');
         $produto_descricao = $request->input('produto_descricao');
 
+
+
         // dd($produto_id);
         // Agora você pode usar o $produto_id para recuperar os detalhes do produto, se necessário.
         $produto = Produto::find($produto_id);
@@ -90,7 +92,7 @@ class CardapioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCardapioRequest $request, Cardapio $cardapio)
+    public function update(Request $request, Cardapio $cardapio)
     {
         //
     }

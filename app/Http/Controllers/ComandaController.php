@@ -111,8 +111,13 @@ class ComandaController extends Controller
 
     public function update(Request $request, Comanda $comanda)
     {
-        $comanda->update($request->all());
-        return redirect()->route('home');
+            dd($comanda->status);
+        if($comanda->status == 1){
+            //se comanda status for igual a 1 -> fazer apenas a adicação do valor
+            //se comanda status for igual a 0 -> finalizar comanda
+        }
+            $comanda->update($request->all());
+            return redirect()->route('home');
     }
 
 

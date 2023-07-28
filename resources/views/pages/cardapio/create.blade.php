@@ -10,16 +10,6 @@
 </head>
 
 <body>
-    {{-- <button
-                                                        class="toggleModalButton bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
-                                                        data-produto-id="{{ $produto->id }}"
-                                                        data-produto-nome="{{ $produto->nome }}"
-                                                        data-produto-descricao="{{ $produto->descricao }}"
-                                                        data-produto-preco="{{ $produto->preco }}">
-                                                        pedir</button> --}}
-
-    {{-- //modal\\ --}}
-{{-- @dd($produto) --}}
 
     <div id="modal" class="fixed inset-0 bg-gray-500 bg-opacity-75  items-center justify-center">
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -37,14 +27,14 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                                    <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
+                                <div class="mt-3 sm:ml-4 sm:mt-0 sm:text-left">
+                                    <h3 class="text-base text-center font-semibold leading-6 text-gray-900" id="modal-title">
                                         Deseja realmente fazer este pedido?</h3>
                                     <div class="mt-2">
-                                        <p class="text-sm text-gray-500"></p>
-                                        Detalhes do pedido:
+                                        <p class="text-center text-gray-500">
+                                        Detalhes do pedido:</p>
                                         <hr>
-                                        <div class="text-sm text-gray-500 relative left-5">
+                                        <div class="text-sm text-gray-500 flex flex-col justify-start ">
                                             <p>
                                                 Nome do pedido:. {{$produto->nome}}
                                             </p>
@@ -59,7 +49,6 @@
 
                                 </div>
                             </div>
-
 
 
 
@@ -95,6 +84,12 @@
                                 <button type="button" id="cancelButton"
                                     class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" onclick="window.history.back()">Cancelar</button>
                                 </div>
+                            </form>
+
+                            <form action="{{ route('comanda.update', session('idcomanda'))}}" method="post">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="atualiza_preco" value="{{ $produto->preco }}">
                             </form>
 
                         </div>

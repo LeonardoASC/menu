@@ -39,7 +39,7 @@
             </svg>
         </div>
         <div class="w-[80%] h-px my-2 bg-black"></div>
-        <div class="min-h-[70vh] w-full flex justify-center items-center flex-col">
+        <div class="min-h-[40vh] w-full flex justify-center items-center flex-col">
             <div class="flex justify-center my-5">
                 <h1 class="text-2xl font-semibold text-primary">Bem Vindo</h1>
             </div>
@@ -68,8 +68,7 @@
                         </p>
                     </div>
                     <div class="w-full">
-                        <button
-                            class="w-full py-2 rounded-md bg-primary shadow-sm text-sm text-white font-semibold"
+                        <button class="w-full py-2 rounded-md bg-primary shadow-sm text-sm text-white font-semibold"
                             type="submit">
                             Gerar Comanda
                         </button>
@@ -80,14 +79,14 @@
                         <label class="text-xs" for="opcoes">Selecione o numero da Mesa:</label>
                         <select class="text-xs" id="opcoes" name="mesa">
                             <option class="text-zinc-400 w-6">-- Selecione --</option>
-                            @foreach($mesas as $mesa)
+                            @foreach ($mesas as $mesa)
                                 <option class="text-blue-500" value="{{ $mesa->id }}">
                                     {{ $mesa->id }}
                                 </option>
                             @endforeach
                         </select>
                         <p class="text-xs  text-gray-500">
-                        {{ $errors->has('mesa') ? $errors->first('mesa') : '' }}
+                            {{ $errors->has('mesa') ? $errors->first('mesa') : '' }}
                         </p>
                     </div>
                 </form>
@@ -102,8 +101,37 @@
             </div>
         </div>
 
-        <div class="w-[80%] h-px my-2 bg-black"></div>
-        <p class="text-sm my-2 text-gray-500 drop-shadow-md">Feito por Leonardo Augusto</p>
+
+
+        <div class="flex h-full w-full items-center justify-center mb-5">
+            <div class="w-1/3 h-px my-2 bg-black"></div>
+            <div class="px-4">Ou</div>
+            <div class="w-1/3 h-px my-2 bg-black"></div>
+          </div>
+
+        <button
+            class="bg-white border shadow-sm mb-2 rounded-md text-black w-[80%] p-2 flex flex-row justify-center gap-2 items-center hover:bg-gray-100 duration-100 ease-in-out">
+            <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path fill="#EA4335 " d="M5.26620003,9.76452941 C6.19878754,6.93863203 8.85444915,4.90909091 12,4.90909091 C13.6909091,4.90909091 15.2181818,5.50909091 16.4181818,6.49090909 L19.9090909,3 C17.7818182,1.14545455 15.0545455,0 12,0 C7.27006974,0 3.1977497,2.69829785 1.23999023,6.65002441 L5.26620003,9.76452941 Z"/>
+                <path fill="#34A853" d="M16.0407269,18.0125889 C14.9509167,18.7163016 13.5660892,19.0909091 12,19.0909091 C8.86648613,19.0909091 6.21911939,17.076871 5.27698177,14.2678769 L1.23746264,17.3349879 C3.19279051,21.2936293 7.26500293,24 12,24 C14.9328362,24 17.7353462,22.9573905 19.834192,20.9995801 L16.0407269,18.0125889 Z"/>
+                <path fill="#4A90E2" d="M19.834192,20.9995801 C22.0291676,18.9520994 23.4545455,15.903663 23.4545455,12 C23.4545455,11.2909091 23.3454545,10.5272727 23.1818182,9.81818182 L12,9.81818182 L12,14.4545455 L18.4363636,14.4545455 C18.1187732,16.013626 17.2662994,17.2212117 16.0407269,18.0125889 L19.834192,20.9995801 Z"/>
+                <path fill="#FBBC05" d="M5.27698177,14.2678769 C5.03832634,13.556323 4.90909091,12.7937589 4.90909091,12 C4.90909091,11.2182781 5.03443647,10.4668121 5.26620003,9.76452941 L1.23999023,6.65002441 C0.43658717,8.26043162 0,10.0753848 0,12 C0,13.9195484 0.444780743,15.7301709 1.23746264,17.3349879 L5.27698177,14.2678769 Z"/>
+            </svg>
+
+            Continuar com o Google
+        </button>
+
+        <button
+            class="bg-blue-600 text-white w-[80%] p-2 flex flex-row justify-center gap-2 items-center hover:bg-blue-700 duration-100 ease-in-out border shadow-sm mb-2 rounded-md">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                role="img" class="w-5" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
+                <path
+                    d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-92.4 233.5h-63.9c-50.1 0-59.8 23.8-59.8 58.8v77.1h119.6l-15.6 120.7h-104V912H539.2V602.2H434.9V481.4h104.3v-89c0-103.3 63.1-159.6 155.3-159.6c44.2 0 82.1 3.3 93.2 4.8v107.9z"
+                    fill="currentColor" />
+            </svg>
+            Continuar com o Facebook
+        </button>
+
     </div>
 
 

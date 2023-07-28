@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Comanda;
 use App\Http\Requests\StorePedidoRequest;
 use App\Http\Requests\UpdatePedidoRequest;
 use Illuminate\Http\Request;
@@ -98,6 +99,9 @@ class PedidoController extends Controller
         // dd($request->all());
         // $pedido->status = 'Entregue';
         // $pedido->save();
+
+       
+
         $pedido->update(['status' => $request->input('pedido_status')]);
         return redirect()->route('pedido.index', ['pedido' => $pedido->id]);
     }

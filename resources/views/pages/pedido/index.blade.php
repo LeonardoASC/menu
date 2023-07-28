@@ -17,9 +17,8 @@
         <div class="flex justify-center py-2 bg-white border-b shadow-md mb-1 rounded-xl">
             <h2>Estamos preparando os pedidos para voce!</h2>
         </div>
-
         @if ($pedidos->isEmpty())
-            <p class="text-center">Nenhum pedido realizado.</p>
+            <p class="text-center p-2 m-2">Nenhum pedido por aqui.</p>
         @else
             @foreach ($pedidos as $pedido)
                 <ul role="list" class="divide-y divide-gray-100 bg-white p-5">

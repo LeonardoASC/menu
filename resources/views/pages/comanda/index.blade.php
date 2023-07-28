@@ -138,7 +138,7 @@
 
                 <div class="flex justify-between">
                     <span class=" text-gray-600 text-xs pl-3">Cover da noite:</span>
-                    <span class=" text-gray-600 text-xs pl-3">R$ 10</span>
+                    <span class=" text-gray-600 text-xs pl-3">R$ {{ $cover }}</span>
                 </div>
 
                 <span class="mt-4 text-gray-600 font-bold">Total:</span>
@@ -150,7 +150,7 @@
                     @csrf
                     @method('PUT')
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button type="submit"
+                        <button type="submit" name="finalizacomanda"
                             class="mt-8 flex items-center py-4 px-3 text-white rounded-lg bg-green-400 shadow focus:outline-none">
                             <svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
                                 <path
