@@ -19,7 +19,7 @@
                     <div class="flex flex-wrap items-center">
                         <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                             <h3 class="font-semibold text-base text-blueGray-700 ">
-                                Pedidos
+                                 - / - / - Pedidos em espera - \ - \ -
                             </h3>
                         </div>
                     </div>
@@ -64,9 +64,7 @@
                                     <br>
                                     obs: {{ $pedido->observacao }}
                                 </td>
-                                {{-- <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    {{ $pedido->quantidade }}x
-                                </td> --}}
+
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
 
                                     {{ $pedido->cliente->nome }}
@@ -86,7 +84,9 @@
                                         </div>
                                     </div>
                                 </td>
-
+                                <td>
+                                    numero do pedido: {{$pedido->id}}
+                                </td>
 
 
                             <form id="pedidoForm-{{ $pedido->id }}" action="{{ route('pedido.update', ['pedido' => $pedido]) }}" method="post">
