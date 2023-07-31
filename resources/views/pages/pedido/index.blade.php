@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="bg-white ">
+    <div class="">
         <div class="flex justify-center py-2 bg-white border-b shadow-md mb-1 rounded-xl">
             <h2>Estamos preparando os pedidos para voce!</h2>
         </div>
@@ -21,8 +21,8 @@
             <p class="text-center p-2 m-2">Nenhum pedido por aqui.</p>
         @else
             @foreach ($pedidos as $pedido)
-                <ul role="list" class="divide-y divide-gray-100 bg-white p-5">
-                    <li class="flex flex-col justify-between gap-x-6 py-5 border rounded-3xl shadow-md p-4 bg-gray-100">
+                <ul role="list" class="divide-y divide-gray-100 p-5">
+                    <li class="flex flex-col justify-between gap-x-6 py-5 border rounded-3xl shadow-md p-4 bg-white">
                         <div class="flex gap-x-4">
                             <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
                                 src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024"

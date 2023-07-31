@@ -12,23 +12,8 @@
 <body>
 
     <!-- component -->
-    <div class="h-screen w-full flex flex-col overflow-hidden bg-white select-none">
-        {{-- <main class="">
-            @foreach ($pedidosEntregues as $pedidosEntregue)
-                <tr>
-                    Bem vindo, {{ session('nome') }}
-                    <br>
-                    cpf: {{ session('cpf') }}
-                    <br>
-                    <td>Id: {{ $pedidosEntregue->cliente_id }} |</td>
-                    <td>{{ $pedidosEntregue->nome }} |</td>
-                    <td>{{ $pedidosEntregue->quantidade }} |</td>
-                    <td>{{ $pedidosEntregue->preco }} |</td>
-                    <td>{{ $pedidosEntregue->status }} |</td>
-                    <br>
-                </tr>
-            @endforeach
-        </main> --}}
+    <div class="h-screen w-full flex flex-col overflow-hidden select-none">
+
         <div class="p-3 flex flex-col" id="cliente-info">
             <p class=" text-sm">
                 Bem vindo Sr.{{ session('nome') }}, o que deseja pedir?
@@ -70,6 +55,7 @@
                 $total = 0; // variável para manter o valor total
                 $garcom10 = 0; // variável para manter o valor total
                 $TotalFinal = 0; // variável para manter o valor total
+                $cover = 10;
             @endphp
 
             {{-- vai por fora do foreach --}}
@@ -78,7 +64,7 @@
             @else
                 @foreach ($pedidosEntregues->take(3) as $pedidosEntregue)
 
-                    <a href=""class="mt-8 p-4 flex justify-between bg-gray-100 rounded-lg font-semibold capitalize">
+                    <a href=""class="mt-8 p-4 flex justify-between bg-white rounded-lg font-semibold capitalize">
                         <div class="flex">
                             <img class="h-10 w-10 rounded-full object-cover" src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024" alt="veldora profile" />
                             <div class="flex flex-col ml-4">

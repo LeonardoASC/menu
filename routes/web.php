@@ -32,8 +32,8 @@ Route::resource('pedidoadm', 'App\Http\Controllers\PedidoADMController');
 Route::group(['middleware' => 'verificar.credenciais'], function () {
     Route::resource('pedido', 'App\Http\Controllers\PedidoController');
     Route::resource('cardapio', 'App\Http\Controllers\CardapioController');
+    Route::resource('comanda', 'App\Http\Controllers\ComandaController');
 });
-Route::resource('comanda', 'App\Http\Controllers\ComandaController');
 
 
 Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.index');
@@ -47,7 +47,7 @@ Route::delete('/categoria/{categoria}', [App\Http\Controllers\CategoriaControlle
 
 
 
-Route::post('/realizar-tarefa', [App\Http\Controllers\CardapioController::class, 'realizarTarefa'])->name('realizar-tarefa');
+// Route::post('/realizar-tarefa', [App\Http\Controllers\CardapioController::class, 'realizarTarefa'])->name('realizar-tarefa');
 
 
 

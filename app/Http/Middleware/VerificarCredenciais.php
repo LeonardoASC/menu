@@ -18,7 +18,7 @@ class VerificarCredenciais
          // Verifica se o nome e o CPF estão na sessão
          if (!$request->session()->has('nome') || !$request->session()->has('cpf')) {
             // Redireciona ou retorna uma resposta de erro
-            return redirect()->route('login')->with('error', 'Faça login para acessar esta página.');
+            return redirect()->route('home')->with('error', 'Faça o registro para acessar esta página.');
         }
 
         return $next($request);

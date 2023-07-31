@@ -7,28 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
-     {{-- toastr --}}
-     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    {{-- toastr --}}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 
 </head>
 
 <body>
     {{-- <x-caminho /> --}}
-    <div class="bg-white p-2 rounded-md w-full flex flex-col">
+    <div class=" p-2 rounded-md w-full flex flex-col">
         <div class="justify-between w-full flex flex-col">
+            <div class="flex items-center">
             <div
-                class="ml-4 mt-2 flex bg-gray-50 items-center w-4/5 rounded-xl border-solid border-2 p-2 border-[#e0cdc7] justify-between">
+                class="ml-4 mt-2 flex bg-gray-50 items-center w-4/5 rounded-xl border-solid border-2 p-2 justify-between">
                 <form action="{{ route('cardapio.index') }}" method="GET" class="flex w-full  items-center">
                     <input class="bg-gray-50 outline-none ml-1  w-full text-xs" type="text" name="termo"
                         placeholder="O que voce gostaria de pedir hoje?" value="{{ $termo }}">
-                    {{-- <button type="button" id="limpar">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M14.348 14.849l-1.5 1.5L10 11.5l-2.849 2.849-1.5-1.5L8.5 10 5.651 7.151l1.5-1.5L10 8.5l2.849-2.849 1.5 1.5L11.5 10l2.849 2.849z" />
-                        </svg>
-                    </button> --}}
+
                 </form>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#CACACA"
                     viewBox="0 0 256 256">
@@ -37,7 +32,10 @@
                     </path>
                 </svg>
             </div>
-            {{-- @dd(session()->all()) --}}
+            <div class="ml-5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M166,112a6,6,0,0,1-6,6H96a6,6,0,0,1,0-12h64A6,6,0,0,1,166,112Zm-6,26H96a6,6,0,0,0,0,12h64a6,6,0,0,0,0-12Zm70-10A102,102,0,0,1,79.31,217.65L44.44,229.27a14,14,0,0,1-17.71-17.71l11.62-34.87A102,102,0,1,1,230,128Zm-12,0A90,90,0,1,0,50.08,173.06a6,6,0,0,1,.5,4.91L38.12,215.35a2,2,0,0,0,2.53,2.53L78,205.42a6.2,6.2,0,0,1,1.9-.31,6.09,6.09,0,0,1,3,.81A90,90,0,0,0,218,128Z"></path></svg>
+            </div>
+        </div>
             <div class="p-3 flex flex-col" id="cliente-info">
                 <p class=" text-sm">
                     Bem vindo Sr.{{ session('nome') }}, o que deseja pedir?
@@ -52,32 +50,12 @@
                     </p>
                 </div>
             </div>
-            {{-- <x-carouseloffer /> --}}
-
-            {{-- <div class="flex flex-col">
-                <div class="flex flex-col">
-                    <div class="inline-block min-w-full overflow-hidden p-2 flex">
-                        <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm"
-                            class="flex items-center rounded-md p-2 gap-2 min-w-full overflow-x-auto">
-
-                            <button type="submit" name="categoriaId" value="" class="text-gray-500"
-                                onclick="handleCategoryFilter('')">Todos</button>
-
-                            @foreach ($categorias as $categoria)
-                                <button type="submit" name="categoriaId" value="{{ $categoria->id }}"
-                                    class="text-gray-400 px-2"
-                                    onclick="handleCategoryFilter('{{ $categoria->id }}')">{{ $categoria->nome }}</button>
-                            @endforeach
-                        </form>
-                    </div>
-                </div>
-            </div> --}}
 
             <div class="flex flex-col">
                 <div class="flex flex-col">
                     <div class="inline-block min-w-full overflow-hidden p-2 flex">
                         <form action="{{ route('cardapio.index') }}" method="GET" id="filtroForm"
-                            class="flex items-center rounded-md p-2 gap-2 min-w-full overflow-x-auto">
+                            class="flex items-center rounded-md p-2 gap-4 min-w-full overflow-x-auto">
                             <button type="submit" name="categoriaId" value=""
                                 class="text-zinc-400  @if (empty(request('categoriaId'))) text-zinc-700 font-semibold underline underline-offset-8 @endif">Todos</button>
 
@@ -115,37 +93,40 @@
                                     </thead>
                                     <tbody>
                                         <tr onclick="submitForm({{ $produto->id }})"
-                                            class="cursor-pointer transition-all duration-300 hover:bg-green-500">
-                                            <td class="px-2 py-4 bg-white text-sm">
+                                            class="cursor-pointer">
+                                            <td class="py-2">
                                                 <div class="flex items-center">
-                                                    <div class="flex-shrink-0 w-14 h-14">
-                                                        <img class="w-full h-full rounded-full bg-slate-600"
-                                                            src="{{$produto->imagem}}"
-                                                            alt="" />
+                                                    <div class="flex-shrink-0 w-28 h-28 absolute z-10">
+                                                        <img class="w-full h-full rounded-full bg-slate-600 drop-shadow-2xl"
+                                                            src="{{ $produto->imagem }}" alt="" />
                                                     </div>
-                                                    <div class="ml-3">
-                                                        <p class="text-gray-900 text-base mb-2">
-                                                            {{ $produto->nome }}
-                                                        </p>
-                                                        <p class="text-gray-500 text-xs">
-                                                            {{ $produto->descricao }}
-                                                        </p>
+                                                    <div
+                                                        class="border rounded-3xl p-5 pl-10 flex w-[80%] h-40 translate-x-16 bg-white shadow-sm shadow-red-100">
+                                                        <div class="ml-3">
+                                                            <p class="text-gray-900 text-base mb-2 text-center">
+                                                                {{ $produto->nome }}
+                                                            </p>
+                                                            <div class="flex items-center justify-between px-4 ">
+                                                                <p class="text-gray-500 text-xs w-2/3">
+                                                                    {{ $produto->descricao }}
+                                                                </p>
+                                                                <div class="h-16 bg-gray-100 w-1 mx-2"></div>
+                                                                <p class="text-gray-900 text-center">
+                                                                    R${{ $produto->preco }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
 
-                                            <td class="px-5 py-4 bg-white text-base flex justify-end items-end">
-                                                <p class="text-gray-900 whitespace-no-wrap">
-                                                    R${{ $produto->preco }}
-                                                </p>
-                                            </td>
+
 
                                             <form id="pedidoForm-{{ $produto->id }}"
                                                 action="{{ route('cardapio.create', ['produto_id' => $produto->id]) }}"
                                                 method="GET">
                                                 @csrf
                                                 <div class="w-full" onclick="submitForm({{ $produto->id }})">
-                                                    <td class="bg-white text-sm cursor-pointer">
                                                         <input type="hidden" name="produto_id"
                                                             value="{{ $produto->id }}">
                                                         <input type="hidden" name="produto_nome"
@@ -156,7 +137,6 @@
                                                             value="{{ $produto->preco }}">
                                                         <input type="hidden" name="produto_descricao"
                                                             value="{{ $produto->descricao }}">
-                                                    </td>
                                                 </div>
                                             </form>
                                         </tr>
@@ -172,18 +152,18 @@
     <x-rodape />
 
 
-      {{-- Toastr --}}
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-      <script>
-          @if (Session::has('message'))
-              toastr.options = {
-                  "closeButton": true,
-                  "progressBar": true
-              }
-              toastr.success("{{ session('message') }}");
-          @endif
-      </script>
+    {{-- Toastr --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+    </script>
     <script>
         // function handleCategoryFilter(categoryId) {
         //     const filtroForm = document.getElementById('filtroForm');

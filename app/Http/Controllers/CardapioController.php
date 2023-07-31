@@ -104,12 +104,12 @@ class CardapioController extends Controller
     {
         //
     }
-    public function realizarTarefa(Request $request)
-    {
-        //ainda nao implementado, possivel modal para confirmar o pedido
-        return view('pages.cardapio.confirmar');
+    // public function realizarTarefa(Request $request)
+    // {
+    //     //ainda nao implementado, possivel modal para confirmar o pedido
+    //     return view('pages.cardapio.confirmar');
 
-    }
+    // }
 
     public function filtrar(Request $request)
     {

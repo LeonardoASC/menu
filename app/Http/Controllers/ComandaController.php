@@ -17,6 +17,7 @@ class ComandaController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
     public function index(Request $request)
     {
         $comandas = Comanda::all();

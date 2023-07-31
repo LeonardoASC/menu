@@ -22,7 +22,7 @@
     </div>
 </div> --}}
 
-<div class="min-h-screen flex flex-col justify-between">
+<div class="min-h-screen flex flex-col justify-between absolute z-20">
     <div
         class="bg-gray-50 text-black py-[1%] fixed bottom-0 left-0 w-full border-t border-gray-300 rounded-t-2xl drop-shadow-2xl flex justify-around items-center">
         <!-- Conteúdo da div que ficará fixa no final da tela -->
