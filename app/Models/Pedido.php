@@ -9,15 +9,10 @@ class Pedido extends Model
 {
     use HasFactory;
     protected $fillable = ['nome', 'quantidade', 'preco', 'status', 'observacao', 'hora_pedido'];
-
-    // public function clientes()
-    // {
-    //     return $this->belongsToMany(Cliente::class, 'pedido_usuario', 'pedido_id', 'cliente_id');
-    // }
-
-    public function clientes()
+    protected $table = 'pedidos';
+    public function cliente()
     {
-        return $this->hasOne(Cliente::class);
+        return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
 }

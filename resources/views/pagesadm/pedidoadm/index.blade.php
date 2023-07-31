@@ -58,18 +58,20 @@
                             @foreach ($pedidos as $pedido)
                             <tr>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                    {{ $pedido->nome }}
+                                   nome: {{ $pedido->nome }}
                                     <br>
-                                    {{ $pedido->quantidade }}x
+                                   Quantidade: {{ $pedido->quantidade }}x
                                     <br>
-                                    {{ $pedido->observacao }}
+                                    obs: {{ $pedido->observacao }}
                                 </td>
                                 {{-- <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                     {{ $pedido->quantidade }}x
                                 </td> --}}
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    {{ $pedido->cliente_id->nome }}
+
+                                    {{ $pedido->cliente->nome }}
                                     <br>
+                                    {{ $pedido->cliente->cpf }}
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                     {{ $pedido->status }}

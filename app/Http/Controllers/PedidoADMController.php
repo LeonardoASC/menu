@@ -22,21 +22,13 @@ class PedidoADMController extends Controller
     public function index(Request $request)
     {
 
-        // $pedidos = Pedido::where('status', 'Solicitado')
-        //             // ->where('cliente_id', $user->id)
-        //             ->get();
+        $pedidos = Pedido::with('cliente')->get();
 
-    // $cpf = $request->session()->get('cpf'); // Obtém o CPF do cliente da sessão
-    // $pedidos = Pedido::where('status', 'Solicitado')
-    //             ->where('cpf', $cpf)
-    //             ->get();
 
-    $cpf = $request->session()->get('cpf'); // Obtém o CPF do cliente da sessão
-    $pedidos = Pedido::join('clientes', 'pedidos.cliente_id', '=', 'clientes.id')
-                ->where('pedidos.status', 'Solicitado')
-                ->where('clientes.cpf', $cpf)
-                ->get(['pedidos.*']);
-        return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all() ]);
+        // Retorna a view passando os dados dos clientes e pedidos
+
+
+        return view('pagesadm.pedidoadm.index', ['pedidos' => $pedidos, 'request' => $request->all() ]);
     }
 
     /**

@@ -15,9 +15,9 @@ class PedidoADM extends Model
     //     return $this->belongsToMany(Cliente::class, 'pedido_usuario', 'pedido_id', 'cliente_id');
     // }
 
-    public function clientes()
-    {
-        return $this->hasOne(Cliente::class);
-    }
+    // public function clientes()
+    // {
+    //     return $this->hasOne(Cliente::class);
+    // }
 
 }
