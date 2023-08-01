@@ -64,7 +64,7 @@
             @else
                 @foreach ($pedidosEntregues->take(3) as $pedidosEntregue)
 
-                    <a href=""class="mt-8 p-4 flex justify-between bg-white rounded-lg font-semibold capitalize">
+                    <a href=""class="mt-8 p-5 flex justify-between bg-white  rounded-3xl font-semibold capitalize">
                         <div class="flex">
                             <img class="h-10 w-10 rounded-full object-cover" src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024" alt="veldora profile" />
                             <div class="flex flex-col ml-4">
