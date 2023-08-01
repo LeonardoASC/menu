@@ -67,8 +67,9 @@ class PedidoController extends Controller
         $pedido->preco = $produtoPreco;
         $pedido->observacao = $pedidoObservacao;
         $pedido->cliente_id = $sessionCliente->id;
+        $pedido->comanda_id = session()->get('idcomanda');
         // $pedido->cliente_id = session('cpf');
-
+        // dd(session()->all());
         $pedido->save();
 
         return redirect()->route('cardapio.index')->with('message', 'Pedido realizado com sucesso!');
@@ -100,7 +101,7 @@ class PedidoController extends Controller
         // $pedido->status = 'Entregue';
         // $pedido->save();
 
-       
+
 
         $pedido->update(['status' => $request->input('pedido_status')]);
         return redirect()->route('pedido.index', ['pedido' => $pedido->id]);

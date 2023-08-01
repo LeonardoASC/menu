@@ -19,4 +19,9 @@ class Comanda extends Model
     {
         return $this->belongsTo(Mesa::class);
     }
+
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class);
+    }
 }

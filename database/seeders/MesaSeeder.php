@@ -12,6 +12,6 @@ class MesaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Mesa::factory(10)->create();
     }
 }

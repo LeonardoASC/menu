@@ -73,16 +73,8 @@
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                     {{ $pedido->status }}
-                                    <div class="flex items-center">
-                                        <span class="mr-2">50%</span>
-                                        <div class="relative w-full">
-                                            <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                                                <div style="width: 60%"
-                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @dd($pedido->mesa)
+                                    {{$pedido->mesa->mesa_id}}
                                 </td>
                                 <td>
                                     numero do pedido: {{$pedido->id}}
