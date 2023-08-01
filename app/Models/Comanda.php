@@ -9,6 +9,7 @@ class Comanda extends Model
 {
     use HasFactory;
     protected $fillable = ['total', 'cliente_id', 'mesa_id'];
+    protected $table = 'comandas';
 
     public function cliente()
     {
@@ -22,6 +23,6 @@ class Comanda extends Model
 
     public function pedidos()
     {
-        return $this->hasMany(Pedido::class);
+        return $this->hasMany(Pedido::class, 'comanda_id');
     }
 }

@@ -67,14 +67,15 @@
 
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
 
-                                    {{ $pedido->cliente->nome }}
+                                   Nome do cliente: {{ $pedido->cliente->nome }}
                                     <br>
-                                    {{ $pedido->cliente->cpf }}
+                                    CPF do cliente: {{ $pedido->cliente->cpf }}
                                 </td>
                                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    {{ $pedido->status }}
-                                    @dd($pedido->mesa)
-                                    {{$pedido->mesa->mesa_id}}
+                                   Status do pedido: {{ $pedido->status }}
+                                    <br>
+                                    {{-- @dd($pedido->comanda) --}}
+                                   Mesa do pedido: {{$pedido->comanda->mesa_id}}
                                 </td>
                                 <td>
                                     numero do pedido: {{$pedido->id}}

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     use HasFactory;
-    protected $fillable = ['nome', 'quantidade', 'preco', 'status', 'observacao', 'hora_pedido'];
+    protected $fillable = ['nome', 'quantidade', 'preco', 'status', 'observacao', 'hora_pedido', 'cliente_id', 'comanda_id'];
     protected $table = 'pedidos';
 
     public function cliente()
@@ -19,6 +19,11 @@ class Pedido extends Model
     public function mesa()
     {
         return $this->belongsTo(Comanda::class, 'mesa_id');
+    }
+
+    public function comanda()
+    {
+        return $this->belongsTo(Comanda::class, 'comanda_id');
     }
 
 }
