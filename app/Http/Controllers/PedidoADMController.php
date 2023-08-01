@@ -22,7 +22,7 @@ class PedidoADMController extends Controller
     public function index(Request $request)
     {
 
-        $pedidos = Pedido::with('cliente')->get();
+        $pedidos = Pedido::with('cliente')->where('pedidos.status', 'Solicitado')->get();
 
 
         // Retorna a view passando os dados dos clientes e pedidos
