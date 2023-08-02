@@ -23,6 +23,11 @@ Route::resource('produto', 'App\Http\Controllers\ProdutoController');
 Route::resource('cliente', 'App\Http\Controllers\ClienteController');
 Route::resource('mesa', 'App\Http\Controllers\MesaController');
 Route::resource('pedidoadm', 'App\Http\Controllers\PedidoADMController');
+
+Route::get('/login', function () {
+    return route('mesa');
+});
+
 //Não deu para utilizar resource por causa do nome gerado pelo laravel fica errado, "categorium"
 Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.index');
 Route::get('/categoria/create', [App\Http\Controllers\CategoriaController::class, 'create'])->name('categoria.create');
