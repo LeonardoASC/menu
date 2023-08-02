@@ -22,8 +22,6 @@ button
     font-family: 'Poppins', sans-serif;
     @apply bg-fundo
 
-    lg:w-[414px]
+    /* lg:w-[414px] */
 }
-body{
 
-}
