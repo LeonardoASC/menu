@@ -19,10 +19,18 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // ADM
-Route::resource('produto', 'App\Http\Controllers\ProdutoController');
-Route::resource('cliente', 'App\Http\Controllers\ClienteController');
-Route::resource('mesa', 'App\Http\Controllers\MesaController');
-Route::resource('pedidoadm', 'App\Http\Controllers\PedidoADMController');
+
+// Route::resource('produto', 'App\Http\Controllers\ProdutoController');
+// Route::resource('cliente', 'App\Http\Controllers\ClienteController');
+// Route::resource('mesa', 'App\Http\Controllers\MesaController');
+// Route::resource('pedidoadm', 'App\Http\Controllers\PedidoADMController');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('produto', 'App\Http\Controllers\ProdutoController');
+    Route::resource('mesa', 'App\Http\Controllers\MesaController');
+    Route::resource('pedidoadm', 'App\Http\Controllers\PedidoADMController');
+});
 
 
 
@@ -42,6 +50,7 @@ Route::group(['middleware' => 'verificar.credenciais'], function () {
     Route::resource('pedido', 'App\Http\Controllers\PedidoController');
     Route::resource('cardapio', 'App\Http\Controllers\CardapioController');
     Route::resource('comanda', 'App\Http\Controllers\ComandaController');
+    Route::resource('cliente', 'App\Http\Controllers\ClienteController');
 });
 
 // Route::post('/realizar-tarefa', [App\Http\Controllers\CardapioController::class, 'realizarTarefa'])->name('realizar-tarefa');
