@@ -19,7 +19,6 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // ADM
-
 // Route::resource('produto', 'App\Http\Controllers\ProdutoController');
 // Route::resource('cliente', 'App\Http\Controllers\ClienteController');
 // Route::resource('mesa', 'App\Http\Controllers\MesaController');
