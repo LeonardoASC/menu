@@ -69,7 +69,7 @@
                         </p>
                     </div>
                     <div class="w-full">
-                        <button class="w-full py-2 rounded-md bg-primary shadow-sm text-sm text-white font-semibold"
+                        <button class="w-full py-2 rounded-md bg-[#edce1f] shadow-sm text-sm text-white font-semibold"
                             type="submit">
                             Gerar Comanda
                         </button>
@@ -81,7 +81,7 @@
                         <select class="text-xs" id="opcoes" name="mesa">
                             <option class="text-zinc-400 w-6">-- Selecione --</option>
                             @foreach ($mesas as $mesa)
-                                <option class="text-blue-500" value="{{ $mesa->id }}">
+                                <option class="" value="{{ $mesa->id }}">
                                     {{ $mesa->id }}
                                 </option>
                             @endforeach

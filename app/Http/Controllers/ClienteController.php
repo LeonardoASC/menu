@@ -39,14 +39,13 @@ class ClienteController extends Controller
         ];
 
         $feedback = [
-
             'required' => 'O campo :attribute deve ser preenchido.',
             'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres.',
             'nome.max' => 'O campo nome deve ter no máximo 40 caracteres.',
             'cpf.required' => 'O campo CPF deve ser preenchido.',
             'cpf.digits' => 'O campo CPF deve ter exatamente 11 dígitos.',
             'mesa.required' => 'Selecione o número da mesa.',
-    'mesa.exists' => 'A mesa selecionada não existe.'
+            'mesa.exists' => 'A mesa selecionada não existe.'
         ];
 
         $request->validate($regras, $feedback);
@@ -57,69 +56,39 @@ class ClienteController extends Controller
         // Verificar se o CPF já existe no banco de dados
         $clienteExistente = Cliente::where('cpf', $cpf)->first();
 
-        // if ($clienteExistente) {
-        //     // CPF já existe, usar o cliente existente
-        //     $cliente = $clienteExistente;
-        // } else {
-        //     // CPF não existe, criar um novo cliente
-        //     $cliente = new Cliente();
-        //     $cliente->cpf = $cpf;
-        // }
 
-        // // Definir o nome digitado para o cliente
-        // $cliente->nome = $request->input('nome');
-        // $cliente->save();
+    if ($clienteExistente) {
+        // CPF já existe, usar o cliente existente
+        $cliente = $clienteExistente;
 
-        // $cliente_dados = Cliente::where('cpf', $cpf)->get()->first();
-        // $cliente_id = $cliente_dados->id;
+        // Verificar se o cliente já possui uma comanda associada
+        $comandaExistente = Comanda::where('cliente_id', $cliente->id)->first();
 
-
-
-        // $atribuicaomesa = new Comanda();
-        // $atribuicaomesa->total = 0;
-        // $atribuicaomesa->mesa_id = $request->input('mesa');
-        // $atribuicaomesa->cliente_id = $cliente_id;
-        // // dd($atribuicaomesa);
-        // // Salvar o cliente no banco de dados
-        // $atribuicaomesa->save();
-
-// --------------------------------------------------------
-
-
-if ($clienteExistente) {
-    // CPF já existe, usar o cliente existente
-    $cliente = $clienteExistente;
-
-    // Verificar se o cliente já possui uma comanda associada
-    $comandaExistente = Comanda::where('cliente_id', $cliente->id)->first();
-
-    if ($comandaExistente) {
-        // Utilizar a comanda existente associada ao cliente
-        $atribuicaomesa = $comandaExistente;
+        if ($comandaExistente) {
+            // Utilizar a comanda existente associada ao cliente
+            $atribuicaomesa = $comandaExistente;
+        } else {
+            // Caso não tenha comanda associada, criar uma nova comanda
+            $atribuicaomesa = new Comanda();
+            $atribuicaomesa->total = 0;
+            $atribuicaomesa->mesa_id = $request->input('mesa');
+            $atribuicaomesa->cliente_id = $cliente->id;
+            $atribuicaomesa->save();
+        }
     } else {
-        // Caso não tenha comanda associada, criar uma nova comanda
+        // CPF não existe, criar um novo cliente
+        $cliente = new Cliente();
+        $cliente->cpf = $cpf;
+        $cliente->nome = $request->input('nome');
+        $cliente->save();
+
+        // Criar uma nova comanda para o cliente recém-criado
         $atribuicaomesa = new Comanda();
         $atribuicaomesa->total = 0;
         $atribuicaomesa->mesa_id = $request->input('mesa');
         $atribuicaomesa->cliente_id = $cliente->id;
         $atribuicaomesa->save();
     }
-} else {
-    // CPF não existe, criar um novo cliente
-    $cliente = new Cliente();
-    $cliente->cpf = $cpf;
-    $cliente->nome = $request->input('nome');
-    $cliente->save();
-
-    // Criar uma nova comanda para o cliente recém-criado
-    $atribuicaomesa = new Comanda();
-    $atribuicaomesa->total = 0;
-    $atribuicaomesa->mesa_id = $request->input('mesa');
-    $atribuicaomesa->cliente_id = $cliente->id;
-    $atribuicaomesa->save();
-}
-
-
 
 
         session(['nome' => $cliente->nome, 'cpf' => $cliente->cpf, 'idcomanda' => $atribuicaomesa->id, 'idmesa' => $atribuicaomesa->mesa_id]);

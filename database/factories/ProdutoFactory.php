@@ -19,6 +19,9 @@ class ProdutoFactory extends Factory
             'nome' => $this->faker->word,
             'descricao' => $this->faker->sentence,
             'preco' => $this->faker->randomFloat(2, 5, 200),  // Gera um preço aleatório entre 10 e 100 com duas casas decimais
+            'imagem' => [
+
+            ],
         ];
     }
 }
