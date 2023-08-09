@@ -27,14 +27,19 @@ class AdministrativaController extends Controller
         ->first();
         $nomeProdutoMaisComum = $produtoMaisComum->nome;
 
-         $clientesAtivos = Cliente::all();
+        $clientesAtivos = Comanda::where('status', 1)->get();
+
+        $quantidadePedidosPorCliente = Pedido::select('cliente_id', \DB::raw('COUNT(*) as total_pedidos'))
+        ->groupBy('cliente_id')
+        ->get();
 
         return view('pagesadm.administrativa.index', [
             'somaValores' => $somaValores,
             'mesasOcupadas' => $mesasOcupadas,
             'comandaAberta' => $comandaAberta,
             'nomeProdutoMaisComum' => $nomeProdutoMaisComum,
-            'clientesAtivos' => $clientesAtivos
+            'clientesAtivos' => $clientesAtivos,
+            'quantidadePedidosPorCliente' => $quantidadePedidosPorCliente
         ]);
     }
 
