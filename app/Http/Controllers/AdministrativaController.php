@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAdministrativaRequest;
 use App\Models\Comanda;
 use App\Models\Mesa;
 use App\Models\Pedido;
+use App\Models\Cliente;
 
 class AdministrativaController extends Controller
 {
@@ -26,11 +27,14 @@ class AdministrativaController extends Controller
         ->first();
         $nomeProdutoMaisComum = $produtoMaisComum->nome;
 
+         $clientesAtivos = Cliente::all();
+
         return view('pagesadm.administrativa.index', [
             'somaValores' => $somaValores,
             'mesasOcupadas' => $mesasOcupadas,
             'comandaAberta' => $comandaAberta,
-            'nomeProdutoMaisComum' => $nomeProdutoMaisComum
+            'nomeProdutoMaisComum' => $nomeProdutoMaisComum,
+            'clientesAtivos' => $clientesAtivos
         ]);
     }
 
