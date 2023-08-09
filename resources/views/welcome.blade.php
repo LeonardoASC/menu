@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    
     <p>Administrador?</p>
     <a href="{{route('login')}}" class="text-blue-700">-clique aqui-</a>
     <div class="pb-12 flex justify-center flex-col items-center">

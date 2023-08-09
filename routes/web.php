@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('mesa', 'App\Http\Controllers\MesaController');
     Route::resource('pedidoadm', 'App\Http\Controllers\PedidoADMController');
     Route::resource('Administrativa', 'App\Http\Controllers\AdministrativaController');
+    Route::resource('mensagem', 'App\Http\Controllers\MensagemController');
 });
 
 

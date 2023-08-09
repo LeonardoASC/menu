@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Administrativa;
 use App\Http\Requests\StoreAdministrativaRequest;
 use App\Http\Requests\UpdateAdministrativaRequest;
+use App\Models\Comanda;
+use App\Models\Mesa;
+use App\Models\Pedido;
 
 class AdministrativaController extends Controller
 {
@@ -13,7 +16,22 @@ class AdministrativaController extends Controller
      */
     public function index()
     {
-        return view('pagesadm.administrativa.index');
+        $somaValores = Comanda::sum('total');
+        $mesasOcupadas = Mesa::where('status', 'ocupada')->count();
+        $comandaAberta = Comanda::where('status', 1)->count();
+
+        $produtoMaisComum = Pedido::select('nome')
+        ->groupBy('nome')
+        ->orderByRaw('COUNT(*) DESC')
+        ->first();
+        $nomeProdutoMaisComum = $produtoMaisComum->nome;
+
+        return view('pagesadm.administrativa.index', [
+            'somaValores' => $somaValores,
+            'mesasOcupadas' => $mesasOcupadas,
+            'comandaAberta' => $comandaAberta,
+            'nomeProdutoMaisComum' => $nomeProdutoMaisComum
+        ]);
     }
 
     /**
