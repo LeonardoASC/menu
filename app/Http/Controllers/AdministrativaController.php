@@ -9,6 +9,7 @@ use App\Models\Comanda;
 use App\Models\Mesa;
 use App\Models\Pedido;
 use App\Models\Cliente;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class AdministrativaController extends Controller
 {
@@ -27,19 +28,25 @@ class AdministrativaController extends Controller
         ->first();
         $nomeProdutoMaisComum = $produtoMaisComum->nome;
 
-        $clientesAtivos = Comanda::where('status', 1)->get();
+        $clientesAtivos = Comanda::with(['pedidos'])->where('status', 1)->get();
 
-        $quantidadePedidosPorCliente = Pedido::select('cliente_id', \DB::raw('COUNT(*) as total_pedidos'))
-        ->groupBy('cliente_id')
-        ->get();
+        $todosPedidos = Pedido::all()->reverse();
+        // $todosPedidos = $todosPedidos->sortBy('created_at');
 
+        // Agrupar pedidos por data
+    $pedidosAgrupados = $todosPedidos->groupBy(function ($pedido) {
+        return $pedido->created_at->format('d/m/Y');
+    });
+
+        // dd($quantidadePedidosPorCliente);
         return view('pagesadm.administrativa.index', [
             'somaValores' => $somaValores,
             'mesasOcupadas' => $mesasOcupadas,
             'comandaAberta' => $comandaAberta,
             'nomeProdutoMaisComum' => $nomeProdutoMaisComum,
             'clientesAtivos' => $clientesAtivos,
-            'quantidadePedidosPorCliente' => $quantidadePedidosPorCliente
+            'todosPedidos' => $todosPedidos,
+            'pedidosAgrupados' => $pedidosAgrupados
         ]);
     }
 
