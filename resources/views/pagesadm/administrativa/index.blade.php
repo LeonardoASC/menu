@@ -240,24 +240,22 @@
                 </div>
                 <!-- ./Statistics Cards -->
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4 ">
-                    <!-- Social Traffic -->
-                    <div
-                        class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                <div class="grid grid-cols-1 h-auto lg:grid-cols-2 p-4 gap-4 ">
+                    <!-- Clientes Ativos -->
+                    <div class="flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
                         <div class="rounded-t mb-0 px-0 border-0">
                             <div class="flex flex-wrap items-center px-4 py-2">
-                                <div class="relative w-full max-w-full flex-grow flex-1">
-                                    <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Clientes Ativos
-                                    </h3>
+                                <div class=" w-full max-w-full flex-grow flex-1">
+                                    <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Clientes Ativos</h3>
                                 </div>
-                                <div class="relative w-full max-w-full flex-grow flex-1 text-right">
+                                <div class=" w-full max-w-full flex-grow flex-1 text-right">
                                     <button
                                         class="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button">Veja todos</button>
                                 </div>
                             </div>
 
-                            <div class="overflow-x-auto ">
+                            <div class="block w-full h-80 overflow-y-auto">
                                 <table class="items-center w-full">
                                     <thead>
                                         <tr>
@@ -269,18 +267,18 @@
                                                 R$</th>
                                             <th
                                                 class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
-                                                Qnt. Pedidos Solicitados</th>
+                                                Pedidos Solicitados</th>
                                             <th
                                                 class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
-                                                Qnt. Pedidos Entregues</th>
+                                                Pedidos Entregues</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="w-full overflow-y-scroll">
+                                    <tbody class="">
                                         @if ($clientesAtivos->isEmpty())
                                             <p>Nenhum cliente no estabelecimento.</p>
                                         @else
                                             @foreach ($clientesAtivos as $clienteAtivo)
-                                                <tr class="text-gray-700 dark:text-gray-100 ">
+                                                <tr class="text-gray-700  dark:text-gray-100 ">
                                                     <td
                                                         class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                                                         {{ $clienteAtivo->cliente->nome }}</td>
@@ -305,7 +303,7 @@
                     </div>
                     <!-- ./Social Traffic -->
 
-                    <!-- Recent Activities -->
+                    <!-- atividades recentes -->
                     <div
                         class="relative flex flex-col min-w-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded ">
                         <div class="rounded-t mb-0 px-0 border-0">
@@ -321,14 +319,14 @@
                                 </div>
                             </div>
 
-                            <div class="block w-full overflow-y-scroll">
+                            <div class="block w-full h-80 overflow-y-auto">
                                 @foreach ($pedidosAgrupados as $data => $pedidos)
                                     <div
-                                        class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        class="px-4 bg-gray-100  dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         {{-- {{ $todoPedido->created_at->format('d/m/Y') }} --}}
                                         {{ $data }}
                                     </div>
-                                    <ul class="my-1">
+                                    <ul class="my-1 ">
                                         @foreach ($pedidos as $pedido)
                                         <li class="flex px-4">
                                             <div class="w-9 h-9 rounded-full flex-shrink-0 bg-indigo-500 my-2 mr-3">
@@ -344,7 +342,7 @@
                                                     <div class="self-center">
                                                         O cliente {{ $pedido->cliente->nome }} pediu {{ $pedido->nome }}
                                                     </div>
-                                                    {{$pedido->created_at->format('h:m')}}
+                                                    {{$pedido->created_at->format('H:i')}}
                                                 </div>
                                             </div>
                                         </li>
