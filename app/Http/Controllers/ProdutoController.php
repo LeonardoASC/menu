@@ -12,14 +12,12 @@ use Illuminate\Http\Request;
 class ProdutoController extends Controller
 {
     //caso precise de autenticação
-    // public function __construct()  {
-    //     $this->middleware('auth');
-    // }
-    /**
-     * Display a listing of the resource.
-     */
-    
+    public function __construct()  {
 
+        // $this->middleware('permission:listar produtos');
+        // $this->middleware('permission:listar produtos')->only(['show']);
+    }
+    
     public function index(Request $request)
     {
         // funcionando
