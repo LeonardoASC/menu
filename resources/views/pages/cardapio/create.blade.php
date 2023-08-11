@@ -22,7 +22,7 @@
                     </path>
                 </svg>
 
-            <img src="https://img.freepik.com/fotos-gratis/hamburguer-duplo-isolado-no-fundo-branco-hamburguer-fresco-fast-food-com-carne-e-queijo-creme_90220-1192.jpg?w=826&t=st=1690994558~exp=1690995158~hmac=1d6b80114efa9e59b5cb1df587e99cfd31ed3f20b88267e54d37331699a4d2a6"
+            <img src="{{$produto->imagem}}"
                 alt="Imagem" class="w-full h-full object-cover"
 
                 />
