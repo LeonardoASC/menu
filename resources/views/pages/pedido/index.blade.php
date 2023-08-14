@@ -30,7 +30,7 @@
                             <div class="min-w-0 flex-auto">
                                 <div class="flex justify-between">
                                     <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->nome }}</p>
-                                    <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->preco }}</p>
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">R$ {{ $pedido->preco }}</p>
                                 </div>
                                 <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->quantidade }}x</p>
                                 <p class="mt-1 truncate text-xs leading-5 text-gray-500"> {{ $pedido->observacao }}Observação do pedido aqui</p>
