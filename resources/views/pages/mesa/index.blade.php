@@ -20,23 +20,26 @@
     {{-- @dd($comandasDaMesa) --}}
     <!-- component -->
 
+    <x-navbarheader />
+    <div class="ml-14 md:ml-64 pt-14">
+
 
     <div class=" bg-white w-full">
         <p class=" text-gray-600 mb-2 text-2xl font-thin px-4 pt-3 ">Mesas</p>
         <div class="px-2 w-full ">
             <svg class="absolute z-10 m-1 text-blue-400" width="24" height="24" viewBox="0 0 24 24"
-                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M14.71 14H15.5L20.49 19L19 20.49L14 15.5V14.71L13.73 14.43C12.59 15.41 11.11 16 9.5 16C5.90997 16 3 13.09 3 9.5C3 5.90997 5.90997 3 9.5 3C13.09 3 16 5.90997 16 9.5C16 11.11 15.41 12.59 14.43 13.73L14.71 14ZM5 9.5C5 11.99 7.01001 14 9.5 14C11.99 14 14 11.99 14 9.5C14 7.01001 11.99 5 9.5 5C7.01001 5 5 7.01001 5 9.5Z"
-                    fill="black" fill-opacity="0.54" />
-            </svg>
-            <input type="text" class="pl-8 p-1 bg-gray-200 w-full rounded relative"
-                placeholder="Search teams or members">
-        </div>
+            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+            d="M14.71 14H15.5L20.49 19L19 20.49L14 15.5V14.71L13.73 14.43C12.59 15.41 11.11 16 9.5 16C5.90997 16 3 13.09 3 9.5C3 5.90997 5.90997 3 9.5 3C13.09 3 16 5.90997 16 9.5C16 11.11 15.41 12.59 14.43 13.73L14.71 14ZM5 9.5C5 11.99 7.01001 14 9.5 14C11.99 14 14 11.99 14 9.5C14 7.01001 11.99 5 9.5 5C7.01001 5 5 7.01001 5 9.5Z"
+            fill="black" fill-opacity="0.54" />
+        </svg>
+        <input type="text" class="pl-8 p-1 bg-gray-200 w-full rounded relative"
+        placeholder="Search teams or members">
+    </div>
 
 
-        <table class="w-full">
-            <tr>
+    <table class="w-full">
+        <tr>
                 @if ($mesas->isEmpty())
                     <p class="text-center p-2 m-2">Nenhuma mesa cadastrada.</p>
                 @else
@@ -112,6 +115,7 @@
             Adicionar Mesa
         </button>
     </a>
+</div>
     <script>
         function toggleId(id) {
             const pTag = document.getElementById('mesa-' + id);

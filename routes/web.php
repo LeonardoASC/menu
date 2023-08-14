@@ -29,8 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('produto', 'App\Http\Controllers\ProdutoController');
     Route::resource('mesa', 'App\Http\Controllers\MesaController');
     Route::resource('pedidoadm', 'App\Http\Controllers\PedidoADMController');
-    Route::resource('Administrativa', 'App\Http\Controllers\AdministrativaController');
+    Route::resource('administrativa', 'App\Http\Controllers\AdministrativaController');
     Route::resource('mensagem', 'App\Http\Controllers\MensagemController');
+    Route::resource('usuario', 'App\Http\Controllers\UsuarioController');
 });
 
 
