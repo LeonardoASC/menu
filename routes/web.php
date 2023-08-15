@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('administrativa', 'App\Http\Controllers\AdministrativaController');
     Route::resource('mensagem', 'App\Http\Controllers\MensagemController');
     Route::resource('usuario', 'App\Http\Controllers\UsuarioController');
+    Route::resource('cargo', 'App\Http\Controllers\CargoController');
 });
 
 

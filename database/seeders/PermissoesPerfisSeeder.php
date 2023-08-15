@@ -17,12 +17,19 @@ class PermissoesPerfisSeeder extends Seeder
     {
         //Criando cargo
         $administrador  = Role::create(['name' => 'Administrador', 'guard_name' => 'admin', 'description' => 'Acesso Completo!']);
+        $gerente  =       Role::create(['name' => 'Gerente', 'guard_name' => 'admin', 'description' => 'Acesso parcial do sistema!']);
+        $garcom  =        Role::create(['name' => 'Garcom', 'guard_name' => 'admin', 'description' => 'Acesso mininmo do sistema!']);
+
         $permissoes = collect([
             ['guard_name'=>'admin','name'=>'listar produtos', 'category' => 'produto', 'description' => 'Permite visualizar a listagem de produtos e executar outras permissões de produto'],
             ['guard_name'=>'admin','name'=>'cadastrar produto', 'category' => 'produto', 'description' => 'Permite cadastrar um novo cliente'],
             ['guard_name'=>'admin','name'=>'visualizar produto', 'category' => 'produto', 'description' => 'Permite visualizar os dados de cliente'],
             ['guard_name'=>'admin','name'=>'editar produto', 'category' => 'produto', 'description' => 'Permite editar os dados de produto'],
             ['guard_name'=>'admin','name'=>'desativar produto', 'category' => 'produto', 'description' => 'Permite desativar e reativar um cliente'],
+
+            // ['guard_name'=>'geren','name'=>'desativar produto', 'category' => 'produto', 'description' => 'Permite desativar e reativar um cliente'],
+            // ['guard_name'=>'garc','name'=>'desativar produto', 'category' => 'produto', 'description' => 'Permite desativar e reativar um cliente'],
+
 
         ]);
         $permissoes->each(function ($item) use ($administrador) {

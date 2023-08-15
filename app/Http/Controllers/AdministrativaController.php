@@ -26,7 +26,11 @@ class AdministrativaController extends Controller
         ->groupBy('nome')
         ->orderByRaw('COUNT(*) DESC')
         ->first();
-        $nomeProdutoMaisComum = $produtoMaisComum->nome;
+        if ($produtoMaisComum) {
+            $nomeProdutoMaisComum = $produtoMaisComum->nome;
+        } else {
+            $nomeProdutoMaisComum = "Nenhum produto em destaque";
+        }
 
         $clientesAtivos = Comanda::with(['pedidos'])->where('status', 1)->get();
 

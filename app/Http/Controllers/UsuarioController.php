@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class UsuarioController extends Controller
 {
@@ -24,7 +26,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('pagesadm.usuario.create');
+        $roles = DB::table('roles')->get();
+        return view('pagesadm.usuario.create', ['roles' => $roles]);
     }
 
     /**
@@ -36,7 +39,7 @@ class UsuarioController extends Controller
         $regras = [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users',
-            // 'funcao' => 'required|string',
+            'funcao' => 'required|exists:roles,id',
             'password' => 'required|string|min:3',
         ];
 
@@ -45,7 +48,8 @@ class UsuarioController extends Controller
             'email.required' => 'O campo Email é obrigatório.',
             'email.email' => 'Digite um email válido.',
             'email.unique' => 'Email ja cadastrado',
-            // 'funcao.required' => 'O campo Função é obrigatório.',
+            'funcao.required' => 'O campo Função é obrigatório.',
+            'funcao.exists' => 'O cargo selecionado não existe.',
             'password.required' => 'O campo Senha é obrigatório.',
             'password.min' => 'A senha deve ter pelo menos 3 caracteres.',
         ];
