@@ -61,7 +61,7 @@ class UsuarioController extends Controller
 
         // dd($request['funcao']);
         $user = User::create($dados);
-        dd($user);
+        // dd($user);
         $user->assignRole($request->funcao);
 
         return redirect()->route('administrativa.index')->with('success', 'Informações salvas com sucesso!');

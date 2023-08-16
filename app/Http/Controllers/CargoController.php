@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cargo;
 use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCargoRequest;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,8 @@ class CargoController extends Controller
      */
     public function create()
     {
-        return view('pagesadm.cargo.create');
+        $permissions = Permission::all();
+        return view('pagesadm.cargo.create',['permissions' => $permissions]);
     }
 
     /**
@@ -48,7 +50,7 @@ class CargoController extends Controller
         $data = [
             'name' => $name,
             'description' => $description,
-            'guard_name' => 'admin',
+            'guard_name' => 'web',
         ];
         Role::create($data);
         return redirect()->route('administrativa.index')->with('success', 'Informações salvas com sucesso!');
