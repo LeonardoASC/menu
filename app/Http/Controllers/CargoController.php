@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cargo;
-use App\Http\Requests\StoreCargoRequest;
+use App\Models\Role;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCargoRequest;
+use Illuminate\Support\Facades\DB;
 
 class CargoController extends Controller
 {
@@ -13,7 +15,8 @@ class CargoController extends Controller
      */
     public function index()
     {
-        return view('pagesadm.cargo.index');
+        $roles = Role::all();
+        return view('pagesadm.cargo.index', ['roles' => $roles]);
     }
 
     /**
@@ -21,15 +24,34 @@ class CargoController extends Controller
      */
     public function create()
     {
-        //
+        return view('pagesadm.cargo.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCargoRequest $request)
+    public function store(Request $request)
     {
-        //
+        $regras = [
+            'name' => 'required|string|max:255',
+            'description' => 'required|max:255',
+        ];
+
+        $feedback = [
+            'name.required' => 'O campo Nome Completo é obrigatório.',
+            'description.required' => 'O campo Nome Completo é obrigatório.',
+        ];
+
+        $request->validate($regras, $feedback);
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $data = [
+            'name' => $name,
+            'description' => $description,
+            'guard_name' => 'admin',
+        ];
+        Role::create($data);
+        return redirect()->route('administrativa.index')->with('success', 'Informações salvas com sucesso!');
     }
 
     /**

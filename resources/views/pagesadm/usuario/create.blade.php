@@ -11,11 +11,10 @@
 
 <body>
     {{-- <x-navbarheader /> --}}
-    <form action="{{ route('usuario.store') }}" method="POST">
+    <form action="{{ route('usuario.store') }}" method="POST" class="bg-white">
         @csrf
-        <div class="space-y-12 p-6">
-
-            <div class="border-b border-gray-900/10 pb-12">
+        <div class="space-y-12 p-6 bg-white">
+            <div class="border-b border-gray-900/10 pb-12 ">
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Cadastrar Colaborador</h2>
                 <p class="mt-1 text-sm leading-6 text-gray-600">Crie um perfil de colaborador.</p>
 
@@ -79,7 +78,7 @@
         </div>
 
 
-        <div class="mt-6 p-6 flex items-center justify-center gap-x-6">
+        <div class="mt-6 p-6 flex items-center justify-center gap-x-6 bg-white">
             <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancelar</button>
             <button type="submit"
                 class="rounded-md bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cadastrar</button>

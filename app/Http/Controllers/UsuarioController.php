@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $roles = DB::table('roles')->get();
+        $roles = Role::all();
         return view('pagesadm.usuario.create', ['roles' => $roles]);
     }
 
@@ -55,9 +56,14 @@ class UsuarioController extends Controller
         ];
 
         $request->validate($regras, $feedback);
+
         $dados = $request->all();
-        // dd($dados);
-        User::create($dados);
+
+        // dd($request['funcao']);
+        $user = User::create($dados);
+        dd($user);
+        $user->assignRole($request->funcao);
+
         return redirect()->route('administrativa.index')->with('success', 'Informações salvas com sucesso!');
     }
 
