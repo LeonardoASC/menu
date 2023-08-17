@@ -242,11 +242,13 @@
 
                 <div class="grid grid-cols-1 h-auto lg:grid-cols-2 p-4 gap-4 ">
                     <!-- Clientes Ativos -->
-                    <div class="flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                    <div
+                        class="flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
                         <div class="rounded-t mb-0 px-0 border-0">
                             <div class="flex flex-wrap items-center px-4 py-2">
                                 <div class=" w-full max-w-full flex-grow flex-1">
-                                    <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Clientes Ativos</h3>
+                                    <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Clientes Ativos
+                                    </h3>
                                 </div>
                                 <div class=" w-full max-w-full flex-grow flex-1 text-right">
                                     <button
@@ -275,7 +277,11 @@
                                     </thead>
                                     <tbody class="">
                                         @if ($clientesAtivos->isEmpty())
-                                            <p>Nenhum cliente no estabelecimento.</p>
+                                            <tr>
+                                                <td
+                                                    class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 text-left">
+                                                    Nenhum cliente no estabelecimento.</td>
+                                            </tr>
                                         @else
                                             @foreach ($clientesAtivos as $clienteAtivo)
                                                 <tr class="text-gray-700  dark:text-gray-100 ">
@@ -328,24 +334,27 @@
                                     </div>
                                     <ul class="my-1 ">
                                         @foreach ($pedidos as $pedido)
-                                        <li class="flex px-4">
-                                            <div class="w-9 h-9 rounded-full flex-shrink-0 bg-indigo-500 my-2 mr-3">
-                                                <svg class="w-9 h-9 fill-current text-indigo-50" viewBox="0 0 36 36">
-                                                    <path
-                                                        d="M18 10c-4.4 0-8 3.1-8 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L18.9 22H18c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z">
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                            <div
-                                                class="flex-grow flex items-center border-b border-gray-100 dark:border-gray-400 text-sm text-gray-600 dark:text-gray-100 py-2">
-                                                <div class="flex-grow flex justify-between items-center">
-                                                    <div class="self-center">
-                                                        O cliente {{ $pedido->cliente->nome }} pediu {{ $pedido->nome }}
-                                                    </div>
-                                                    {{$pedido->created_at->format('H:i')}}
+                                            <li class="flex px-4">
+                                                <div
+                                                    class="w-9 h-9 rounded-full flex-shrink-0 bg-indigo-500 my-2 mr-3">
+                                                    <svg class="w-9 h-9 fill-current text-indigo-50"
+                                                        viewBox="0 0 36 36">
+                                                        <path
+                                                            d="M18 10c-4.4 0-8 3.1-8 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L18.9 22H18c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z">
+                                                        </path>
+                                                    </svg>
                                                 </div>
-                                            </div>
-                                        </li>
+                                                <div
+                                                    class="flex-grow flex items-center border-b border-gray-100 dark:border-gray-400 text-sm text-gray-600 dark:text-gray-100 py-2">
+                                                    <div class="flex-grow flex justify-between items-center">
+                                                        <div class="self-center">
+                                                            O cliente {{ $pedido->cliente->nome }} pediu
+                                                            {{ $pedido->nome }}
+                                                        </div>
+                                                        {{ $pedido->created_at->format('H:i') }}
+                                                    </div>
+                                                </div>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 @endforeach

@@ -36,6 +36,9 @@
                             <th
                                 class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                 Email</th>
+                                <th
+                                class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                options</th>
 
                         </tr>
                     </thead>
@@ -51,6 +54,11 @@
                                     <td
                                         class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{ $usuario->email }}</td>
+                                        <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                                            <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Ver</a>
+                                            <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Editar</a>
+                                            <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Excluir</a>
+                                        </td>
 
                                 </tr>
                             @endforeach

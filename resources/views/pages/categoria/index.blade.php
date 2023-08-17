@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <x-caminho/>
+    {{-- <x-caminho/> --}}
 
     <div class="flex flex-col justify-center items-center">
         <div

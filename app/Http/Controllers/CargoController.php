@@ -7,7 +7,6 @@ use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCargoRequest;
-use Illuminate\Support\Facades\DB;
 
 class CargoController extends Controller
 {
@@ -37,6 +36,7 @@ class CargoController extends Controller
         $regras = [
             'name' => 'required|string|max:255',
             'description' => 'required|max:255',
+
         ];
 
         $feedback = [
@@ -52,10 +52,13 @@ class CargoController extends Controller
             'description' => $description,
             'guard_name' => 'web',
         ];
-        Role::create($data);
-        return redirect()->route('administrativa.index')->with('success', 'Informações salvas com sucesso!');
-    }
 
+        $role = Role::create($data);
+        foreach ($request['selected_permissions'] as $key => $value) {
+            $role->givePermissionTo($value);
+        }
+        return redirect()->route('cargo.index', ['role' => $role])->with('success', 'Informações salvas com sucesso!');
+    }
     /**
      * Display the specified resource.
      */
@@ -69,7 +72,7 @@ class CargoController extends Controller
      */
     public function edit(Cargo $cargo)
     {
-        //
+        return view('pagesadm.cargo.edit', ['cargo' => $cargo]);
     }
 
     /**
@@ -87,4 +90,21 @@ class CargoController extends Controller
     {
         //
     }
+
+
+
+    public function addPermissoes(Request $request, $id)
+    {
+        $cargo = Cargo::findOrFail($id);
+        $permissoes = $request->get('permissoes');
+
+        foreach ($permissoes as $permissao) {
+            $cargo->givePermissaoTo($permissao);
+        }
+
+        $cargo->save();
+
+        return redirect()->route('cargos.index')->with('success', 'Permissões adicionadas com sucesso.');
+    }
+
 }
