@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cargo;
 use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateCargoRequest;
 
-class CargoController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class CargoController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('pagesadm.cargo.index', ['roles' => $roles]);
+        return view('pagesadm.role.index', ['roles' => $roles]);
     }
 
     /**
@@ -25,7 +23,7 @@ class CargoController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        return view('pagesadm.cargo.create',['permissions' => $permissions]);
+        return view('pagesadm.role.create',['permissions' => $permissions]);
     }
 
     /**
@@ -57,12 +55,13 @@ class CargoController extends Controller
         foreach ($request['selected_permissions'] as $key => $value) {
             $role->givePermissionTo($value);
         }
-        return redirect()->route('cargo.index', ['role' => $role])->with('success', 'Informações salvas com sucesso!');
+        return redirect()->route('role.index', ['role' => $role])->with('success', 'Informações salvas com sucesso!');
     }
+
     /**
      * Display the specified resource.
      */
-    public function show(Cargo $cargo)
+    public function show(string $id)
     {
         //
     }
@@ -72,13 +71,14 @@ class CargoController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('pagesadm.cargo.edit', ['role' => $role]);
+        
+        return view('pagesadm.role.edit', ['role' => $role]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCargoRequest $request, Cargo $cargo)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -86,25 +86,23 @@ class CargoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cargo $cargo)
+    public function destroy(string $id)
     {
         //
     }
 
-
-
     public function addPermissoes(Request $request, $id)
     {
-        $cargo = Cargo::findOrFail($id);
+        $role = Role::findOrFail($id);
         $permissoes = $request->get('permissoes');
 
         foreach ($permissoes as $permissao) {
-            $cargo->givePermissaoTo($permissao);
+            $role->givePermissaoTo($permissao);
         }
 
-        $cargo->save();
+        $role->save();
 
-        return redirect()->route('cargos.index')->with('success', 'Permissões adicionadas com sucesso.');
+        return redirect()->route('role.index')->with('success', 'Permissões adicionadas com sucesso.');
     }
 
 }

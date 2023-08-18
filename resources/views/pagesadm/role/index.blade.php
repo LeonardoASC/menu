@@ -20,7 +20,7 @@
                     <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Cargos cadastrados</h3>
                 </div>
                 <div class=" w-full max-w-full flex-grow flex-1 text-right">
-                    <a href="{{ route('cargo.create') }}">
+                    <a href="{{ route('role.create') }}">
                         <button
                             class="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button">Novo</button>
@@ -64,7 +64,7 @@
                                     <td
                                         class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                                         <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Ver</a>
-                                             <a href="{{ route('cargo.edit', ['role' => $role->id]) }}"
+                                             <a href="{{ route('role.edit', ['role' => $role->id]) }}"
 
                                             class="border p-2 rounded-lg hover:bg-slate-200">Editar</a>
 
