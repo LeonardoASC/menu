@@ -18,7 +18,7 @@
 
     <div class="flex flex-col justify-center items-center">
         <div
-            class="!z-5 relative items-center flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
+            class="!z-5 relative items-center rounded-[20px] max-w-[300px] bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
 
             <div class="relative flex flex-row justify-between">
                 <div class="flex items-center">
