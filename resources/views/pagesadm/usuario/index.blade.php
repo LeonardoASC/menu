@@ -54,11 +54,21 @@
                                     <td
                                         class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{ $usuario->email }}</td>
-                                        <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                            <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Ver</a>
-                                            <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Editar</a>
-                                            <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Excluir</a>
-                                        </td>
+                                        <td
+                                        class="border-t-0 flex gap-2 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                                        <a href="{{ route('usuario.show', ['usuario' => $usuario->id]) }}"
+                                            class="border p-2 rounded-lg hover:bg-slate-200">Ver</a>
+
+                                        <a href="{{ route('usuario.edit', ['usuario' => $usuario->id]) }}"
+                                            class="border p-2 rounded-lg hover:bg-slate-200">Editar</a>
+                                            
+                                        <form action="{{ route('usuario.destroy', $usuario->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="text-gray-700 border p-2 rounded-lg hover:bg-slate-200"
+                                                type="submit">Excluir</button>
+                                        </form>
+                                    </td>
 
                                 </tr>
                             @endforeach

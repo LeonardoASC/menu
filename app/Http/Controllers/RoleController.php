@@ -61,9 +61,9 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Role $role)
     {
-        //
+        return view('pagesadm.role.show', ['role' => $role]);
     }
 
     /**
@@ -71,24 +71,32 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        
+
         return view('pagesadm.role.edit', ['role' => $role]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+
+    public function update(Request $request, Role $role)
     {
-        //
+        $role->update($request->all());
+        return redirect()->route('role.index', ['role' => $role->id]);
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Role $role)
     {
-        //
+        if ($role->name === 'Administrador') {
+            return redirect()->route('role.index')->with('message', 'Você não pode excluir o papel de administrador.');
+        }
+
+        $role->delete();
+        return redirect()->route('role.index')->with('success', 'Papel excluído com sucesso.');
     }
 
     public function addPermissoes(Request $request, $id)

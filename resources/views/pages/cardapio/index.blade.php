@@ -47,6 +47,7 @@
                     </p>
                     <p class=" text-xs pl-2">
                         comanda: {{ session('idcomanda') }}
+
                     </p>
                 </div>
             </div>

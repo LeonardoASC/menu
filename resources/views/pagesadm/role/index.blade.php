@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
+    {{-- toastr --}}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -62,13 +64,17 @@
                                         class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                         {{ $role->description }}</td>
                                     <td
-                                        class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                        <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Ver</a>
-                                             <a href="{{ route('role.edit', ['role' => $role->id]) }}"
-
+                                        class="border-t-0 flex gap-2 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                                        <a href="{{ route('role.show', ['role' => $role->id]) }}"
+                                            class="border p-2 rounded-lg hover:bg-slate-200">Ver</a>
+                                        <a href="{{ route('role.edit', ['role' => $role->id]) }}"
                                             class="border p-2 rounded-lg hover:bg-slate-200">Editar</a>
-
-                                        <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Excluir</a>
+                                        <form action="{{ route('role.destroy', $role->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="text-gray-700 border p-2 rounded-lg hover:bg-slate-200"
+                                                type="submit">Excluir</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -79,7 +85,20 @@
         </div>
     </div>
 
+{{-- Toastr --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
 
+    @if (Session::has('message'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        // toastr.success("{{ session('message') }}");
+        toastr.error("{{ session('message') }}");
+    @endif
+</script>
 </body>
 
 </html>

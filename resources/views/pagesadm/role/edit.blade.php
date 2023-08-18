@@ -11,19 +11,19 @@
 
 <body>
 
-    <form action="" method="post">
+    <form action="{{ route('role.update', ['role' => $role->id]) }}" method="post">
         @csrf
         @method('PUT')
         {{-- @dd($cargo) --}}
-        <div class="my-4 text-lg flex flex-col">
+        <div class="my-4 text-lg flex flex-col p-5">
             <p>Nome do cargo</p>
-            <input type="text" name="name" value="{{ $role ?? old('name') }}"
+            <input type="text" name="name" value="{{ $role->name ?? old('name') }}"
                 placeholder="" class="w-1/3 mb-2 border" />
                 <p>Descrição do cargo</p>
-            <input type="text" name="description" value="{{ $role ?? old('description') }}"
+            <input type="text" name="description" value="{{ $role->description ?? old('description') }}"
                 placeholder="" class="w-1/3 mb-2 border" />
         </div>
-        <div class="">
+        <div class="p-5">
             <button type="submit" class="bg-black">Atualizar</button>
         </div>
     </form>
