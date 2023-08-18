@@ -70,7 +70,7 @@
                                     <td
                                         class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                                         <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Ver</a>
-                                        <a href="{{ route('cargo.edit', ['role' => $role->id]) }}"
+                                             <a href="{{ route('cargo.edit', $role->id) }}"
                                             class="border p-2 rounded-lg hover:bg-slate-200">Editar</a>
                                         <a href="" class="border p-2 rounded-lg hover:bg-slate-200">Excluir</a>
                                     </td>

@@ -70,9 +70,9 @@ class CargoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cargo $cargo)
+    public function edit(Role $role)
     {
-        return view('pagesadm.cargo.edit', ['cargo' => $cargo]);
+        return view('pagesadm.cargo.edit', ['role' => $role]);
     }
 
     /**
