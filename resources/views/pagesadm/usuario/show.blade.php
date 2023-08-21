@@ -9,8 +9,8 @@
 </head>
 <body>
     <h1>Detalhes do Usuario</h1>
-    @dd($user)
-    <p>Nome: {{ $user->name }}</p>
-    <p>Descrição: {{ $user->email }}</p>
+    {{-- @dd($usuario) --}}
+    <p>Nome: {{ $usuario->name }}</p>
+    <p>Descrição: {{ $usuario->email }}</p>
 </body>
 </html>

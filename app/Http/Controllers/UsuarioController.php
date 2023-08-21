@@ -70,39 +70,39 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $usuario)
     {
-        return view('pagesadm.usuario.show', ['user' => $user]);
+        return view('pagesadm.usuario.show', ['usuario' => $usuario]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, User $user)
+    public function edit(Request $request, User $usuario)
     {
-        return view('pagesadm.usuario.edit', ['user' => $user]);
+        return view('pagesadm.usuario.edit', ['usuario' => $usuario]);
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $usuario)
     {
-        $user->update($request->all());
-        return redirect()->route('usuario.index', ['user' => $user->id]);
+        $usuario->update($request->all());
+        return redirect()->route('usuario.index', ['usuario' => $usuario->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $usuario)
     {
-        if ($user->name === 'adm') {
+        if ($usuario->name === 'adm') {
             return redirect()->route('usuario.index')->with('message', 'Você não pode excluir o administrador master.');
         }
 
-        $user->delete();
+        $usuario->delete();
         return redirect()->route('usuario.index')->with('success', 'Papel excluído com sucesso.');
     }
 }

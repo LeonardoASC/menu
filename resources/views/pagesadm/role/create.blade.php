@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="mt-6 p-6 flex items-center justify-center gap-x-6 bg-white">
-                    <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancelar</button>
+                    <a class="text-sm font-semibold leading-6 text-gray-900" href="{{ route("usuario.index") }}">Cancelar</a>
                     <button type="submit"
                         class="rounded-md bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cadastrar</button>
                 </div>
