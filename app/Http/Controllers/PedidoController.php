@@ -72,6 +72,8 @@ class PedidoController extends Controller
         // dd(session()->all());
         $pedido->save();
 
+
+
         return redirect()->route('cardapio.index')->with('message', 'Pedido realizado com sucesso!');
     }
 
@@ -96,15 +98,30 @@ class PedidoController extends Controller
      */
     public function update(Request $request, Pedido $pedido)
     {
-        // $pedido->update($request->all());
-        // dd($request->all());
-        // $pedido->status = 'Entregue';
-        // $pedido->save();
+        // dd($pedido);
 
 
+        // $pedido->update(['status' => $request->input('pedido_status')]);
+        // return redirect()->route('pedido.index', ['pedido' => $pedido->id])->with('success', 'Pedido atualizado com sucesso!');
+        $status = $request->input('pedido_status');
 
-        $pedido->update(['status' => $request->input('pedido_status')]);
-        return redirect()->route('pedido.index', ['pedido' => $pedido->id]);
+    // Atualize o status do pedido
+    $pedido->update(['status' => $status]);
+
+    // Verifique se o pedido foi entregue
+    if ($status === 'entregue') {
+        // Encontre a comanda relacionada ao pedido
+        $comanda = $pedido->comanda;
+
+        // Recalcule o valor total da comanda com base nos pedidos entregues
+        $valorTotalComanda = $comanda->pedidos->where('status', 'entregue')->sum('valor');
+
+        // Atualize o valor total da comanda
+        $comanda->update(['valor_total' => $valorTotalComanda]);
+    }
+
+    return redirect()->route('pedido.index')->with('success', 'Pedido atualizado com sucesso!');
+
     }
 
     /**

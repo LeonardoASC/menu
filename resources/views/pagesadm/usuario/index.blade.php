@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
+    {{-- toastr --}}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -61,7 +63,7 @@
 
                                         <a href="{{ route('usuario.edit', ['usuario' => $usuario->id]) }}"
                                             class="border p-2 rounded-lg hover:bg-slate-200">Editar</a>
-                                            
+
                                         <form action="{{ route('usuario.destroy', $usuario->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -69,7 +71,6 @@
                                                 type="submit">Excluir</button>
                                         </form>
                                     </td>
-
                                 </tr>
                             @endforeach
                         @endif
@@ -78,6 +79,21 @@
             </div>
         </div>
     </div>
+
+    {{-- Toastr --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+
+    @if (Session::has('message'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        // toastr.success("{{ session('message') }}");
+        toastr.error("{{ session('message') }}");
+    @endif
+</script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
     <script>
         const setup = () => {

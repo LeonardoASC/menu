@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cardapio;
+use App\Models\Comanda;
 use App\Models\Produto;
 use App\Models\Categoria;
 use App\Http\Requests\StoreCardapioRequest;
