@@ -103,22 +103,22 @@ class PedidoController extends Controller
 
         // $pedido->update(['status' => $request->input('pedido_status')]);
         // return redirect()->route('pedido.index', ['pedido' => $pedido->id])->with('success', 'Pedido atualizado com sucesso!');
+
         $status = $request->input('pedido_status');
+        // dd($pedido);
+        $pedido_valor = $request->input('pedido_valor');
 
-    // Atualize o status do pedido
-    $pedido->update(['status' => $status]);
 
-    // Verifique se o pedido foi entregue
-    if ($status === 'entregue') {
-        // Encontre a comanda relacionada ao pedido
-        $comanda = $pedido->comanda;
+        $pedido->update(['status' => $status]);
 
-        // Recalcule o valor total da comanda com base nos pedidos entregues
-        $valorTotalComanda = $comanda->pedidos->where('status', 'entregue')->sum('valor');
 
-        // Atualize o valor total da comanda
-        $comanda->update(['valor_total' => $valorTotalComanda]);
-    }
+        if ($status === 'Entregue') {
+            $comanda = $pedido->comanda;
+            // = $comanda->pedidos->where('status', 'Entregue')->sum('valor');
+            // dd($valorPedido);
+            $comanda->total = $comanda->total + $pedido_valor;
+            $comanda->save();
+        }
 
     return redirect()->route('pedido.index')->with('success', 'Pedido atualizado com sucesso!');
 

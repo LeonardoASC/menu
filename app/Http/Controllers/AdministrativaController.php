@@ -38,7 +38,7 @@ class AdministrativaController extends Controller
         // $todosPedidos = $todosPedidos->sortBy('created_at');
 
         // Agrupar pedidos por data
-    $pedidosAgrupados = $todosPedidos->groupBy(function ($pedido) {
+        $pedidosAgrupados = $todosPedidos->groupBy(function ($pedido) {
         return $pedido->created_at->format('d/m/Y');
     });
 

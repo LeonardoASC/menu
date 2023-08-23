@@ -51,6 +51,7 @@
                                 <button class="toggleModalButton bg-green-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
                                 data-produto-id="{{ $pedido->id }}">Entregar pedido</button>
                                 <input type="hidden" name="pedido_status" value="Entregue">
+                                <input type="hidden" name="pedido_valor" value="{{ $pedido->preco }}">
                             </div>
                                 </form>
                         </div>
@@ -80,7 +81,7 @@
                             </div>
                             <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                 <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
-                                    Deseja realmente entregar esse pedidosaaaaaaaaaaaa?</h3>
+                                    Deseja realmente entregar esse pedidosa?</h3>
                             </div>
                         </div>
                     </div>
