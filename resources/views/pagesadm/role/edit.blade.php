@@ -14,7 +14,7 @@
     <form action="{{ route('role.update', ['role' => $role->id]) }}" method="post">
         @csrf
         @method('PUT')
-        {{-- @dd($cargo) --}}
+        {{-- @dd($role) --}}
         <div class="my-4 text-lg flex flex-col p-5">
             <p>Nome do cargo</p>
             <input type="text" name="name" value="{{ $role->name ?? old('name') }}"
@@ -25,6 +25,14 @@
         </div>
         <div class="p-5">
             <button type="submit" class="bg-black">Atualizar</button>
+        </div>
+        <div class="flex flex-col">
+            @foreach ($permissions as $permission)
+            <label >
+                <input type="checkbox" @checked($role->hasPermissionTo($permission->id)) name="selected_permissions[{{$permission->id}}]" value="{{ $permission->id }}">
+               - {{ $permission->name }}
+            </label>
+        @endforeach
         </div>
     </form>
 

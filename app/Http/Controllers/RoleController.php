@@ -75,8 +75,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-
-        return view('pagesadm.role.edit', ['role' => $role]);
+        $permissions = Permission::all();
+        return view('pagesadm.role.edit', ['role' => $role, 'permissions' => $permissions]);
     }
 
     /**
@@ -86,6 +86,30 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $role->update($request->all());
+
+        // $role = Role::findOrFail($id);
+        if ($role->name === 'admin') {
+            return redirect()->back()->with('error', 'Não é possível alterar este perfil');
+        }
+        $permissions = $role->getAllPermissions()->toArray();
+
+        $values = $request['selected_permissions'];
+        while ($var = current($values)) {
+            if (array_search(key($values), array_column($permissions, 'id')) === false) {
+                $role->givePermissionTo(key($values));
+            }
+            next($values);
+        }
+
+        while ($var = current($permissions)) {
+            if (!array_key_exists($var['id'], $values)) {
+                $role->revokePermissionTo($var['id']);
+            }
+            next($permissions);
+        }
+
+
+
         return redirect()->route('role.index', ['role' => $role->id]);
     }
 
