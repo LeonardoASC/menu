@@ -25,7 +25,14 @@
 
 
         <div class=" bg-white w-full">
-            <p class=" text-gray-600 mb-2 text-2xl font-thin px-4 pt-3 ">Mesas</p>
+            <div class="flex justify-between">
+                <p class=" text-gray-600 mb-2 text-2xl font-thin px-4 pt-3 ">Mesas</p>
+                <a href="{{ route('mesa.create') }}">
+                    <button type="button" class=" px-4 py-2 m-2 select-none border bg-gray-400 text-white rounded-md">
+                        Adicionar Mesa
+                    </button>
+                </a>
+            </div>
             <div class="px-2 w-full ">
                 <svg class="absolute z-10 m-1 text-blue-400" width="24" height="24" viewBox="0 0 24 24"
                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -76,11 +83,7 @@
                                             onclick="toggleId({{ $mesa->id }})">
                                             Ver
                                         </button>
-                                        {{-- <button class="border bg-gray-400 text-white rounded-md px-1 py-1"
-                                        onmouseover="mostrarConteudo({{ $mesa->id }})"
-                                        onmouseout="esconderConteudo({{ $mesa->id }})">
-                                        Ver
-                                    </button> --}}
+                                        
                                     </div>
                                 </div>
                                 <div id="mesa-{{ $mesa->id }}"
@@ -110,11 +113,7 @@
 
 
         </div>
-        <a href="{{ route('mesa.create') }}">
-            <button type="button" class="border bg-primary text-white rounded-md px-4 py-2 m-2 select-none">
-                Adicionar Mesa
-            </button>
-        </a>
+
     </div>
     <script>
         function toggleId(id) {

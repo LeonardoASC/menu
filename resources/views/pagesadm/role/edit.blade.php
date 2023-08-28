@@ -10,31 +10,33 @@
 </head>
 
 <body>
-
-    <form action="{{ route('role.update', ['role' => $role->id]) }}" method="post">
-        @csrf
-        @method('PUT')
-        {{-- @dd($role) --}}
-        <div class="my-4 text-lg flex flex-col p-5">
-            <p>Nome do cargo</p>
-            <input type="text" name="name" value="{{ $role->name ?? old('name') }}"
-                placeholder="" class="w-1/3 mb-2 border" />
+    <div class="flex flex-col justify-center items-center h-screen bg-white">
+        <h1 class="text-lg font-semibold border p-2 rounded">Editar cargo e suas permissões</h1>
+        <form action="{{ route('role.update', ['role' => $role->id]) }}" method="post">
+            @csrf
+            @method('PUT')
+            <div class="my-4 flex flex-col p-5 items-center">
+                <p>Nome do cargo</p>
+                <input type="text" name="name" value="{{ $role->name ?? old('name') }}" placeholder=""
+                    class=" mb-2 border rounded" />
                 <p>Descrição do cargo</p>
-            <input type="text" name="description" value="{{ $role->description ?? old('description') }}"
-                placeholder="" class="w-1/3 mb-2 border" />
-        </div>
-        <div class="p-5">
-            <button type="submit" class="bg-black">Atualizar</button>
-        </div>
-        <div class="flex flex-col">
-            @foreach ($permissions as $permission)
-            <label >
-                <input type="checkbox" @checked($role->hasPermissionTo($permission->id)) name="selected_permissions[{{$permission->id}}]" value="{{ $permission->id }}">
-               - {{ $permission->name }}
-            </label>
-        @endforeach
-        </div>
-    </form>
+                <input type="text" name="description" value="{{ $role->description ?? old('description') }}"
+                    placeholder="" class="rounded mb-2 border" />
+            </div>
+            <div class="flex flex-col ">
+                @foreach ($permissions as $permission)
+                    <label>
+                        <input type="checkbox" @checked($role->hasPermissionTo($permission->id))
+                            name="selected_permissions[{{ $permission->id }}]" value="{{ $permission->id }}">
+                        - {{ $permission->name }}
+                    </label>
+                @endforeach
+            </div>
+            <div class="p-5 flex items-center justify-center">
+                <button type="submit" class="bg-black p-2 rounded ">Atualizar</button>
+            </div>
+        </form>
+    </div>
 
 </body>
 

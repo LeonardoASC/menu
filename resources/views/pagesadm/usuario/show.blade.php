@@ -8,9 +8,12 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <h1>Detalhes do Usuario</h1>
-    {{-- @dd($usuario) --}}
-    <p>Nome: {{ $usuario->name }}</p>
-    <p>Descrição: {{ $usuario->email }}</p>
+    <div class="flex flex-col justify-center items-center h-screen">
+        <h1 class="block text-gray-700 font-bold mb-2">Detalhes do Usuario</h1>
+    <div class="bg-white p-8 rounded-md shadow-md flex flex-col justify-center items-center">
+        <p>Nome: {{ $usuario->name }}</p>
+        <p>Descrição: {{ $usuario->email }}</p>
+    </div>
+    </div>
 </body>
 </html>

@@ -8,8 +8,10 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <h1>Detalhes do Papel</h1>
-    <p>Nome: {{ $role->name }}</p>
-    <p>Descrição: {{ $role->description }}</p>
+    <div class="flex flex-col justify-center items-center h-screen bg-white">
+        <h1 class="border p-2 rounded">Detalhes do Cargo</h1>
+        <p>Nome: {{ $role->name }}</p>
+        <p>Descrição: {{ $role->description }}</p>
+    </div>
 </body>
 </html>

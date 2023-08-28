@@ -10,30 +10,29 @@
 </head>
 
 <body>
-
-    <div class="flex h-screen w-full items-center justify-center bg-fundo bg-cover bg-no-repeat"
-        >
-        <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
-            <div class="text-white">
-                <div class="mb-8 flex flex-col items-center">
-                    <h1 class="mb-2 text-2xl">Atualizar quantidade de cadeiras</h1>
-                </div>
-
-                <form action="{{ route('mesa.update', ['mesa' => $mesa->id]) }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-4 text-lg">
-                        <input type="text" name="numero_cadeiras" value="{{ $mesa->numero_cadeiras ?? old('numero_cadeiras') }}"
-                            class="rounded-3xl border-none bg-primary bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                            placeholder="" />
-                    </div>
-                    <div class="mt-8 flex justify-center text-lg text-black">
-                        <button type="submit"
-                            class="rounded-3xl bg-primary bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Atualizar</button>
-                    </div>
-                </form>
+    <div class="flex flex-col justify-center items-center h-screen">
+        <h1 class="text-lg font-semibold p-2 rounded">Atualizar quantidade de cadeiras</h1>
+        <form action="{{ route('mesa.update', ['mesa' => $mesa->id]) }}" method="post"
+            class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md flex flex-col justify-center items-center">
+            @csrf
+            @method('PUT')
+            <div class="mb-4 flex flex-col justify-center items-center">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Quantidade de cadeiras da
+                    mesa</label>
+                <input type="text" name="numero_cadeiras" class="mb-2 border rounded mt-4"
+                    value="{{ $mesa->numero_cadeiras ?? old('numero_cadeiras') }}" placeholder="" />
             </div>
-        </div>
+            <div class="flex justify-center items-center">
+                <a href="{{ route('mesa.index') }}">
+                    <button type="button" class=" px-4 py-2 select-none border bg-gray-400 text-white rounded-md">
+                        Voltar
+                    </button>
+                </a>
+                <div class="p-5 flex justify-center items-center">
+                    <button type="submit" class="bg-black p-2 rounded ">Atualizar</button>
+                </div>
+            </div>
+        </form>
     </div>
 </body>
 

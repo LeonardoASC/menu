@@ -6,26 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    @vite('resources/css/app.css')
 </head>
 
 <body>
-    {{-- @dd($usuario) --}}
-    <form action="{{ route('usuario.update', ['usuario' => $usuario->id]) }}" method="post">
-        @csrf
-        @method('PUT')
 
-        <div class="my-4 text-lg flex flex-col p-5">
-            <p>Nome do usuario</p>
-            <input type="text" name="name" value="{{ $usuario->name ?? old('name') }}" placeholder=""
-                class="w-1/3 mb-2 border" />
-            <p>Email do usuario</p>
-            <input type="text" name="email" value="{{ $usuario->email ?? old('email') }}" placeholder=""
-                class="w-1/3 mb-2 border" />
-        </div>
-        <div class="p-5">
-            <button type="submit" class="bg-black">Atualizar</button>
-        </div>
-    </form>
+    <div class="flex flex-col justify-center items-center h-screen">
+        <h1 class="text-lg font-semibold p-2 rounded">Editar Usuario</h1>
+        <form action="{{ route('usuario.update', ['usuario' => $usuario->id]) }}" method="post"
+            class="bg-white p-8 rounded-md shadow-md flex flex-col justify-center items-center"
+            >
+            @csrf
+            @method('PUT')
+
+            <div class="my-4 flex flex-col p-5 justify-center items-center">
+                <p>Nome do usuario</p>
+                <input type="text" name="name" value="{{ $usuario->name ?? old('name') }}" placeholder=""
+                    class="mb-2 rounded border" />
+                <p>Email do usuario</p>
+                <input type="text" name="email" value="{{ $usuario->email ?? old('email') }}" placeholder=""
+                    class="mb-2 border rounded" />
+            </div>
+            <div class="p-5 flex justify-center items-center">
+                <button type="submit" class="bg-black p-2 rounded ">Atualizar</button>
+            </div>
+        </form>
+    </div>
+
 </body>
 
 </html>
