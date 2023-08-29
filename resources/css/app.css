@@ -20,7 +20,7 @@ button
 
 :root{
     font-family: 'Poppins', sans-serif;
-    @apply bg-fundo
+    /* @apply bg-fundo */
 
     /* lg:w-[414px] */
 }
