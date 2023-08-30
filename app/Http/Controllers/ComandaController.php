@@ -17,7 +17,7 @@ class ComandaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    
+
     public function index(Request $request)
     {
         $comandas = Comanda::all();
@@ -112,7 +112,7 @@ class ComandaController extends Controller
 
     public function update(Request $request, Comanda $comanda)
     {
-            dd($comanda->status);
+            // dd($comanda->status);
         if($comanda->status == 1){
             //se comanda status for igual a 1 -> fazer apenas a adicação do valor
             //se comanda status for igual a 0 -> finalizar comanda

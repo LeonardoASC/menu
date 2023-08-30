@@ -13,10 +13,13 @@ class ComandaObserver
     {
          // Ao criar uma comanda, atualize o status da mesa para 'ocupado'
          $mesa = $comanda->mesa;
-         dd($mesa);
+// dd($mesa);
          if ($mesa) {
-             $mesa->status = 'ocupado';
-             $mesa->save();
+            $mesa->status = 'ocupado';
+            $mesa->save();
+         }else{
+            $mesa->status = 'disponivel';
+            $mesa->save();
          }
     }
 
