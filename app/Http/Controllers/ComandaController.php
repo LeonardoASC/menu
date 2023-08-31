@@ -6,7 +6,6 @@ use App\Models\Comanda;
 use App\Models\Pedido;
 use App\Models\Cliente;
 use App\Models\Mesa;
-
 use App\Http\Requests\StoreComandaRequest;
 use App\Http\Requests\UpdateComandaRequest;
 use Illuminate\Http\Request;
@@ -21,8 +20,7 @@ class ComandaController extends Controller
     public function index(Request $request)
     {
         $comandas = Comanda::all();
-        // $pedidosEntregues = Pedido::where('status', 'entregue')->get();
-        // return view('pages.comanda.index', ['comandas' => $comandas,'pedidosEntregues' => $pedidosEntregues, 'request' => $request->all() ]);
+        $valorTotal = Comanda::where('id', session('idcomanda'))->value('total');
 
         $cpf = $request->session()->get('cpf'); // Obtém o CPF do cliente da sessão
         $pedidosEntregues = Pedido::join('clientes', 'pedidos.cliente_id', '=', 'clientes.id')
@@ -30,7 +28,19 @@ class ComandaController extends Controller
                     ->where('clientes.cpf', $cpf)
                     ->get(['pedidos.*']);
 
-        return view('pages.comanda.index', ['comandas' => $comandas, 'pedidosEntregues' => $pedidosEntregues, 'request' => $request->all() ]);
+        $garcom10 = 0;
+        $TotalFinal = 0;
+        $cover = 10;
+        return view('pages.comanda.index',
+        [
+            'valorTotal' => $valorTotal,
+            'comandas' => $comandas,
+            'pedidosEntregues' => $pedidosEntregues,
+            'request' => $request->all(),
+            'garcom10' => $garcom10,
+            'TotalFinal' => $TotalFinal,
+            'cover' => $cover,
+        ]);
     }
 
     /**
@@ -60,36 +70,6 @@ class ComandaController extends Controller
     }
 
 
-    // public function store(Request $request)
-    // {
-    // $totalComanda = $request->input('total');
-    // $cliente_id = $request->input('cliente_id_total');
-    // $mesa_id = $request->input('mesa_id_total');
-
-    // // Verifica se já existe uma comanda com o cliente_id e mesa_id informados
-    // $comandaExistente = Comanda::where('cliente_id', $cliente_id)
-    //                            ->where('mesa_id', $mesa_id)
-    //                            ->first();
-
-    // if ($comandaExistente) {
-    //     // Atualiza o total da comanda existente
-    //     $comandaExistente->total = $totalComanda;
-    //     $comandaExistente->save();
-    // } else {
-    //     // Cria uma nova comanda, pois não existe uma comanda com o cliente_id e mesa_id informados
-    //     $novaComanda = new Comanda();
-    //     $novaComanda->total = $totalComanda;
-    //     $novaComanda->cliente_id = $cliente_id;
-    //     $novaComanda->mesa_id = $mesa_id;
-    //     $novaComanda->save();
-    // }
-
-    // // Limpando a sessão (se necessário)
-    // Session::flush();
-
-    // return redirect()->route('home');
-    // }
-
     /**
      * Display the specified resource.
      */
@@ -112,12 +92,10 @@ class ComandaController extends Controller
 
     public function update(Request $request, Comanda $comanda)
     {
-            // dd($comanda->status);
-        if($comanda->status == 1){
-            //se comanda status for igual a 1 -> fazer apenas a adicação do valor
-            //se comanda status for igual a 0 -> finalizar comanda
+
+        if ($comanda->status != 0) {
+            $comanda->update(['status' => 0]);
         }
-            $comanda->update($request->all());
             return redirect()->route('home');
     }
 

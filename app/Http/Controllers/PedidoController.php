@@ -98,25 +98,14 @@ class PedidoController extends Controller
      */
     public function update(Request $request, Pedido $pedido)
     {
-        // dd($pedido);
-
-
-        // $pedido->update(['status' => $request->input('pedido_status')]);
-        // return redirect()->route('pedido.index', ['pedido' => $pedido->id])->with('success', 'Pedido atualizado com sucesso!');
-
         $status = $request->input('pedido_status');
-        // dd($pedido);
         $pedido_valor = $request->input('pedido_valor');
-
-
+        $pedido_quantidade = $request->input('pedido_quantidade');
         $pedido->update(['status' => $status]);
-
 
         if ($status === 'Entregue') {
             $comanda = $pedido->comanda;
-            // = $comanda->pedidos->where('status', 'Entregue')->sum('valor');
-            // dd($valorPedido);
-            $comanda->total = $comanda->total + $pedido_valor;
+            $comanda->total = $comanda->total + ($pedido_valor*$pedido_quantidade);
             $comanda->save();
         }
 

@@ -348,8 +348,8 @@
                                                     class="flex-grow flex items-center border-b border-gray-100 dark:border-gray-400 text-sm text-gray-600 dark:text-gray-100 py-2">
                                                     <div class="flex-grow flex justify-between items-center">
                                                         <div class="self-center">
-                                                            O cliente {{ $pedido->cliente->nome }} pediu
-                                                            {{ $pedido->nome }}
+                                                            O cliente <strong>{{ $pedido->cliente->nome }}</strong> pediu
+                                                        <strong>{{ $pedido->nome }}</strong>
                                                         </div>
                                                         {{ $pedido->created_at->format('H:i') }}
                                                     </div>

@@ -10,7 +10,6 @@
 </head>
 
 <body>
-    <x-caminho />
     <div class="bg-white p-8 rounded-md w-full">
 
         <div class=" flex items-center justify-between pb-6">

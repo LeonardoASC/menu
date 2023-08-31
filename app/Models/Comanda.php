@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comanda extends Model
 {
     use HasFactory;
-    protected $fillable = ['total', 'cliente_id', 'mesa_id'];
+    protected $fillable = ['total', 'cliente_id', 'mesa_id', 'status'];
     protected $table = 'comandas';
 
     public function cliente()

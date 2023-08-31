@@ -52,6 +52,7 @@
                                 data-produto-id="{{ $pedido->id }}">Entregar pedido</button>
                                 <input type="hidden" name="pedido_status" value="Entregue">
                                 <input type="hidden" name="pedido_valor" value="{{ $pedido->preco }}">
+                                <input type="hidden" name="pedido_quantidade" value="{{ $pedido->quantidade }}">
                             </div>
                                 </form>
                         </div>

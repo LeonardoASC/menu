@@ -50,12 +50,10 @@
                 </button>
             </div>
 
-            {{-- @dd($pedidosEntregues) --}}
             @php
-                $total = 0; // variável para manter o valor total
-                $garcom10 = 0; // variável para manter o valor total
-                $TotalFinal = 0; // variável para manter o valor total
+                $garcom10 = intval(($valorTotal * 10) / 100);
                 $cover = 10;
+                $TotalFinal = $valorTotal + $cover + $garcom10;
             @endphp
 
             {{-- vai por fora do foreach --}}
@@ -63,10 +61,11 @@
                 <p class="p-4 text-center italic">Nenhum pedido foi feito ainda.</p>
             @else
                 @foreach ($pedidosEntregues->take(3) as $pedidosEntregue)
-
                     <a href=""class="mt-8 p-5 flex justify-between bg-white  rounded-3xl font-semibold capitalize">
                         <div class="flex">
-                            <img class="h-10 w-10 rounded-full object-cover" src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024" alt="veldora profile" />
+                            <img class="h-10 w-10 rounded-full object-cover"
+                                src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024"
+                                alt="veldora profile" />
                             <div class="flex flex-col ml-4">
                                 <span>{{ $pedidosEntregue->nome }}</span>
                                 <span class="text-sm text-gray-600">{{ $pedidosEntregue->quantidade }}x</span>
@@ -74,20 +73,14 @@
                         </div>
                         <span>R$ {{ $pedidosEntregue->preco }}</span>
                     </a>
-
-                    @php
-                        $total += $pedidosEntregue->preco * $pedidosEntregue->quantidade; // atualiza o valor total
-                        $garcom10 = intval(($total * 10) / 100);
-                        $cover = 10;
-                        $TotalFinal = $total + $cover + $garcom10;
-                    @endphp
                 @endforeach
             @endif
 
-            <div id="itensRestantes" class="hidden">
-                @foreach ($pedidosEntregues->skip(4) as $pedidosEntregue)
 
-                    <div class="mt-8 p-4 flex  justify-between bg-gray-100 rounded-lg font-semibold capitalize">
+
+            <div id="itensRestantes" class="hidden">
+                @foreach ($pedidosEntregues->skip(3) as $pedidosEntregue)
+                    <div class="mt-8 p-4 flex  justify-between bg-white rounded-3xl font-semibold capitalize">
                         <div class="flex">
                             <img class="h-10 w-10 rounded-full object-cover" src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024" alt="veldora profile" />
                             <div class="flex flex-col ml-4">
@@ -100,10 +93,8 @@
                     @endforeach
                 </div>
 
-
-                @if ($pedidosEntregues->count() > 4)
-                <button id="verMaisBtn" class="mt-4 flex justify-center items-center flex-col capitalize text-blue-600 bg-white">
-
+                @if ($pedidosEntregues->count() > 3)
+                <button id="verMaisBtn" class="mt-4 flex justify-center items-center flex-col capitalize text-blue-600 bg-fundo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#000000" viewBox="0 0 256 256"><path d="M112,60a16,16,0,1,1,16,16A16,16,0,0,1,112,60Zm16,52a16,16,0,1,0,16,16A16,16,0,0,0,128,112Zm0,68a16,16,0,1,0,16,16A16,16,0,0,0,128,180Z"></path></svg>
                     Ver Todos!
                 </button>
@@ -113,7 +104,7 @@
             <div class="flex flex-col">
                 <div class="flex justify-between">
                     <span class="mt-4 text-gray-600">Sub-Total:</span>
-                    <span class="mt-4 text-gray-600">{{ $total }}</span>
+                    <span class="mt-4 text-gray-600">{{ $valorTotal }}</span>
                 </div>
 
                 <span class="mt-4 text-gray-600 text-sm">Taxa de {...}:</span>
@@ -132,21 +123,21 @@
 
             <span class="mt-1 text-3xl font-semibold">$ {{ $TotalFinal }}</span>
 
-                <form action="{{ route('comanda.update', session('idcomanda')) }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button type="submit" name="finalizacomanda"
-                            class="mt-8 flex items-center py-4 px-3 text-white rounded-lg bg-green-400 shadow focus:outline-none">
-                            <svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
-                                <path
-                                    d="M9 16.17l-3.59-3.59a.996.996 0 1 0-1.41 1.41l4.24 4.24c.39.39 1.02.39 1.41 0L20.41 9.7a.996.996 0 1 0-1.41-1.41L9 16.17z" />
-                            </svg>
-                            <span>Finalizar COMANDA!</span>
-                        </button>
-                        <input type="hidden" name="total" value="{{ $TotalFinal }}">
-                    </td>
-                </form>
+            <form action="{{ route('comanda.update', session('idcomanda')) }}" method="post">
+                @csrf
+                @method('PUT')
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <button type="text" name="finalizacomanda"
+                        class="mt-8 flex items-center py-4 px-3 text-white rounded-lg bg-green-400 shadow focus:outline-none">
+                        <svg class="h-5 w-5 fill-current mr-2 ml-3" viewBox="0 0 24 24">
+                            <path
+                                d="M9 16.17l-3.59-3.59a.996.996 0 1 0-1.41 1.41l4.24 4.24c.39.39 1.02.39 1.41 0L20.41 9.7a.996.996 0 1 0-1.41-1.41L9 16.17z" />
+                        </svg>
+                        <span>Finalizar COMANDA!</span>
+                    </button>
+                    <input type="hidden" name="total" value="{{ $TotalFinal }}">
+                </td>
+            </form>
 
 
         </aside>

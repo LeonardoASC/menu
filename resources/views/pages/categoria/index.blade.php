@@ -16,35 +16,26 @@
 <body>
     {{-- <x-caminho/> --}}
 
-    <div class="flex flex-col justify-center items-center">
-        <div
-            class="!z-5 relative items-center rounded-[20px] max-w-[300px] bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
-
+        <div class=" bg-white h-screen w-full ">
             <div class="relative flex flex-row justify-between">
                 <div class="flex items-center">
-                    <div
-                        class="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-100 dark:bg-white/5">
-                    </div>
                     <h4 class="ml-4 text-xl font-bold text-navy-700 dark:text-white">
                         Categorias
                     </h4>
-
                 </div>
             </div>
 
-
-
             @foreach ($categorias as $categoria)
-                <div class="h-full w-full flex justify-end">
-                    <div class="mt-5 flex items-center justify-between p-2 ">
+                <div class="flex mx-4">
+                    <div class="mt-5 w-1/2 border rounded-lg flex p-2 ">
                         <div class="flex items-center justify-center gap-2 ">
-                            <p class="text-base font-bold text-navy-700 dark:text-white">
+                            <p class="text-base font-bold flex-grow-1 dark:text-white">
                                 {{ $categoria->nome }}
                             </p>
                         </div>
                         <a href="{{ route('categoria.edit', ['categoria' => $categoria->id]) }}">
                             <button
-                                class="border border-indigo-500  text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                                class="border text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none focus:outline-none focus:shadow-outline">
                                 Editar
                             </button>
                         </a>
@@ -52,7 +43,7 @@
                             @method('DELETE')
                             @csrf
                             <button type="submit"
-                            class="border border-indigo-500 bg-red-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                            class="border bg-red-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none focus:outline-none focus:shadow-outline">
                             Excluir
                         </button>
                     </form>
@@ -60,9 +51,10 @@
                     </div>
                 </div>
             @endforeach
+
             <a href="{{ route('categoria.create') }}">
                 <button type="button"
-                    class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                    class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none focus:outline-none focus:shadow-outline">
                     Adicionar categoria
                 </button>
             </a>
