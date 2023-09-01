@@ -89,6 +89,24 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, User $usuario)
     {
+        $regras = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.$usuario->id,
+        ];
+
+        $feedback = [
+            'name.required' => 'O campo Nome Completo é obrigatório.',
+            'email.required' => 'O campo Email é obrigatório.',
+            'email.email' => 'Digite um email válido.',
+            'email.unique' => 'Email ja cadastrado',
+            'funcao.required' => 'O campo Função é obrigatório.',
+            'funcao.exists' => 'O cargo selecionado não existe.',
+            'password.required' => 'O campo Senha é obrigatório.',
+            'password.min' => 'A senha deve ter pelo menos 3 caracteres.',
+        ];
+
+        $request->validate($regras, $feedback);
+
         $usuario->update($request->all());
         return redirect()->route('usuario.index', ['usuario' => $usuario->id]);
     }

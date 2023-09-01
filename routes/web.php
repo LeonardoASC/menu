@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('usuario', 'App\Http\Controllers\UsuarioController');
     Route::resource('role', 'App\Http\Controllers\RoleController');
     Route::resource('permission', 'App\Http\Controllers\PermissionController');
+    Route::resource('honorario', 'App\Http\Controllers\HonorarioController');
 });
 
 

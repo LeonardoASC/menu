@@ -245,7 +245,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('honorario.index') }}"
                     class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-gray-500 dark:hover:border-gray-800 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -255,9 +255,7 @@
                             </path>
                         </svg>
                     </span>
-                    <span class="ml-2 text-sm tracking-wide truncate">Board</span>
-                    <span
-                        class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-gray-500 bg-indigo-50 rounded-full">New</span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Honorários</span>
                 </a>
             </li>
             <li>

@@ -21,6 +21,9 @@
                     mesa</label>
                 <input type="text" name="numero_cadeiras" class="mb-2 border rounded mt-4"
                     value="{{ $mesa->numero_cadeiras ?? old('numero_cadeiras') }}" placeholder="" />
+                    <p class="text-xs  text-gray-500">
+                        {{ $errors->has('numero_cadeiras') ? $errors->first('numero_cadeiras') : '' }}
+                    </p>
             </div>
             <div class="flex justify-center items-center">
                 <a href="{{ route('mesa.index') }}">

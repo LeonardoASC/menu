@@ -47,6 +47,7 @@ class RoleController extends Controller
         ];
 
         $request->validate($regras, $feedback);
+
         $name = $request->input('name');
         $description = $request->input('description');
         $data = [
@@ -85,6 +86,17 @@ class RoleController extends Controller
 
     public function update(Request $request, Role $role)
     {
+        $regras = [
+            'name' => 'required|string|max:255',
+            'description' => 'required|max:255',
+            'selected_permissions' => 'required'
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute é obrigatório.',
+        ];
+
+        $request->validate($regras, $feedback);
         $role->update($request->all());
 
         // $role = Role::findOrFail($id);

@@ -19,9 +19,15 @@
                 <p>Nome do cargo</p>
                 <input type="text" name="name" value="{{ $role->name ?? old('name') }}" placeholder=""
                     class=" mb-2 border rounded" />
+                    <p class="text-xs  text-gray-500">
+                        {{ $errors->has('name') ? $errors->first('name') : '' }}
+                    </p>
                 <p>Descrição do cargo</p>
                 <input type="text" name="description" value="{{ $role->description ?? old('description') }}"
                     placeholder="" class="rounded mb-2 border" />
+                    <p class="text-xs  text-gray-500">
+                        {{ $errors->has('description') ? $errors->first('description') : '' }}
+                    </p>
             </div>
             <div class="flex flex-col ">
                 @foreach ($permissions as $permission)
@@ -31,6 +37,9 @@
                         - {{ $permission->name }}
                     </label>
                 @endforeach
+                <p class="text-xs  text-gray-500">
+                    {{ $errors->has('selected_permissions') ? $errors->first('selected_permissions') : '' }}
+                </p>
             </div>
             <div class="p-5 flex items-center justify-center">
                 <button type="submit" class="bg-black p-2 rounded ">Atualizar</button>

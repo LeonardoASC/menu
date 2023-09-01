@@ -22,6 +22,9 @@
                         <input type="text" name="nome" value="{{ $categoria->nome ?? old('nome') }}"
                             class="rounded-lg border-none  bg-opacity-50 px-6 py-2 text-center text-black text-inherit shadow-lg"
                             placeholder="nova categoria" />
+                            <p class="text-xs  text-black">
+                                {{ $errors->has('nome') ? $errors->first('nome') : '' }}
+                            </p>
                     </div>
                     <div class="mt-8 flex justify-center text-lg text-black">
                         <button type="submit"

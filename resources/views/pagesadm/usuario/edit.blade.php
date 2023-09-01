@@ -18,14 +18,19 @@
             >
             @csrf
             @method('PUT')
-
             <div class="my-4 flex flex-col p-5 justify-center items-center">
                 <p>Nome do usuario</p>
                 <input type="text" name="name" value="{{ $usuario->name ?? old('name') }}" placeholder=""
                     class="mb-2 rounded border" />
+                    <p class="text-xs  text-gray-500">
+                        {{ $errors->has('name') ? $errors->first('name') : '' }}
+                    </p>
                 <p>Email do usuario</p>
                 <input type="text" name="email" value="{{ $usuario->email ?? old('email') }}" placeholder=""
                     class="mb-2 border rounded" />
+                    <p class="text-xs  text-gray-500">
+                        {{ $errors->has('email') ? $errors->first('email') : '' }}
+                    </p>
             </div>
             <div class="p-5 flex justify-center items-center">
                 <button type="submit" class="bg-black p-2 rounded ">Atualizar</button>

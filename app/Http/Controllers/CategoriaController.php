@@ -79,10 +79,22 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-            $categoria->update($request->all());
-            return redirect()->route('categoria.index', ['categoria' => $categoria->id]);
-            
-        }
+        $regras = [
+            'nome' => 'required|min:3|max:40'
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'O campo nome de ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo nome de ter no máximo 40 caracteres',
+        ];
+
+        $request->validate($regras, $feedback);
+        
+        $categoria->update($request->all());
+        return redirect()->route('categoria.index', ['categoria' => $categoria->id]);
+
+    }
 
         /**
          * Remove the specified resource from storage.
