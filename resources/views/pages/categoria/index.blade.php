@@ -14,9 +14,8 @@
 </head>
 
 <body>
-    {{-- <x-caminho/> --}}
-
-        <div class=" bg-white h-screen w-full ">
+    <x-navbarheader/>
+        <div class=" bg-white h-screen w-full md:ml-64 pt-14">
             <div class="relative flex flex-row justify-between">
                 <div class="flex items-center">
                     <h4 class="ml-4 text-xl font-bold text-navy-700 dark:text-white">

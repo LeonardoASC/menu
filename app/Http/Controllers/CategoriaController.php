@@ -90,7 +90,6 @@ class CategoriaController extends Controller
         ];
 
         $request->validate($regras, $feedback);
-        
         $categoria->update($request->all());
         return redirect()->route('categoria.index', ['categoria' => $categoria->id]);
 
