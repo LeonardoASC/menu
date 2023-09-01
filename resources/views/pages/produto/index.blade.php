@@ -106,10 +106,12 @@
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            <button
-                                                class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Editar</button>
-                                            <button
-                                                class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Excluir</button>
+                                            <a href="{{ route('produto.edit', ['produto' => $produto->id]) }}"
+                                                class="border p-2 rounded-lg hover:bg-slate-200">Editar</a>
+
+                                            <a href="{{ route('produto.edit', ['produto' => $produto->id]) }}"
+                                                class="border p-2 rounded-lg hover:bg-slate-200">Excluir</a>
+
                                         </td>
                                     </tr>
                                 </tbody>

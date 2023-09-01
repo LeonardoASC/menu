@@ -17,7 +17,7 @@ class ProdutoController extends Controller
         // $this->middleware('permission:listar produtos');
         // $this->middleware('permission:listar produtos')->only(['show']);
     }
-    
+
     public function index(Request $request)
     {
         // funcionando
@@ -52,9 +52,9 @@ class ProdutoController extends Controller
     {
         $regras = [
             'nome' => 'required|min:3|max:40',
-            'descricao' => 'max:255',
-            'preco' => 'numeric|min:0',
-            'imagem' => 'nullable|image|max:2048'
+            'descricao' => 'required|max:255',
+            'preco' => 'required|numeric|min:0',
+            'imagem' => 'required|nullable|image|max:2048'
         ];
 
         $feedback = [
@@ -92,15 +92,34 @@ class ProdutoController extends Controller
      */
     public function edit(produto $produto)
     {
-        //
+        return view('pages.produto.edit', ['produto' => $produto]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateprodutoRequest $request, produto $produto)
+    public function update(Request $request, produto $produto)
     {
-        //
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'max:255',
+            'preco' => 'numeric|min:0',
+            'imagem' => 'nullable'
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'O campo título deve ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo título deve ter no máximo 40 caracteres',
+            'descricao.max' => 'O campo descrição deve ter no máximo 255 caracteres',
+            'preco.numeric' => 'O campo preço deve ser um valor numérico',
+            'preco.min' => 'O campo preço não pode ser um valor negativo',
+        ];
+
+        $request->validate($regras, $feedback);
+
+        $produto->update($request->all());
+        return redirect()->route('produto.index', ['produto' => $produto->id]);
     }
 
     /**
