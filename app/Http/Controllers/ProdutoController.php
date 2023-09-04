@@ -53,6 +53,7 @@ class ProdutoController extends Controller
         $regras = [
             'nome' => 'required|min:3|max:40',
             'descricao' => 'required|max:255',
+            'categoria_id' => 'required|exists:mesas,id',
             'preco' => 'required|numeric|min:0',
             'imagem' => 'required|nullable|image|max:2048'
         ];
@@ -66,6 +67,7 @@ class ProdutoController extends Controller
             'preco.min' => 'O campo preço não pode ser um valor negativo',
             'imagem.image' => 'O arquivo enviado para o campo imagem deve ser uma imagem válida',
             'imagem.max' => 'O tamanho do arquivo enviado para o campo imagem não pode exceder 2MB',
+            'categoria_id.exists' => 'A categoria selecionada não existe.'
         ];
 
         $request->validate($regras, $feedback);
@@ -92,7 +94,8 @@ class ProdutoController extends Controller
      */
     public function edit(produto $produto)
     {
-        return view('pages.produto.edit', ['produto' => $produto]);
+        $categorias = Categoria::all();
+        return view('pages.produto.edit', ['produto' => $produto, 'categorias' => $categorias]);
     }
 
     /**
@@ -102,7 +105,8 @@ class ProdutoController extends Controller
     {
         $regras = [
             'nome' => 'required|min:3|max:40',
-            'descricao' => 'max:255',
+            'descricao' => 'required|max:255',
+            'categoria_id' => 'required|exists:mesas,id',
             'preco' => 'numeric|min:0',
             'imagem' => 'nullable'
         ];
@@ -114,6 +118,7 @@ class ProdutoController extends Controller
             'descricao.max' => 'O campo descrição deve ter no máximo 255 caracteres',
             'preco.numeric' => 'O campo preço deve ser um valor numérico',
             'preco.min' => 'O campo preço não pode ser um valor negativo',
+            'categoria_id.exists' => 'A categoria selecionada não existe.'
         ];
 
         $request->validate($regras, $feedback);
@@ -127,7 +132,8 @@ class ProdutoController extends Controller
      */
     public function destroy(produto $produto)
     {
-        //
+        $produto->delete();
+        return redirect()->route('produto.index');
     }
 
     public function buscar(Request $request)

@@ -16,10 +16,15 @@ class UsuarioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::all();
-        return view('pagesadm.usuario.index',['usuarios' => $usuarios]);
+        $termo = $request->input('termo');
+        $usuarios = User::query();
+        if ($termo) {
+            $usuarios->where('name', 'LIKE', '%' . $termo . '%');
+        }
+        $usuarios = $usuarios->get();
+        return view('pagesadm.usuario.index',['usuarios' => $usuarios,'termo' => $termo ]);
     }
 
     /**
@@ -64,7 +69,7 @@ class UsuarioController extends Controller
         // dd($user);
         $user->assignRole($request->funcao);
 
-        return redirect()->route('administrativa.index')->with('success', 'Informações salvas com sucesso!');
+        return redirect()->route('usuario.index')->with('success', 'Informações salvas com sucesso!');
     }
 
     /**
@@ -122,5 +127,12 @@ class UsuarioController extends Controller
 
         $usuario->delete();
         return redirect()->route('usuario.index')->with('success', 'Papel excluído com sucesso.');
+    }
+
+    public function buscar(Request $request)
+    {
+        $termo = $request->input('termo');
+        $usuarios = Usuario::where('name', 'LIKE', '%' . $termo . '%')->get();
+        return view('usuarios.busca', compact('usuarios', 'termo'));
     }
 }

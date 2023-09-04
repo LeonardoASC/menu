@@ -14,6 +14,32 @@
 <body>
     <x-navbarheader />
     <div class="flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800  shadow-lg rounded md:ml-64 pt-14">
+        <div class=" flex items-center justify-between pb-6 mt-2 w-1/2">
+            <h1 class="text-gray-600 font-bold">Produtos</h1>
+            <div class="flex bg-gray-50 items-center p-2 rounded-md">
+                <form action="{{ route('usuario.index') }}" method="GET" class="flex items-center">
+                    <div class="mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <input class="bg-gray-50 outline-none ml-1 block" type="text" name="termo"
+                        placeholder="Pesquisar..." value="{{ $termo }}">
+                    <button type="button" id="limpar">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M14.348 14.849l-1.5 1.5L10 11.5l-2.849 2.849-1.5-1.5L8.5 10 5.651 7.151l1.5-1.5L10 8.5l2.849-2.849 1.5 1.5L11.5 10l2.849 2.849z" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+
+        </div>
         <div class="rounded-t mb-0 px-0 border-0">
             <div class="flex flex-wrap items-center px-4 py-2">
                 <div class=" w-full max-w-full flex-grow flex-1">
