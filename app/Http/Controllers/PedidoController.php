@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePedidoRequest;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class PedidoController extends Controller
 {
@@ -18,21 +19,18 @@ class PedidoController extends Controller
     public function index(Request $request)
     {
 
-        // $pedidos = Pedido::where('status', 'Solicitado')
-        //             // ->where('cliente_id', $user->id)
-        //             ->get();
+        if (Auth::check()) {
+            $pedidos = Pedido::with('cliente')->where('pedidos.status', 'Solicitado')->get();
+            return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all() ]);
+        } else {
+            $cpf = $request->session()->get('cpf'); // Obtém o CPF do cliente da sessão
+            $pedidos = Pedido::join('clientes', 'pedidos.cliente_id', '=', 'clientes.id')
+                    ->where('pedidos.status', 'Solicitado')
+                    ->where('clientes.cpf', $cpf)
+                    ->get(['pedidos.*']);
+            return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all() ]);
+        }
 
-    // $cpf = $request->session()->get('cpf'); // Obtém o CPF do cliente da sessão
-    // $pedidos = Pedido::where('status', 'Solicitado')
-    //             ->where('cpf', $cpf)
-    //             ->get();
-
-    $cpf = $request->session()->get('cpf'); // Obtém o CPF do cliente da sessão
-    $pedidos = Pedido::join('clientes', 'pedidos.cliente_id', '=', 'clientes.id')
-                ->where('pedidos.status', 'Solicitado')
-                ->where('clientes.cpf', $cpf)
-                ->get(['pedidos.*']);
-        return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all() ]);
     }
 
     /**
@@ -71,8 +69,6 @@ class PedidoController extends Controller
         // $pedido->cliente_id = session('cpf');
         // dd(session()->all());
         $pedido->save();
-
-
 
         return redirect()->route('cardapio.index')->with('message', 'Pedido realizado com sucesso!');
     }

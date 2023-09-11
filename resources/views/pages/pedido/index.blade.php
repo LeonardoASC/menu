@@ -15,7 +15,11 @@
 <body>
     <div class="">
         <div class="flex justify-center py-2 bg-white border-b shadow-md mb-1 rounded-xl">
-            <h2>Estamos preparando os pedidos para voce!</h2>
+            @if (auth()->check())
+                <h2>Os Pedidos estão sendo preparados!</h2>
+            @else
+                <h2>Estamos preparando os pedidos para voce!</h2>
+            @endif
         </div>
         @if ($pedidos->isEmpty())
             <p class="text-center p-2 m-2">Nenhum pedido por aqui.</p>
@@ -25,24 +29,33 @@
                     <li class="flex flex-col justify-between gap-x-6 py-5 border rounded-3xl shadow-md p-4 bg-white">
                         <div class="flex gap-x-4">
                             <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
-                                src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024"
-                                alt="">
+                            src="https://classic.exame.com/wp-content/uploads/2020/05/mafe-studio-LV2p9Utbkbw-unsplash-1.jpg?quality=70&strip=info&w=1024"
+                            alt="">
                             <div class="min-w-0 flex-auto">
                                 <div class="flex justify-between">
-                                    <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->nome }}</p>
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->nome }} - {{ $pedido->quantidade }}x</p>
                                     <p class="text-sm font-semibold leading-6 text-gray-900">R$ {{ $pedido->preco }}</p>
                                 </div>
-                                <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->quantidade }}x</p>
-                                <p class="mt-1 truncate text-xs leading-5 text-gray-500"> {{ $pedido->observacao }}Observação do pedido aqui</p>
-                            <div class="flex items-center">
-                                <p class="text-sm leading-6 text-gray-900 mr-2">{{ $pedido->status }}</p>
-                                <div class="w-4 h-4  flex justify-center items-center rounded-full bg-gradient-to-t from-green-400 to-gray-100 animate-spin">
-                                    <div class="w-3 h-3 bg-gray-100 rounded-full"></div>
+                                <div class="flex justify-between">
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">{{ $pedido->cliente->nome }}</p>
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">Mesa: {{ $pedido->comanda->mesa_id }}</p>
+
                                 </div>
+                                @can('cadastrar produto')
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">CPF: {{ $pedido->cliente->cpf }}</p>
+                                @endcan
+                                <p class="text-sm font-semibold leading-6 text-gray-900"></p>
+                                <p class="mt-1 truncate text-xs leading-5 text-gray-500"> {{ $pedido->observacao }}Observação do pedido aqui</p>
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm leading-6 text-gray-900 mr-2">{{ $pedido->status }}
+
+                            </div>
+                                <p class="text-sm leading-6 text-gray-900 mr-2">numero do pedido: {{ $pedido->id }}</p>
                             </div>
                         </div>
                         </div>
 
+                        @can('cadastrar produto')
                         <div class="">
                             <form id="pedidoForm-{{ $pedido->id }}" action="{{ route('pedido.update', ['pedido' => $pedido]) }}" method="post">
                                 @csrf
@@ -54,11 +67,11 @@
                                 <input type="hidden" name="pedido_valor" value="{{ $pedido->preco }}">
                                 <input type="hidden" name="pedido_quantidade" value="{{ $pedido->quantidade }}">
                             </div>
-                                </form>
+                        </form>
+                        @endcan
                         </div>
                     </li>
-                </ul>
-            @endforeach
+                </ul> @endforeach
         @endif
 </div>
     {{-- //modal\\ --}}

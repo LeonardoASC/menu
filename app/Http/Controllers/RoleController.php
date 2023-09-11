@@ -15,10 +15,15 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Role::all();
-        return view('pagesadm.role.index', ['roles' => $roles]);
+        $termo = $request->input('termo');
+        $roles = Role::query();
+        if ($termo) {
+            $roles->where('name', 'LIKE', '%' . $termo . '%');
+        }
+        $roles = $roles->get();
+        return view('pagesadm.role.index', ['roles' => $roles,'termo' => $termo ]);
     }
 
     /**
@@ -151,6 +156,13 @@ class RoleController extends Controller
         $role->save();
 
         return redirect()->route('role.index')->with('success', 'Permissões adicionadas com sucesso.');
+    }
+
+    public function buscar(Request $request)
+    {
+        $termo = $request->input('termo');
+        $roles = Role::where('name', 'LIKE', '%' . $termo . '%')->get();
+        return view('roles.busca', compact('usuarios', 'termo'));
     }
 
 }

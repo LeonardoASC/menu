@@ -28,7 +28,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::middleware(['auth'])->group(function () {
     Route::resource('produto', 'App\Http\Controllers\ProdutoController');
     Route::resource('mesa', 'App\Http\Controllers\MesaController');
-    Route::resource('pedidoadm', 'App\Http\Controllers\PedidoADMController');
     Route::resource('administrativa', 'App\Http\Controllers\AdministrativaController');
     Route::resource('usuario', 'App\Http\Controllers\UsuarioController');
     Route::resource('role', 'App\Http\Controllers\RoleController');
