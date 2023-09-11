@@ -16,7 +16,10 @@
     <div class="">
         <div class="flex justify-center py-2 bg-white border-b shadow-md mb-1 rounded-xl">
             @if (auth()->check())
-                <h2>Os Pedidos estão sendo preparados!</h2>
+                <div class="flex items-center justify-between p-2">
+                    <h2 >Os Pedidos estão sendo preparados!</h2>
+                    <a href="{{route('administrativa.index')}}" class="border rounded-xl p-2 absolute right-5">Voltar</a>
+                </div>
             @else
                 <h2>Estamos preparando os pedidos para voce!</h2>
             @endif
@@ -45,7 +48,7 @@
                                     <p class="text-sm font-semibold leading-6 text-gray-900">CPF: {{ $pedido->cliente->cpf }}</p>
                                 @endcan
                                 <p class="text-sm font-semibold leading-6 text-gray-900"></p>
-                                <p class="mt-1 truncate text-xs leading-5 text-gray-500"> {{ $pedido->observacao }}Observação do pedido aqui</p>
+                                <p class="mt-1 truncate text-xs leading-5 text-gray-500">Observação: {{ $pedido->observacao }}</p>
                             <div class="flex items-center justify-between">
                                 <div class="text-sm leading-6 text-gray-900 mr-2">{{ $pedido->status }}
 
@@ -110,8 +113,9 @@
         </div>
     </div>
     </div>
-    <x-rodape />
-
+    @guest
+        <x-rodape />
+    @endguest
     <script>
         //modal
         document.addEventListener('DOMContentLoaded', function() {

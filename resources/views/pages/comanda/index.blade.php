@@ -50,11 +50,7 @@
                 </button>
             </div>
 
-            @php
-                $garcom10 = intval(($valorTotal * 10) / 100);
-                $cover = 10;
-                $TotalFinal = $valorTotal + $cover + $garcom10;
-            @endphp
+
 
             {{-- vai por fora do foreach --}}
             @if ($pedidosEntregues->isEmpty())
@@ -109,7 +105,7 @@
 
                 <span class="mt-4 text-gray-600 text-sm">Taxa de {...}:</span>
                 <div class="flex justify-between">
-                    <span class=" text-gray-600 text-xs pl-3">10% Garçom:</span>
+                    <span class=" text-gray-600 text-xs pl-3">{{intval(($porcentagem_garcom))}}% Garçom:</span>
                     <span class=" text-gray-600 text-xs pl-3 ">R$ {{ $garcom10 }}</span>
                 </div>
 

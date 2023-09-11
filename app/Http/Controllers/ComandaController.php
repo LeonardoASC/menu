@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comanda;
 use App\Models\Pedido;
 use App\Models\Cliente;
+use App\Models\Honorario;
 use App\Models\Mesa;
 use App\Http\Requests\StoreComandaRequest;
 use App\Http\Requests\UpdateComandaRequest;
@@ -28,9 +29,11 @@ class ComandaController extends Controller
                     ->where('clientes.cpf', $cpf)
                     ->get(['pedidos.*']);
 
-        $garcom10 = 0;
-        $TotalFinal = 0;
-        $cover = 10;
+        $honorario = Honorario::first();
+        $garcom10 = intval(($valorTotal * $honorario->porcentagem_garcom) / 100);
+        $cover = $honorario->preco_cover;
+        $TotalFinal = $valorTotal + $cover + $garcom10;;
+
         return view('pages.comanda.index',
         [
             'valorTotal' => $valorTotal,
@@ -40,6 +43,7 @@ class ComandaController extends Controller
             'garcom10' => $garcom10,
             'TotalFinal' => $TotalFinal,
             'cover' => $cover,
+            'porcentagem_garcom' => $honorario->porcentagem_garcom,
         ]);
     }
 
