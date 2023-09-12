@@ -283,7 +283,7 @@
                              </path>
                          </svg>
                      </span>
-                     <span class="ml-2 text-sm tracking-wide truncate">Mensagens</span>
+                     <span class="ml-2 text-sm tracking-wide truncate text-red-700">Mensagens</span>
                  </a>
              </li>
              <li>

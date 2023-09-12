@@ -22,11 +22,9 @@ class MesaController extends Controller
 
         $comanda = Comanda::all();
         // $mesaDaComanda = $comanda->mesas; // Retorna o objeto da mesa à qual a comanda pertence
-
+       
         return view('pages.mesa.index', [
             'mesas' => $mesas,
-            // 'comandasDaMesa' => $comandasDaMesa,
-            // 'mesaDaComanda' => $mesaDaComanda,
             'request' => $request->all()
             ]);
 
@@ -98,7 +96,7 @@ class MesaController extends Controller
             'numero_cadeiras.min' => 'Mesa deve ter no mínimo 1 cadeira',
             'numero_cadeiras.max' => 'Mesa deve ter no maximo 99 cadeiras',
         ];
-        
+
         $request->validate($regras, $feedback);
         $mesa->update($request->all());
         return redirect()->route('mesa.index', ['mesa' => $mesa->id]);

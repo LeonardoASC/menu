@@ -30,8 +30,12 @@ class ComandaController extends Controller
                     ->get(['pedidos.*']);
 
         $honorario = Honorario::first();
-        $garcom10 = intval(($valorTotal * $honorario->porcentagem_garcom) / 100);
-        $cover = $honorario->preco_cover;
+
+       
+            $garcom10 = intval(($valorTotal * $honorario->porcentagem_garcom) / 100);
+            $cover = $honorario->preco_cover;
+
+
         $TotalFinal = $valorTotal + $cover + $garcom10;;
 
         return view('pages.comanda.index',

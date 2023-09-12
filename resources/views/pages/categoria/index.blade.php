@@ -14,8 +14,9 @@
 </head>
 
 <body>
-    <x-navbarheader/>
-        <div class=" bg-white h-screen w-full md:ml-64 pt-14">
+    <div x-data="setup()" :class="{ 'dark': isDark }">
+        <x-navbarheader />
+        <div class="h-screen w-full md:ml-64 pt-16 dark:bg-gray-700">
             <div class="relative flex flex-row justify-between">
                 <div class="flex items-center">
                     <h4 class="ml-4 text-xl font-bold text-navy-700 dark:text-white">
@@ -26,9 +27,9 @@
 
             @foreach ($categorias as $categoria)
                 <div class="flex mx-4">
-                    <div class="mt-5 w-1/2 border rounded-lg flex p-2 ">
+                    <div class="mt-5 w-1/2 border rounded-lg flex p-2 dark:bg-gray-900">
                         <div class="flex items-center justify-center gap-2 ">
-                            <p class="text-base font-bold flex-grow-1 dark:text-white">
+                            <p class="text-base font-bold flex-grow-1 dark:text-white ">
                                 {{ $categoria->nome }}
                             </p>
                         </div>
@@ -38,14 +39,14 @@
                                 Editar
                             </button>
                         </a>
-                        <form method="POST" action="{{ route('categoria.destroy', ['categoria' => $categoria->id])}}">
+                        <form method="POST" action="{{ route('categoria.destroy', ['categoria' => $categoria->id]) }}">
                             @method('DELETE')
                             @csrf
                             <button type="submit"
-                            class="border bg-red-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none focus:outline-none focus:shadow-outline">
-                            Excluir
-                        </button>
-                    </form>
+                                class="border bg-red-400 text-white rounded-md px-1 py-1 m-1 transition duration-500 ease select-none focus:outline-none focus:shadow-outline">
+                                Excluir
+                            </button>
+                        </form>
 
                     </div>
                 </div>
@@ -58,6 +59,7 @@
                 </button>
             </a>
         </div>
+    </div>
 </body>
 
 </html>
