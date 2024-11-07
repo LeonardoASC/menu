@@ -30,7 +30,6 @@ class PedidoController extends Controller
                     ->get(['pedidos.*']);
             return view('pages.pedido.index', ['pedidos' => $pedidos, 'request' => $request->all() ]);
         }
-
     }
 
     /**

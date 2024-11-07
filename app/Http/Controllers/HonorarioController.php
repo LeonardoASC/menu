@@ -23,15 +23,32 @@ class HonorarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('pagesadm.honorario.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHonorarioRequest $request)
+    public function store(Request $request)
     {
+        // dd($request->all());
+        $regras = [
+            'preco_cover' => 'required|min:1|max:99',
+            'porcentagem_garcom' => 'required|min:1|max:99',
+            'taxa_reserva' => 'required|min:1|max:99',
+            'taxa_cortesia' => 'required|min:1|max:99',
+        ];
 
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'min' => ':atribute deve ter no mínimo 1 cadeira',
+            'max' => ':atribute deve ter no maximo 99 cadeiras',
+        ];
+
+        $request->validate($regras, $feedback);
+
+        Honorario::create($request->all());
+        return redirect()->route('honorario.index');
     }
 
     /**

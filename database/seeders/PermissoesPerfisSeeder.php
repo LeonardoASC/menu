@@ -17,7 +17,8 @@ class PermissoesPerfisSeeder extends Seeder
     {
         //Criando cargo
         $administrador  = Role::create(['name' => 'Administrador', 'guard_name' => 'web', 'description' => 'Acesso Completo!']);
-       
+        
+
         $permissoes = collect([
             ['guard_name'=>'web','name'=>'listar produtos', 'category' => 'produto', 'description' => 'Permite visualizar a listagem de produtos e executar outras permissões de produto'],
             ['guard_name'=>'web','name'=>'cadastrar produto', 'category' => 'produto', 'description' => 'Permite cadastrar um novo cliente'],
